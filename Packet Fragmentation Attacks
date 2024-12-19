@@ -1,0 +1,12 @@
+Packet Fragmentation Attacks
+
+MITRE Tactic:
+Defense Evasion (TA0005) / Initial Access (TA0001)
+
+MITRE Techniques:
+Network Traffic Obfuscation (T1027): Fragmented packets can evade firewalls or IDS/IPS systems.
+
+Detection Logic:
+Monitor network traffic for an unusually high number of fragmented packets.
+Alert on fragmented packets targeting sensitive systems or services.
+Correlate with endpoint logs for processes generating such traffic.
