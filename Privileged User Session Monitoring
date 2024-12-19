@@ -1,0 +1,16 @@
+Privileged User Session Monitoring
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Valid Accounts (T1078)
+
+Detection Logic:
+Track privileged user activity for anomalies during active sessions.
+
+Microsoft Sentinel KQL Query:
+SessionLogs
+| where AccountName contains "Admin"
+| project TimeGenerated, AccountName, SessionID, Actions
+
+Testing:
+Perform a session with multiple admin actions in a test environment.
