@@ -1,0 +1,18 @@
+Insider Threat Data Exfiltration
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Data Transfer to External Accounts (T1567)
+
+Detection Logic:
+Detect unusual data transfers by internal users to external accounts or servers.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationIP !in (internalNetworkIPs)
+| summarize DataTransferred = sum(BytesSent) by User, DestinationIP, bin(TimeGenerated, 1h)
+| where DataTransferred > 100000000 // Adjust threshold in bytes
+| project TimeGenerated, User, DestinationIP, DataTransferred
+
+Testing:
+Transfer large amounts of data to an external test server.
