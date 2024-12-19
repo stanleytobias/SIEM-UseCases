@@ -1,0 +1,17 @@
+SaaS Application Anomalies
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Access Cloud Storage Objects (T1530)
+
+Detection Logic:
+Monitor for unusual activity in SaaS applications, such as excessive file downloads.
+
+Microsoft Sentinel KQL Query:
+SaaSApplicationLogs
+| summarize DownloadCount = count() by User, ApplicationName, bin(TimeGenerated, 1h)
+| where DownloadCount > 50 // Adjust threshold
+| project TimeGenerated, User, ApplicationName, DownloadCount
+
+Testing:
+Simulate excessive file downloads from a SaaS app.
