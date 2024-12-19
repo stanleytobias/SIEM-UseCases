@@ -1,0 +1,16 @@
+Sensitive File Access Outside Business Hours
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Valid Accounts (T1078)
+
+Detection Logic:
+Monitor access to sensitive files outside predefined working hours.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where FilePath contains "sensitive" and TimeGenerated outside (datetime(09:00:00) .. datetime(17:00:00))
+| project TimeGenerated, FilePath, User
+
+Testing:
+Access sensitive files during non-business hours from a test account.
