@@ -1,0 +1,18 @@
+Rapid Cloud Security Group Updates
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Modify Cloud Compute Infrastructure (T1578)
+
+Detection Logic:
+Detect multiple changes to security groups in a short period.
+
+Microsoft Sentinel KQL Query:
+AzureActivity
+| where OperationName contains "UpdateSecurityGroup"
+| summarize UpdateCount = count() by Caller, bin(TimeGenerated, 5m)
+| where UpdateCount > 3 // Adjust threshold
+| project TimeGenerated, Caller, UpdateCount
+
+Testing:
+Modify security groups multiple times in a test cloud environment.
