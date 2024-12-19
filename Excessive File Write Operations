@@ -1,0 +1,19 @@
+Excessive File Write Operations
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Data Destruction (T1485)
+
+Detection Logic:
+Detect large volumes of file write operations.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where ActionType == "Write"
+| summarize WriteCount = count() by User, FilePath, bin(TimeGenerated, 1h)
+| where WriteCount > 100 // Adjust threshold
+| project TimeGenerated, User, FilePath, WriteCount
+
+Testing:
+Simplest Test:
+Write data to multiple files using a loop in a script.
