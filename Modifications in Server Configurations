@@ -1,0 +1,12 @@
+Modifications in Server Configurations
+
+MITRE Tactic:
+Defense Evasion (TA0005) / Impact (TA0040)
+
+MITRE Techniques:
+Impair Defenses (T1562): Modifying server configurations to disable logging or weaken security.
+
+Detection Logic:
+Monitor server configuration files for unauthorized changes.
+Alert on changes to logging, authentication, or network settings.
+Correlate with user activity logs to identify the initiator of the changes.
