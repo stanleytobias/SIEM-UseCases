@@ -1,0 +1,18 @@
+HTTP Anomalies Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Application Layer Protocol (T1071.001)
+
+Detection Logic:
+Detect unusual HTTP methods or abnormal error rates.
+
+Microsoft Sentinel KQL Query:
+WebProxyLogs
+| where HttpMethod !in ("GET", "POST", "HEAD")
+| summarize AnomaliesCount = count() by User, HttpMethod, bin(TimeGenerated, 1h)
+| where AnomaliesCount > 10 // Adjust threshold
+| project TimeGenerated, User, HttpMethod, AnomaliesCount
+
+Testing:
+Send requests with uncommon HTTP methods (e.g., OPTIONS, TRACE).
