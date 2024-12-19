@@ -11,3 +11,9 @@ Detection Logic:
 Analyze DNS logs for domains with low frequency of appearance across the network.
 Alert on domains newly registered or flagged in threat intelligence feeds.
 Correlate rare domains with other suspicious traffic (e.g., non-standard ports).
+
+MS Sentinel:
+DNSLogs
+| summarize QueryCount = count() by DomainName, bin(TimeGenerated, 1h)
+| where QueryCount == 1 // Rare domain with a single query
+| project TimeGenerated, DomainName, QueryCount
