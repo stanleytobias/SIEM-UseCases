@@ -1,0 +1,21 @@
+DNS Query for Known Malicious Domains
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Indicator Removal on Host (T1568.003)
+
+Detection Logic:
+Identify queries to domains flagged in threat intelligence feeds as malicious.
+
+Microsoft Sentinel KQL Query:
+
+DNSLogs
+| where QueryName in (maliciousDomains) // Replace with a list of known malicious domains
+| project TimeGenerated, ClientIP, QueryName
+
+Testing:
+
+Simulate DNS resolution to a malicious domain listed in known feeds.
+
+Simplest Test:
+Use nslookup maliciousdomain.com for a flagged domain.
