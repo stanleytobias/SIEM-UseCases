@@ -1,0 +1,20 @@
+Excessive SSH Authentication Failures from Known IPs
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Brute Force (T1110)
+
+Detection Logic:
+Detect multiple failed SSH logins from known IPs.
+
+Microsoft Sentinel KQL Query:
+SSHLogs
+| where EventType == "AuthenticationFailed"
+| where SourceIP in (trustedIPs) // Replace with known IPs
+| summarize FailedSSHCount = count() by SourceIP, bin(TimeGenerated, 1h)
+| where FailedSSHCount > 5 // Adjust threshold
+| project TimeGenerated, SourceIP, FailedSSHCount
+
+Testing:
+Simplest Test:
+Attempt multiple failed SSH logins from a test machine.
