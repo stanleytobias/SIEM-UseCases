@@ -1,0 +1,18 @@
+High Frequency of Network Disconnects
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Network Denial of Service (T1498)
+
+Detection Logic:
+Monitor logs for frequent network disconnections.
+
+Microsoft Sentinel KQL Query:
+NetworkConnectionLogs
+| where EventType == "Disconnect"
+| summarize DisconnectCount = count() by User, bin(TimeGenerated, 1h)
+| where DisconnectCount > 10 // Adjust threshold
+| project TimeGenerated, User, DisconnectCount
+
+Testing:
+Simulate disconnections by repeatedly disabling and enabling network adapters.
