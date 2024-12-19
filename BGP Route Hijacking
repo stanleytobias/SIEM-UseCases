@@ -1,0 +1,12 @@
+BGP Route Hijacking
+
+MITRE Tactic:
+Impact (TA0040)
+
+MITRE Techniques:
+Hijacking Network Traffic (T1589.006): Manipulation of BGP routes to hijack traffic.
+
+Detection Logic:
+Monitor for sudden changes in route advertisements or prefix announcements.
+Detect discrepancies between advertised and actual routes for critical services.
+Integrate with internet-wide BGP monitoring tools to receive real-time alerts.
