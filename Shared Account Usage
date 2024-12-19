@@ -1,0 +1,18 @@
+Shared Account Usage
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Valid Accounts (T1078)
+
+Detection Logic:
+Detect logins to shared accounts from different locations or IPs.
+
+Microsoft Sentinel KQL Query:
+AuthenticationLogs
+| where AccountName in (sharedAccounts)
+| summarize LoginsByIP = dcount(SourceIP) by AccountName, bin(TimeGenerated, 1h)
+| where LoginsByIP > 1
+| project TimeGenerated, AccountName, LoginsByIP
+
+Testing:
+Simulate shared account usage from different devices or locations.
