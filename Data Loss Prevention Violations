@@ -1,0 +1,12 @@
+Data Loss Prevention Violations
+
+MITRE Tactic:
+Exfiltration (TA0010)
+
+MITRE Techniques:
+Exfiltration Over Web Service (T1567.001): Violations involving the transfer of sensitive data to unauthorized destinations.
+
+Detection Logic:
+Monitor DLP logs for flagged file types, keywords, or sensitive data being transferred.
+Alert on data transfers exceeding size thresholds or bypassing security controls.
+Correlate with user behavior and access logs for anomaly detection.
