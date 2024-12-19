@@ -1,0 +1,18 @@
+Sudden Increase in Failed API Requests
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Application API Abuse (T1529)
+
+Detection Logic:
+Monitor API logs for a surge in failed requests.
+
+Microsoft Sentinel KQL Query:
+APIActivityLogs
+| where Status == "Failed"
+| summarize FailedRequestCount = count() by CallerIP, APIName, bin(TimeGenerated, 1h)
+| where FailedRequestCount > 50 // Adjust threshold
+| project TimeGenerated, CallerIP, APIName, FailedRequestCount
+
+Testing:
+Send multiple invalid API requests from a test account.
