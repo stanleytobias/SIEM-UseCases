@@ -1,0 +1,16 @@
+Suspicious Email Header Anomalies
+
+MITRE ATT&CK Mapping:
+Tactic: Initial Access (TA0001)
+Technique: Spear Phishing Attachment (T1566.001)
+
+Detection Logic:
+Detect emails with mismatched headers or suspicious sender addresses.
+
+Microsoft Sentinel KQL Query:
+EmailEvents
+| where SenderDomain != SPFDomain
+| project TimeGenerated, Sender, SenderDomain, SPFDomain
+
+Testing:
+Send an email with a spoofed sender address to a test account.
