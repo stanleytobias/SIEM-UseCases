@@ -1,0 +1,16 @@
+Keylogger Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Input Capture (T1056.001)
+
+Detection Logic:
+Detect processes or files related to keylogging activity.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where ProcessName in ("keylogger.exe", "keyboardhook.exe") // Known keylogger processes
+| project TimeGenerated, ProcessName, CommandLine, User
+
+Testing:
+Run a benign keylogging application in a test environment.
