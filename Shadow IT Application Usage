@@ -1,0 +1,16 @@
+Shadow IT Application Usage
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Exfiltration Over Web Service (T1567.001)
+
+Detection Logic:
+Monitor access to unapproved applications or cloud services.
+
+Microsoft Sentinel KQL Query:
+WebProxyLogs
+| where ApplicationName not in (approvedApplications)
+| project TimeGenerated, User, ApplicationName, URL
+
+Testing:
+Access a shadow IT application from a test account.
