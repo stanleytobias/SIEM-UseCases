@@ -1,0 +1,17 @@
+File Integrity Monitoring Alerts
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Indicator Removal on Host (T1070)
+
+Detection Logic:
+Generate alerts for unexpected file changes.
+
+Microsoft Sentinel KQL Query:
+SecurityAlert
+| where AlertName == "File Integrity Monitoring Alert"
+| project TimeGenerated, FilePath, User, Severity
+
+Testing:
+Simplest Test:
+Simulate file changes and validate alerts.
