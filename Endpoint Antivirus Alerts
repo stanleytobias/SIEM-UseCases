@@ -1,0 +1,17 @@
+Endpoint Antivirus Alerts
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Impair Defenses (T1562)
+
+Detection Logic:
+Monitor antivirus alerts for potential malware or misconfigurations.
+
+Microsoft Sentinel KQL Query:
+SecurityAlert
+| where ProductName == "Antivirus"
+| project TimeGenerated, Computer, MalwareName, Severity
+
+Testing:
+Simplest Test:
+Deploy an EICAR test file to trigger antivirus alerts.
