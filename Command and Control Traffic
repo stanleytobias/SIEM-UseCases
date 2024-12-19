@@ -11,3 +11,9 @@ Detection Logic:
 Monitor for DNS queries to dynamically generated domains (DGA) or rare domains.
 Detect anomalies in TLS handshakes, such as self-signed certificates.
 Alert on non-standard port usage or high volumes of encrypted traffic.
+
+MS Sentinel:
+NetworkTraffic
+| where DestinationDomain in (dynamic(["C2_Domain_1", "C2_Domain_2"])) // Replace with C2 domains from threat intelligence
+| summarize C2ConnectionCount = count() by SourceIP, DestinationDomain, bin(TimeGenerated, 1h)
+| project TimeGenerated, SourceIP, DestinationDomain, C2ConnectionCount
