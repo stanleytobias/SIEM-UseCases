@@ -1,0 +1,16 @@
+Privilege Escalation
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Access Token Manipulation (T1134)
+
+Detection Logic:
+Monitor logs for activities indicating privilege escalation.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID in (4673, 4674) // Privileged operation
+| project TimeGenerated, AccountName, PrivilegeName
+
+Testing:
+Use tools like PowerShell to perform privilege escalation simulations.
