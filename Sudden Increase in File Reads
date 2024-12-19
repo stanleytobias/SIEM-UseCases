@@ -1,0 +1,18 @@
+Sudden Increase in File Reads
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: File and Directory Discovery (T1083)
+
+Detection Logic:
+Detect a sharp rise in file read operations within a short timeframe.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where Action == "Read"
+| summarize ReadCount = count() by User, bin(TimeGenerated, 1h)
+| where ReadCount > 100 // Adjust threshold
+| project TimeGenerated, User, ReadCount
+
+Testing:
+Use a script to read multiple files in a test environment.
