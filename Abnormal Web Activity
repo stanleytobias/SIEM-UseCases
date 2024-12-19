@@ -1,0 +1,13 @@
+Abnormal Web Activity
+
+MITRE Tactic:
+Command and Control (TA0011) / Initial Access (TA0001)
+
+MITRE Techniques:
+Spear Phishing (T1566): Abnormal web activity may result from phishing campaigns.
+Exfiltration Over Web Service (T1567.001): Unusual activity could signal exfiltration via HTTP/S.
+
+Detection Logic:
+Analyze web proxy logs for sudden increases in browsing activity or visits to flagged URLs.
+Monitor for access to known malicious or newly registered domains.
+Alert on non-standard HTTP methods or unusually high HTTP error rates.
