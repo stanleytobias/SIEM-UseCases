@@ -11,3 +11,10 @@ Detection Logic:
 Track command-line execution logs for repeated failures within a short period.
 Correlate with unusual user behavior or access attempts.
 Alert on command-line usage with common errors like "command not found" or syntax errors.
+
+MS Sentinel:
+CommandExecutionLogs
+| where Status == "Failed"
+| summarize FailedCommandCount = count() by User, ProcessName, bin(TimeGenerated, 1h)
+| where FailedCommandCount > 20 // Adjust threshold
+| project TimeGenerated, User, ProcessName, FailedCommandCount
