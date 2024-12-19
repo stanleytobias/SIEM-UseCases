@@ -1,0 +1,13 @@
+Cloud Resource Terminations
+
+MITRE Tactic:
+Impact (TA0040) / Execution (TA0002)
+
+MITRE Techniques:
+Resource Hijacking (T1586): Abrupt terminations to disrupt legitimate activity or cover traces.
+Impair Defenses (T1562): Destroying resources to reduce visibility.
+
+Detection Logic:
+Track resource termination events in cloud activity logs.
+Alert on bulk terminations or terminations initiated from unusual IPs or accounts.
+Correlate with suspicious events like privilege escalation or failed login attempts.
