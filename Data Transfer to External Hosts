@@ -10,3 +10,10 @@ Detection Logic:
 Analyze outbound traffic for unusual IPs or destinations, especially flagged or rare ones.
 Monitor for large file transfers or uncommon protocols (e.g., FTP, SCP).
 Alert on unauthorized user accounts initiating data transfers.
+
+MS Sentinel:
+NetworkTraffic
+| where Direction == "Outbound"
+| where DestinationIP !in (trustedIPs) // Replace with a list of trusted IPs
+| summarize ExternalDataTransfer = sum(BytesSent) by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| project TimeGenerated, SourceIP, DestinationIP, ExternalDataTransfer
