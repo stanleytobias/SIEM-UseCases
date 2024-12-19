@@ -11,3 +11,10 @@ Detection Logic:
 Monitor traffic geolocation and alert on connections to countries with no business relevance.
 Compare against a whitelist of expected geolocations based on historical traffic.
 Correlate with new domains or IPs in threat intelligence feeds.
+
+MS Sentinel:
+NetworkTraffic
+| extend GeoLocation = GetGeoLocation(DestinationIP)
+| where GeoLocation.Country !in ("Country1", "Country2") // Replace with allowed countries
+| summarize ConnectionCount = count() by SourceIP, DestinationIP, GeoLocation, bin(TimeGenerated, 1h)
+| project TimeGenerated, SourceIP, DestinationIP, GeoLocation, ConnectionCount
