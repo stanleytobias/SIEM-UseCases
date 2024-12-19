@@ -1,0 +1,16 @@
+Privileged Account Escalation Activity
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Account Manipulation (T1098)
+
+Detection Logic:
+Monitor for privilege escalation activities like group membership changes.
+
+Microsoft Sentinel KQL Query:
+AuditLogs
+| where OperationName == "AddMemberToGroup" and GroupName contains "Admin"
+| project TimeGenerated, AccountName, GroupName, InitiatedBy
+
+Testing:
+Add a user to an admin group in a test environment.
