@@ -1,0 +1,17 @@
+Suspicious Access to Source Code Repositories
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Information Repositories (T1213)
+
+Detection Logic:
+Detect unusual access patterns to source code repositories.
+
+Microsoft Sentinel KQL Query:
+RepositoryAccessLogs
+| summarize AccessCount = count() by User, RepositoryName, bin(TimeGenerated, 1h)
+| where AccessCount > 20 // Adjust threshold
+| project TimeGenerated, User, RepositoryName, AccessCount
+
+Testing:
+Clone a repository multiple times using a test account.
