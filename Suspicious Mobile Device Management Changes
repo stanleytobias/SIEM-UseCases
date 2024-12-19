@@ -1,0 +1,16 @@
+Suspicious Mobile Device Management Changes
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Modify Cloud Compute Infrastructure (T1578)
+
+Detection Logic:
+Monitor for unauthorized changes to mobile device management configurations.
+
+Microsoft Sentinel KQL Query:
+MobileDeviceManagementLogs
+| where Action in ("ModifyPolicy", "AddDevice") and User not in (authorizedAdmins)
+| project TimeGenerated, Action, DeviceID, User
+
+Testing:
+Modify MDM policies or add a test device to MDM.
