@@ -10,3 +10,10 @@ Detection Logic:
 Monitor network routing tables for unauthorized changes to prefixes or AS numbers.
 Alert on traffic rerouted to unfamiliar AS paths or suspicious geolocations.
 Correlate with external route monitoring systems like RIPE or BGPMon.
+
+MS Sentinel:
+NetworkRoutingLogs
+| where EventType == "RouteChange"
+| where NewASPath != ExpectedASPath // Replace with expected AS paths
+| project TimeGenerated, Prefix, NewASPath, ExpectedASPath, Initiator
+
