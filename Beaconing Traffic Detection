@@ -1,0 +1,12 @@
+Beaconing Traffic Detection
+
+MITRE Tactic:
+Command and Control (TA0011)
+
+MITRE Techniques:
+C2 Communication over Web Protocols (T1071.001): Beaconing patterns can indicate C2 traffic.
+
+Detection Logic:
+Analyze outbound traffic for regular intervals or repeated connections to the same IPs/domains.
+Use anomaly detection to identify deviations in traffic volume or frequency.
+Correlate with threat intelligence feeds to flag known C2 domains or IPs.
