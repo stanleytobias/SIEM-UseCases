@@ -1,0 +1,16 @@
+Suspicious Directory Traversal Attempts
+
+MITRE ATT&CK Mapping:
+Tactic: Initial Access (TA0001)
+Technique: Exploit Public-Facing Application (T1190)
+
+Detection Logic:
+Detect directory traversal patterns in web application logs.
+
+Microsoft Sentinel KQL Query:
+WebApplicationFirewallLogs
+| where RequestUri matches regex "(\\.|\\.)+/"
+| project TimeGenerated, ClientIP, RequestUri
+
+Testing:
+Perform a test directory traversal attack using tools like burpsuite.
