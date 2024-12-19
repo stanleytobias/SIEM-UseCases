@@ -1,0 +1,17 @@
+Suspicious Outbound Traffic Volume
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Exfiltration Over Network Medium (T1048)
+
+Detection Logic:
+Detect abnormally high outbound traffic from a single host.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| summarize OutboundTraffic = sum(BytesTransferred) by SourceIP, bin(TimeGenerated, 1h)
+| where OutboundTraffic > 1000000000 // Adjust threshold
+| project TimeGenerated, SourceIP, OutboundTraffic
+
+Testing:
+Simulate large outbound data transfers using test tools like scp or rsync.
