@@ -1,0 +1,16 @@
+Suspicious External IP Communication
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Non-Standard Port (T1571)
+
+Detection Logic:
+Detect traffic to external IPs on uncommon ports.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationIP !startswith "10." and DestinationPort not in (80, 443, 22)
+| project TimeGenerated, SourceIP, DestinationIP, DestinationPort
+
+Testing:
+Send traffic to an external IP on a non-standard port.
