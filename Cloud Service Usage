@@ -1,0 +1,13 @@
+Cloud Service Usage
+
+MITRE Tactic:
+Credential Access (TA0006) / Discovery (TA0007)
+
+MITRE Techniques:
+Cloud Infrastructure Discovery (T1580): Abnormal use could indicate scanning or enumeration.
+Valid Accounts (T1078): Misuse of valid credentials to perform unauthorized actions.
+
+Detection Logic:
+Establish a baseline of normal cloud service usage patterns (e.g., service type, volume, time).
+Monitor for deviations, such as sudden spikes in resource utilization or access outside business hours.
+Alert on usage by accounts with limited historical activity or unauthorized access.
