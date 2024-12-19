@@ -1,0 +1,17 @@
+Suspicious Domain Generation Algorithm (DGA) Activity
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Domain Generation Algorithms (T1568.002)
+
+Detection Logic:
+Detect DNS queries for domains matching DGA patterns.
+
+Microsoft Sentinel KQL Query:
+DNSLogs
+| where QueryName matches regex "[a-z0-9]{10,}\\.(com|net|org)"
+| summarize QueryCount = count() by SourceIP, QueryName, bin(TimeGenerated, 1h)
+| project TimeGenerated, SourceIP, QueryName, QueryCount
+
+Testing:
+Use a DGA generator tool like pyDGAs to simulate activity.
