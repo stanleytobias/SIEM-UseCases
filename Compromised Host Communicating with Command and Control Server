@@ -10,3 +10,9 @@ Detection Logic:
 Monitor for suspicious outbound traffic patterns, such as beaconing.
 Alert on known C2 indicators of compromise (IOCs), such as flagged IPs or domains.
 Correlate with endpoint logs to identify compromised processes initiating traffic.
+
+MS Sentinel:
+NetworkTraffic
+| where DestinationIP in (dynamic(["C2_IP_1", "C2_IP_2"])) // Replace with C2 IPs
+| summarize CompromisedConnections = count() by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| project TimeGenerated, SourceIP, DestinationIP, CompromisedConnections
