@@ -1,0 +1,19 @@
+Excessive Anomalies in Email Bounce Rates
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Email Service Abuse (T1585.002)
+
+Detection Logic:
+Detect high email bounce rates, which may indicate a phishing campaign or email spoofing.
+
+Microsoft Sentinel KQL Query:
+EmailEvents
+| where Status == "Bounced"
+| summarize BounceRate = count() by Sender, bin(TimeGenerated, 1h)
+| where BounceRate > 20 // Adjust threshold
+| project TimeGenerated, Sender, BounceRate
+
+Testing:
+Simplest Test:
+Send test emails to invalid addresses from a monitored email account.
