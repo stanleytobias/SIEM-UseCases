@@ -1,0 +1,18 @@
+Email Spoofing Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Initial Access (TA0001)
+Technique: Phishing (T1566)
+
+Detection Logic:
+Detect discrepancies in email headers (e.g., mismatched sender and SPF/DKIM results).
+
+Microsoft Sentinel KQL Query:
+
+EmailEvents
+| where SPFResult != "Pass" or DKIMResult != "Pass"
+| project TimeGenerated, Sender, Recipient, SPFResult, DKIMResult
+
+Testing:
+Simplest Test:
+Send an email with a spoofed "From" address using tools like SendEmail.
