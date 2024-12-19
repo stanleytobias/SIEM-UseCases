@@ -1,0 +1,19 @@
+Excessive Failed File Decryption Attempts
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Brute Force (T1110)
+
+Detection Logic:
+Detect multiple failed attempts to decrypt files using incorrect keys.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where ActionType == "DecryptionFailed"
+| summarize FailedDecryptionCount = count() by User, FilePath, bin(TimeGenerated, 1h)
+| where FailedDecryptionCount > 5 // Adjust threshold
+| project TimeGenerated, User, FilePath, FailedDecryptionCount
+
+Testing:
+Simplest Test:
+Attempt to decrypt an encrypted file using invalid keys.
