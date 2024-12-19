@@ -1,0 +1,12 @@
+Cloud Security Misconfiguration
+
+MITRE Tactic:
+Defense Evasion (TA0005) / Impact (TA0040)
+
+MITRE Techniques:
+Modify Cloud Access Policies (T1484.002): Misconfigurations may lead to unauthorized access or privilege escalation.
+
+Detection Logic:
+Monitor for changes in cloud security configurations, such as open storage buckets or unrestricted firewall rules.
+Alert on policy modifications outside of approved change windows or by unauthorized users.
+Correlate with logs from Infrastructure as Code (IaC) tools to detect unapproved changes.
