@@ -11,3 +11,10 @@ Detection Logic:
 Monitor file system event logs for ownership change operations.
 Correlate changes with known administrative accounts or unusual user activity.
 Alert on unexpected ownership changes for sensitive files or directories.
+
+MS Sentinel:
+FileAuditLogs
+| where ActionType == "ChangeFileOwnership"
+| summarize ChangeCount = count() by FilePath, Initiator, bin(TimeGenerated, 1h)
+| where ChangeCount > 3 // Adjust based on environment
+| project TimeGenerated, FilePath, Initiator, ChangeCount
