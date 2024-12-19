@@ -11,3 +11,9 @@ Detection Logic:
 Track backup job schedules and alert on unscheduled or excessive jobs.
 Detect unusual file selections or destinations for backups.
 Correlate with recent privilege escalation or unauthorized access events.
+
+MS Sentinel:
+BackupActivityLogs
+| summarize BackupCount = count() by User, BackupType, bin(TimeGenerated, 1h)
+| where BackupCount > 5 // Adjust threshold based on backup frequency
+| project TimeGenerated, User, BackupType, BackupCount
