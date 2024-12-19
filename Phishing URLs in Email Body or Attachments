@@ -1,0 +1,12 @@
+Phishing URLs in Email Body or Attachments
+
+MITRE Tactic:
+Initial Access (TA0001)
+
+MITRE Techniques:
+Spear Phishing (T1566.002): Phishing URLs are used to compromise user accounts or deliver malware.
+
+Detection Logic:
+Monitor email content for URLs flagged in threat intelligence feeds or known phishing patterns.
+Analyze attachments for links redirecting to suspicious domains.
+Alert on emails from untrusted senders containing URLs with short-lived domains.
