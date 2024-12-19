@@ -1,0 +1,12 @@
+Deactivation of Endpoint Security
+
+MITRE Tactic:
+Defense Evasion (TA0005) / Impact (TA0040)
+
+MITRE Techniques:
+Disabling Security Tools (T1562.001): Attempted deactivation of endpoint security to avoid detection.
+
+Detection Logic:
+Monitor endpoint logs for changes to antivirus or EDR configurations.
+Alert on process termination attempts targeting security tools.
+Detect uninstallation commands issued for endpoint protection software.
