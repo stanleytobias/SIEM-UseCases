@@ -11,3 +11,10 @@ Detection Logic:
 Monitor for bulk file deletions or deletion of critical system files.
 Correlate deletions with recent user or process activity, such as privilege escalation.
 Detect unauthorized attempts to delete logs or security-related files.
+
+MS Sentinel:
+FileAuditLogs
+| where ActionType == "Delete"
+| summarize DeletionCount = count() by User, FilePath, bin(TimeGenerated, 1h)
+| where DeletionCount > 20 // Adjust based on normal activity
+| project TimeGenerated, User, FilePath, DeletionCount
