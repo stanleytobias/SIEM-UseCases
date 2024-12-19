@@ -10,3 +10,10 @@ Detection Logic:
 Monitor system audit logs for processes started with debug privileges.
 Alert on debug privilege usage by unauthorized or non-administrative accounts.
 Correlate with abnormal process execution or system changes.
+
+MS Sentinel:
+SecurityEvent
+| where EventID == 4673 // Privileged service operation
+| where PrivilegeList contains "SeDebugPrivilege"
+| summarize PrivilegeUseCount = count() by AccountName, bin(TimeGenerated, 1h)
+| project TimeGenerated, AccountName, PrivilegeUseCount
