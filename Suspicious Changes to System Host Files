@@ -1,0 +1,16 @@
+Suspicious Changes to System Host Files
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Modify System Process (T1543)
+
+Detection Logic:
+Detect changes to the system hosts file.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where FilePath == "C:\\Windows\\System32\\drivers\\etc\\hosts" and Action == "Modify"
+| project TimeGenerated, User, FilePath
+
+Testing:
+Modify the hosts file on a test system.
