@@ -1,0 +1,12 @@
+Cloud Infrastructure Anomalies
+
+MITRE Tactic:
+Discovery (TA0007) / Impact (TA0040)
+
+MITRE Techniques:
+Cloud Infrastructure Discovery (T1580): Anomalies in cloud infrastructure usage may indicate reconnaissance.
+
+Detection Logic:
+Monitor cloud activity logs for API calls deviating from normal usage patterns.
+Alert on infrastructure changes, such as unexpected VM launches or storage expansions.
+Correlate anomalies with privilege escalation or compromised accounts.
