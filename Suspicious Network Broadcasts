@@ -1,0 +1,12 @@
+Suspicious Network Broadcasts
+
+MITRE Tactic:
+Discovery (TA0007) / Credential Access (TA0006)
+
+MITRE Techniques:
+Network Discovery (T1046): Using network broadcasts to identify hosts or services.
+
+Detection Logic:
+Monitor for unusual ARP, NetBIOS, or multicast broadcasts on the network.
+Alert on broadcast storms or traffic originating from unauthorized devices.
+Correlate with network logs to identify anomalies in broadcast behavior.
