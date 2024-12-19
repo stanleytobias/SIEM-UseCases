@@ -17,6 +17,7 @@ NetworkTraffic
 
 Testing:
 Atomic Red Team:
-Test case: T1571.
+Test case: T1571. https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1571/T1571.yaml
+
 Simplest Test:
 Simulate traffic using curl or similar tools to non-standard ports.
