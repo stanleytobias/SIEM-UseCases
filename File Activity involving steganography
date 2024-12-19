@@ -1,0 +1,12 @@
+File Activity involving steganography
+
+MITRE Tactic:
+Exfiltration (TA0010) / Defense Evasion (TA0005)
+
+MITRE Techniques:
+Exfiltration Over Steganography (T1001.002): Using steganographic techniques to hide malicious data in files.
+
+Detection Logic:
+Monitor for files with unusual metadata or high entropy (indicative of hidden data).
+Detect large image or multimedia files being uploaded or downloaded outside normal baselines.
+Correlate file activity with user behavior, focusing on anomalies in file creation or access.
