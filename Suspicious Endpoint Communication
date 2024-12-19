@@ -1,0 +1,16 @@
+Suspicious Endpoint Communication
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Application Layer Protocol (T1071)
+
+Detection Logic:
+Detect endpoints communicating with known malicious IPs or domains.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationIP in (maliciousIPs) or DestinationDomain in (maliciousDomains)
+| project TimeGenerated, SourceIP, DestinationIP, DestinationDomain
+
+Testing:
+Simulate communication with a benign but flagged IP or domain.
