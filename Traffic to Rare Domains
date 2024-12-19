@@ -1,0 +1,13 @@
+Traffic to Rare Domains
+
+MITRE Tactic:
+Command and Control (TA0011) / Initial Access (TA0001)
+
+MITRE Techniques:
+Domain Generation Algorithms (DGA) (T1568.002): Rare domains may be associated with malicious DGA traffic.
+DNS Tunneling (T1071.004): Rare domains may indicate DNS-based C2 channels.
+
+Detection Logic:
+Analyze DNS logs for domains with low frequency of appearance across the network.
+Alert on domains newly registered or flagged in threat intelligence feeds.
+Correlate rare domains with other suspicious traffic (e.g., non-standard ports).
