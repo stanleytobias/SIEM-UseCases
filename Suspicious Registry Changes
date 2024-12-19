@@ -1,0 +1,16 @@
+Suspicious Registry Changes
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Modify Registry (T1112)
+
+Detection Logic:
+Detect unauthorized changes to sensitive registry keys.
+
+Microsoft Sentinel KQL Query:
+RegistryEvents
+| where RegistryKeyPath startswith "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"
+| project TimeGenerated, RegistryKeyPath, Action, User
+
+Testing:
+Modify a test registry key in a non-critical environment.
