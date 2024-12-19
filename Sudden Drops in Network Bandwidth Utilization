@@ -1,0 +1,17 @@
+Sudden Drops in Network Bandwidth Utilization
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Network Denial of Service (T1498)
+
+Detection Logic:
+Identify sudden drops in network bandwidth usage.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| summarize BandwidthUsage = sum(BytesTransferred) by bin(TimeGenerated, 5m)
+| order by BandwidthUsage asc
+| project TimeGenerated, BandwidthUsage
+
+Testing:
+Simulate a sudden reduction in traffic using bandwidth-limiting tools.
