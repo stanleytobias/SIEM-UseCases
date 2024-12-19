@@ -1,0 +1,16 @@
+Social Engineering Indicators
+
+MITRE ATT&CK Mapping:
+Tactic: Initial Access (TA0001)
+Technique: Spear Phishing (T1566.001)
+
+Detection Logic:
+Detect unusual email patterns or flagged keywords indicating social engineering.
+
+Microsoft Sentinel KQL Query:
+EmailEvents
+| where Subject contains_any ("urgent", "password", "security")
+| project TimeGenerated, Sender, Recipient, Subject
+
+Testing:
+Send a benign phishing-style email with flagged keywords.
