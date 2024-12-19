@@ -1,0 +1,16 @@
+Suspicious Hyper-V Activity
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Create Cloud Instance (T1578.002)
+
+Detection Logic:
+Detect unexpected virtual machine creation or configuration changes.
+
+Microsoft Sentinel KQL Query:
+HyperVLogs
+| where Action in ("CreateVM", "ModifySettings") and User not in (authorizedUsers)
+| project TimeGenerated, Action, VMName, User
+
+Testing:
+Create or modify a virtual machine in a test Hyper-V environment.
