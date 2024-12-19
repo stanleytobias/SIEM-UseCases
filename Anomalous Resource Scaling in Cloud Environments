@@ -11,3 +11,10 @@ Detection Logic:
 Monitor cloud activity logs for unexpected resource scaling events.
 Alert on scaling triggered by non-administrative accounts or at odd times.
 Correlate scaling with changes in cloud costs or resource utilization.
+
+MS Sentinel:
+AzureActivity
+| where OperationName contains "Scale"
+| summarize ScalingEventCount = count() by ResourceId, Caller, bin(TimeGenerated, 1h)
+| where ScalingEventCount > 5 // Define threshold for abnormal scaling events
+| project TimeGenerated, ResourceId, Caller, ScalingEventCount
