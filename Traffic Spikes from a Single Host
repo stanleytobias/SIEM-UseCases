@@ -11,3 +11,9 @@ Detection Logic:
 Monitor traffic volume per host over time and alert on significant spikes.
 Correlate spikes with unusual destinations or non-standard ports.
 Compare against normal usage patterns for the specific host.
+
+MS Sentinel:
+NetworkTraffic
+| summarize TrafficVolume = sum(BytesSent + BytesReceived) by SourceIP, bin(TimeGenerated, 1h)
+| where TrafficVolume > 1000000000 // Adjust threshold for spikes
+| project TimeGenerated, SourceIP, TrafficVolume
