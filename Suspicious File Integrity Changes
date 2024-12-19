@@ -1,0 +1,16 @@
+Suspicious File Integrity Changes
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: File Deletion (T1070.004)
+
+Detection Logic:
+Detect unexpected changes to critical system or configuration files.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where Action == "Modified" and FilePath in (criticalFiles)
+| project TimeGenerated, FilePath, User, Action
+
+Testing:
+Modify a critical file in a test environment.
