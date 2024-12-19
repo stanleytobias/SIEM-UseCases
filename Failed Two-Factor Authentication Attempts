@@ -1,0 +1,19 @@
+Failed Two-Factor Authentication Attempts
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Multi-Factor Authentication Interception (T1111)
+
+Detection Logic:
+Monitor for failed 2FA attempts in authentication logs.
+
+Microsoft Sentinel KQL Query:
+AuthenticationLogs
+| where ResultType == "Failure" and AuthenticationMethod == "MFA"
+| summarize Failed2FAAttempts = count() by UserPrincipalName, bin(TimeGenerated, 1h)
+| where Failed2FAAttempts > 3 // Adjust threshold
+| project TimeGenerated, UserPrincipalName, Failed2FAAttempts
+
+Testing:
+Simplest Test:
+Attempt 2FA with incorrect codes from a monitored test account.
