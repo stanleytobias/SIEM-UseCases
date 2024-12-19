@@ -11,3 +11,10 @@ Detection Logic:
 Monitor filesystem events for high rates of temporary file creation.
 Compare against baseline activity for the specific system or user.
 Alert on excessive growth in directories like /tmp or %TEMP%.
+
+MS Sentinel:
+FileCreationEvents
+| where FilePath contains "/tmp" or FilePath contains "\\Temp"
+| summarize TempFileCount = count() by User, bin(TimeGenerated, 1h)
+| where TempFileCount > 50 // Adjust threshold for environment
+| project TimeGenerated, User, TempFileCount
