@@ -1,0 +1,18 @@
+High Volume of Data Retrieval from EDR Systems
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data Staged (T1074)
+
+Detection Logic:
+Detect excessive API calls or data extraction from endpoint detection and response (EDR) systems.
+
+Microsoft Sentinel KQL Query:
+APIActivityLogs
+| where ResourceType == "EDR"
+| summarize DataRetrievalCount = count() by CallerIP, User, bin(TimeGenerated, 1h)
+| where DataRetrievalCount > 50 // Adjust threshold
+| project TimeGenerated, CallerIP, User, DataRetrievalCount
+
+Testing:
+Use a script to extract data from an EDR system's API in a test environment.
