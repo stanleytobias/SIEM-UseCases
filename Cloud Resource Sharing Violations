@@ -1,0 +1,12 @@
+Cloud Resource Sharing Violations
+
+MITRE Tactic:
+Collection (TA0009) / Exfiltration (TA0010)
+
+MITRE Techniques:
+Data Transfer to Cloud Accounts (T1567.002): Unauthorized sharing may indicate data exfiltration.
+
+Detection Logic:
+Monitor cloud storage sharing logs for files shared with external accounts or public links.
+Alert on sharing permissions being changed to "everyone" or "public."
+Correlate with user behavior to detect unauthorized sharing patterns.
