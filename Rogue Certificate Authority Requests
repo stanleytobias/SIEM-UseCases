@@ -1,0 +1,16 @@
+Rogue Certificate Authority Requests
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Valid Accounts (T1078)
+
+Detection Logic:
+Monitor for unauthorized certificate authority requests.
+
+Microsoft Sentinel KQL Query:
+CertificateLogs
+| where ActionType == "RequestCertificate" and Issuer not in (authorizedIssuers)
+| project TimeGenerated, Issuer, Requester
+
+Testing:
+Attempt to request a rogue certificate in a test environment.
