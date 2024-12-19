@@ -10,3 +10,8 @@ Detection Logic:
 Monitor for sudden changes in route advertisements or prefix announcements.
 Detect discrepancies between advertised and actual routes for critical services.
 Integrate with internet-wide BGP monitoring tools to receive real-time alerts.
+
+MS Sentinel:
+NetworkRoutingLogs
+| where EventType == "RouteHijack"
+| project TimeGenerated, Prefix, SourceIP, NewAS, OldAS
