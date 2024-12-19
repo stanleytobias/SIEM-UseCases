@@ -1,0 +1,13 @@
+Data Exfiltration Detection
+
+MITRE Tactic:
+Exfiltration (TA0010)
+
+MITRE Techniques:
+Exfiltration Over Web Service (T1567.001): Exfiltration through legitimate web services.
+Exfiltration Over Alternative Protocol (T1048): Using non-standard protocols for exfiltration.
+
+Detection Logic:
+Monitor outbound traffic for large or unusual data transfers.
+Detect connections to unauthorized external hosts or flagged cloud storage services.
+Correlate with file access logs to identify potential staging activities.
