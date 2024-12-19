@@ -1,0 +1,18 @@
+Rapid File Encryption Events
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Data Encrypted for Impact (T1486)
+
+Detection Logic:
+Monitor for rapid file encryption based on file extension changes.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where FileExtension in (".encrypted", ".lock", ".crypto")
+| summarize EncryptionEventCount = count() by User, bin(TimeGenerated, 1m)
+| where EncryptionEventCount > 10 // Adjust threshold
+| project TimeGenerated, User, EncryptionEventCount
+
+Testing:
+Simulate rapid file encryption with a benign ransomware simulation tool.
