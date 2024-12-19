@@ -1,0 +1,12 @@
+Data Uploaded to Unauthorized Cloud Storage
+
+MITRE Tactic:
+Exfiltration (TA0010)
+
+MITRE Techniques:
+Exfiltration Over Cloud Accounts (T1567.002): Uploading data to unauthorized cloud storage services.
+
+Detection Logic:
+Monitor cloud storage logs for uploads to external accounts or unregistered services.
+Alert on significant increases in upload volumes by non-privileged users.
+Correlate with access logs to detect compromised accounts.
