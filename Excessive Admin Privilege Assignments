@@ -1,0 +1,20 @@
+Excessive Admin Privilege Assignments
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Account Manipulation (T1098)
+
+Detection Logic:
+Monitor Active Directory or cloud IAM logs for a surge in admin privilege assignments.
+
+Microsoft Sentinel KQL Query:
+AuditLogs
+| where OperationName == "AddMemberToGroup"
+| where GroupName contains "Admin"
+| summarize PrivilegeAssignments = count() by InitiatedBy, bin(TimeGenerated, 1h)
+| where PrivilegeAssignments > 5 // Adjust threshold
+| project TimeGenerated, InitiatedBy, PrivilegeAssignments
+
+Testing:
+Simplest Test:
+Assign admin privileges to multiple test accounts via AD or Azure AD.
