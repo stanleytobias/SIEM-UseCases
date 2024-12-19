@@ -1,0 +1,16 @@
+Suspicious File Download
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: User Execution (T1204.001)
+
+Detection Logic:
+Detect downloads of files with suspicious extensions or from flagged sources.
+
+Microsoft Sentinel KQL Query:
+WebProxyLogs
+| where URL endswith ".exe" or URL endswith ".zip"
+| project TimeGenerated, User, URL
+
+Testing:
+Download a benign executable file in a test environment.
