@@ -10,3 +10,9 @@ Detection Logic:
 Monitor email content for URLs flagged in threat intelligence feeds or known phishing patterns.
 Analyze attachments for links redirecting to suspicious domains.
 Alert on emails from untrusted senders containing URLs with short-lived domains.
+
+MS Sentinel:
+EmailEvents
+| where UrlDomain !in (trustedDomains) // Replace with trusted domains
+| where UrlDomain matches regex @"[A-Za-z0-9-]+\.[A-Za-z]{2,}" // Detect URL format
+| project TimeGenerated, Sender, Recipient, UrlDomain, Subject
