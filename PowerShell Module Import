@@ -1,0 +1,13 @@
+PowerShell Module Import
+
+MITRE Tactic:
+Execution (TA0002) / Defense Evasion (TA0005)
+
+MITRE Techniques:
+PowerShell (T1059.001): Unusual module imports may signal malicious scripts or evasion.
+Execution Guardrails (T1480): Abnormal imports could indicate an attacker testing commands.
+
+Detection Logic:
+Monitor PowerShell logs for module import events (e.g., Import-Module).
+Alert on imports of uncommon modules or those flagged as suspicious (e.g., Mimikatz).
+Correlate module imports with subsequent script execution or system changes.
