@@ -1,0 +1,12 @@
+Brute Force Attacks
+
+MITRE Tactic:
+Credential Access (TA0006)
+
+MITRE Techniques:
+Brute Force (T1110): Repeated login attempts to guess credentials.
+
+Detection Logic:
+Monitor authentication logs for repeated failed login attempts followed by a success.
+Alert on login attempts from unknown or flagged IPs.
+Correlate with geolocation or time-based anomalies.
