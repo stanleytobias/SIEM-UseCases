@@ -1,0 +1,16 @@
+Privilege Escalation Attempt
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Exploitation for Privilege Escalation (T1068)
+
+Detection Logic:
+Detect failed attempts to execute privileged operations.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID == 4673 and Status == "Failed"
+| project TimeGenerated, AccountName, PrivilegeName, Status
+
+Testing:
+Simulate privilege escalation using incorrect permissions or commands.
