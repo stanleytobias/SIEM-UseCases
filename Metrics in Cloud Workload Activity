@@ -1,0 +1,13 @@
+Metrics in Cloud Workload Activity
+
+MITRE Tactic:
+Discovery (TA0007) / Execution (TA0002)
+
+MITRE Techniques:
+Cloud Infrastructure Discovery (T1580): Abnormal workload metrics may signal reconnaissance or scanning.
+Resource Hijacking (T1586): Unusual workload activity could indicate misuse, such as crypto-mining.
+
+Detection Logic:
+Monitor cloud metrics like CPU, memory, and network activity for unexpected spikes.
+Correlate metrics with time of day, user accounts, or workload types.
+Alert on deviations from historical baselines or sudden, unexplained activity increases.
