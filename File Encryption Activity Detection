@@ -1,0 +1,17 @@
+File Encryption Activity Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Data Encrypted for Impact (T1486)
+
+Detection Logic:
+Identify file extensions or processes associated with encryption.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where ProcessName in ("ransomware.exe", "encryptor.exe") // Known ransomware processes
+| project TimeGenerated, ProcessName, CommandLine, User
+
+Testing:
+Simplest Test:
+Execute a benign encryption simulation tool.
