@@ -1,0 +1,17 @@
+Network Traffic Spikes
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Network Denial of Service (T1498)
+
+Detection Logic:
+Detect sudden increases in network traffic volume.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| summarize TotalTraffic = sum(BytesTransferred) by SourceIP, DestinationIP, bin(TimeGenerated, 1m)
+| where TotalTraffic > 100000000 // Adjust threshold in bytes
+| project TimeGenerated, SourceIP, DestinationIP, TotalTraffic
+
+Testing:
+Use a traffic generator tool to simulate high network traffic from a test system.
