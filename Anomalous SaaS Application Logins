@@ -11,3 +11,10 @@ Detection Logic:
 Monitor login attempts for geolocation, time, and device anomalies.
 Detect multiple failed logins followed by a successful login (indicative of brute force).
 Alert on logins from flagged IPs or devices not previously associated with the account.
+
+MS Sentinel:
+OfficeActivity
+| where Operation == "UserLoggedIn"
+| summarize LoginCount = count() by UserId, ApplicationName, bin(TimeGenerated, 1h)
+| where LoginCount > 10 // Adjust based on expected activity
+| project TimeGenerated, UserId, ApplicationName, LoginCount
