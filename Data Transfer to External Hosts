@@ -1,0 +1,12 @@
+Data Transfer to External Hosts
+
+MITRE Tactic:
+Exfiltration (TA0010)
+
+MITRE Techniques:
+Data Transfer to Remote Hosts (T1567): Transferring data to unauthorized or unknown hosts.
+
+Detection Logic:
+Analyze outbound traffic for unusual IPs or destinations, especially flagged or rare ones.
+Monitor for large file transfers or uncommon protocols (e.g., FTP, SCP).
+Alert on unauthorized user accounts initiating data transfers.
