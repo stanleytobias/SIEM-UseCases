@@ -10,3 +10,9 @@ Detection Logic:
 Analyze outbound traffic for regular intervals or repeated connections to the same IPs/domains.
 Use anomaly detection to identify deviations in traffic volume or frequency.
 Correlate with threat intelligence feeds to flag known C2 domains or IPs.
+
+MS Sentinel:
+NetworkTraffic
+| summarize BeaconingFrequency = count() by SourceIP, DestinationIP, bin(TimeGenerated, 1m)
+| where BeaconingFrequency > 10 // Adjust threshold for beaconing patterns
+| project TimeGenerated, SourceIP, DestinationIP, BeaconingFrequency
