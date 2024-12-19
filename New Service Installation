@@ -1,0 +1,16 @@
+New Service Installation
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Create or Modify System Process (T1543)
+
+Detection Logic:
+Monitor for new services being created.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID == 7045 // A new service was installed
+| project TimeGenerated, ServiceName, ServiceFilePath, InitiatingAccount
+
+Testing:
+Install a new service using sc create or similar commands.
