@@ -1,0 +1,12 @@
+Compromised Host Communicating with Command and Control Server
+
+MITRE Tactic:
+Command and Control (TA0011)
+
+MITRE Techniques:
+C2 Communication over Web Protocols (T1071.001): C2 communication initiated by compromised hosts.
+
+Detection Logic:
+Monitor for suspicious outbound traffic patterns, such as beaconing.
+Alert on known C2 indicators of compromise (IOCs), such as flagged IPs or domains.
+Correlate with endpoint logs to identify compromised processes initiating traffic.
