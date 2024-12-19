@@ -1,0 +1,13 @@
+File Path Access Patterns
+
+MITRE Tactic:
+Discovery (TA0007) / Credential Access (TA0006)
+
+MITRE Techniques:
+File and Directory Discovery (T1083): Scanning unusual paths as part of reconnaissance.
+Access Token Manipulation (T1134): Leveraging tokens to access restricted paths.
+
+Detection Logic:
+Analyze file access logs for rare or sensitive file paths accessed by users.
+Correlate with user privilege levels and prior behavior.
+Detect access to restricted directories or paths with no prior legitimate access.
