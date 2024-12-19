@@ -1,0 +1,18 @@
+Insider Threat Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Data Transfer to Cloud Accounts (T1567.002)
+
+Detection Logic:
+Monitor for unusual activities, such as accessing sensitive files outside working hours.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where AccessTime outside (datetime(09:00:00) .. datetime(17:00:00))
+| summarize AccessCount = count() by User, FilePath, bin(TimeGenerated, 1h)
+| where AccessCount > 20 // Adjust threshold
+| project TimeGenerated, User, FilePath, AccessCount
+
+Testing:
+Access sensitive files during off-hours from a monitored account.
