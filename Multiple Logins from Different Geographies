@@ -1,0 +1,18 @@
+Multiple Logins from Different Geographies
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Valid Accounts (T1078)
+
+Detection Logic:
+Detect logins from different geolocations for the same user within a short time.
+
+Microsoft Sentinel KQL Query:
+AuthenticationLogs
+| extend GeoLocation = GetGeoLocation(ClientIP)
+| summarize GeoCount = dcount(GeoLocation.Country) by UserPrincipalName, bin(TimeGenerated, 1h)
+| where GeoCount > 1
+| project TimeGenerated, UserPrincipalName, GeoCount
+
+Testing:
+Simulate logins from different regions using a VPN.
