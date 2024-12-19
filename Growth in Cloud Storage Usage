@@ -1,0 +1,13 @@
+Growth in Cloud Storage Usage
+
+MITRE Tactic:
+Collection (TA0009) / Exfiltration (TA0010)
+
+MITRE Techniques:
+Data Transfer to Cloud Accounts (T1567.002): Large or rapid data uploads to cloud storage may indicate exfiltration.
+Exfiltration Over Web Service (T1567.001): Abnormal growth could signal unauthorized exfiltration.
+
+Detection Logic:
+Monitor cloud storage metrics for sudden spikes in usage.
+Correlate growth with specific users, IPs, or unusual file uploads.
+Set thresholds for storage usage growth over a defined period and alert on breaches.
