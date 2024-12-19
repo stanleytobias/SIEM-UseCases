@@ -10,3 +10,10 @@ Detection Logic:
 Monitor network traffic for an unusually high number of fragmented packets.
 Alert on fragmented packets targeting sensitive systems or services.
 Correlate with endpoint logs for processes generating such traffic.
+
+MS Sentinel:
+NetworkTraffic
+| where PacketSize < 500 // Adjust based on expected minimum size
+| summarize FragmentedPacketCount = count() by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| where FragmentedPacketCount > 50 // Adjust threshold for fragmentation
+| project TimeGenerated, SourceIP, DestinationIP, FragmentedPacketCount
