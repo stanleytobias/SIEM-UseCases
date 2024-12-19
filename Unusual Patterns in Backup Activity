@@ -1,0 +1,13 @@
+Unusual Patterns in Backup Activity
+
+MITRE Tactic:
+Impact (TA0040) / Defense Evasion (TA0005)
+
+MITRE Techniques:
+Data Destruction (T1485): Unusual backup patterns may precede destructive attacks.
+Data Encrypted for Impact (T1486): Abnormal backups might be used as ransomware preparation.
+
+Detection Logic:
+Track backup job schedules and alert on unscheduled or excessive jobs.
+Detect unusual file selections or destinations for backups.
+Correlate with recent privilege escalation or unauthorized access events.
