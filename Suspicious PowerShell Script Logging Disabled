@@ -1,0 +1,16 @@
+Suspicious PowerShell Script Logging Disabled
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Disable or Modify Tools (T1562.001)
+
+Detection Logic:
+Detect events indicating PowerShell script logging has been disabled.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID == 4719 and Message contains "PowerShell script block logging"
+| project TimeGenerated, AccountName, Message
+
+Testing:
+Disable PowerShell script logging in a test environment.
