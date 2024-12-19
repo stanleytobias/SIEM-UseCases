@@ -1,0 +1,20 @@
+Elevated Privilege Token Usage
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Access Token Manipulation (T1134)
+
+Detection Logic:
+Monitor usage of elevated privileges via tokens in logs.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID == 4673 // Privileged operation
+| summarize TokenUsageCount = count() by AccountName, bin(TimeGenerated, 1h)
+| project TimeGenerated, AccountName, TokenUsageCount
+
+Testing:
+Atomic Red Team:
+Test case: T1134. https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1134/T1134.yaml
+Simplest Test:
+Run a script or command requiring elevated privileges.
