@@ -1,0 +1,16 @@
+Suspicious Dynamic DNS (DDNS) Queries
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Application Layer Protocol (T1071.004)
+
+Detection Logic:
+Detect DNS queries to known DDNS providers.
+
+Microsoft Sentinel KQL Query:
+DNSLogs
+| where QueryName contains_any ("no-ip.com", "dyn.com", "duckdns.org")
+| project TimeGenerated, SourceIP, QueryName
+
+Testing:
+Query a DDNS service like no-ip.com from a test environment.
