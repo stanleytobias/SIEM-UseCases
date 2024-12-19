@@ -1,0 +1,18 @@
+High Volume of Access Requests to Privileged Directories
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Brute Force (T1110)
+
+Detection Logic:
+Detect a high number of requests to privileged directories.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where FilePath startswith "/admin" or FilePath startswith "/root"
+| summarize AccessCount = count() by User, FilePath, bin(TimeGenerated, 1h)
+| where AccessCount > 30 // Adjust threshold
+| project TimeGenerated, User, FilePath, AccessCount
+
+Testing:
+Attempt access to privileged directories using scripts.
