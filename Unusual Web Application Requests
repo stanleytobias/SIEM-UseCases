@@ -1,0 +1,13 @@
+Unusual Web Application Requests
+
+MITRE Tactic:
+Initial Access (TA0001) / Exfiltration (TA0010)
+
+MITRE Techniques:
+Application Layer Protocols (T1071): Abnormal web requests could indicate malicious communication.
+Exploitation for Privilege Escalation (T1068): Web application requests could exploit vulnerabilities.
+
+Detection Logic:
+Monitor HTTP/S requests for anomalous patterns (e.g., unexpected methods, payloads, or parameters).
+Alert on requests with SQL injection, XSS, or directory traversal indicators.
+Compare against a baseline of normal application traffic patterns.
