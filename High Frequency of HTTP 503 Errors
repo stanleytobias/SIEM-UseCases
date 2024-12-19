@@ -1,0 +1,18 @@
+High Frequency of HTTP 503 Errors
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Denial of Service (T1499)
+
+Detection Logic:
+Detect spikes in HTTP 503 (Service Unavailable) errors.
+
+Microsoft Sentinel KQL Query:
+WebServerLogs
+| where ResponseCode == 503
+| summarize ErrorCount = count() by URL, bin(TimeGenerated, 1h)
+| where ErrorCount > 50 // Adjust threshold
+| project TimeGenerated, URL, ErrorCount
+
+Testing:
+Trigger 503 errors by overloading a test web server.
