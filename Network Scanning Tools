@@ -1,0 +1,12 @@
+Network Scanning Tools
+
+MITRE Tactic:
+Discovery (TA0007)
+
+MITRE Techniques:
+Network Service Scanning (T1046): Tools like Nmap or masscan may be used for reconnaissance.
+
+Detection Logic:
+Monitor network traffic for port scans or sweeps (e.g., high connection attempts across multiple ports).
+Detect patterns of SYN/ACK responses from multiple devices.
+Alert on known scanning tools or scripts initiated from endpoints.
