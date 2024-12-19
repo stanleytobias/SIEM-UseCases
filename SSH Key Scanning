@@ -11,3 +11,10 @@ Detection Logic:
 Monitor for excessive file read operations targeting .ssh directories.
 Detect repeated access attempts to private keys by unusual processes or users.
 Correlate with failed login attempts or privilege escalation activities.
+
+MS Sentinel:
+FileAccessEvents
+| where FilePath contains "/.ssh/"
+| summarize AccessCount = count() by User, FilePath, bin(TimeGenerated, 1h)
+| where AccessCount > 10 // Adjust threshold for scanning behavior
+| project TimeGenerated, User, FilePath, AccessCount
