@@ -11,3 +11,10 @@ Detection Logic:
 Monitor PowerShell logs for module import events (e.g., Import-Module).
 Alert on imports of uncommon modules or those flagged as suspicious (e.g., Mimikatz).
 Correlate module imports with subsequent script execution or system changes.
+
+MS Sentinel:
+PowerShellCommandLogs
+| where CommandLine contains "Import-Module"
+| summarize ModuleImportCount = count() by User, ModuleName, bin(TimeGenerated, 1h)
+| where ModuleImportCount > 5 // Adjust threshold
+| project TimeGenerated, User, ModuleName, ModuleImportCount
