@@ -11,3 +11,10 @@ Detection Logic:
 Monitor SSL certificates for unapproved issuers or expired certificates in use.
 Alert on certificates being reused across unrelated systems or domains.
 Analyze traffic for certificates used by unauthorized applications or suspicious servers.
+
+MS Sentinel:
+NetworkTraffic
+| where Protocol == "TLS"
+| where SSLVersion in ("SSLv3", "TLS 1.0", "TLS 1.1") // Deprecated versions
+| summarize SSLUsageCount = count() by DestinationIP, SSLVersion, bin(TimeGenerated, 1h)
+| project TimeGenerated, DestinationIP, SSLVersion, SSLUsageCount
