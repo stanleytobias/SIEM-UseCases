@@ -1,0 +1,20 @@
+Excessive Changes to Monitoring Thresholds
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Impair Defenses (T1562)
+
+Detection Logic:
+Monitor logs for repeated changes to alert thresholds in monitoring systems.
+
+Microsoft Sentinel KQL Query:
+
+AuditLogs
+| where OperationName == "UpdateAlertThreshold"
+| summarize ThresholdChangeCount = count() by InitiatedBy, bin(TimeGenerated, 1h)
+| where ThresholdChangeCount > 3 // Adjust based on environment
+| project TimeGenerated, InitiatedBy, ThresholdChangeCount
+
+Testing:
+Simplest Test:
+Adjust monitoring thresholds in a test system and validate detection.
