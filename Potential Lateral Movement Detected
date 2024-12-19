@@ -1,0 +1,18 @@
+Potential Lateral Movement Detected
+
+MITRE ATT&CK Mapping:
+Tactic: Lateral Movement (TA0008)
+Technique: Remote Services (T1021)
+
+Detection Logic:
+Detect logons or access to multiple systems from the same user account.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID == 4624 // Successful logon
+| summarize LateralMovementCount = count() by AccountName, TargetComputer, bin(TimeGenerated, 1h)
+| where LateralMovementCount > 5 // Adjust threshold
+| project TimeGenerated, AccountName, TargetComputer, LateralMovementCount
+
+Testing:
+Log into multiple systems using a single account.
