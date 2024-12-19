@@ -1,0 +1,13 @@
+Abuse of Group Policy Objects (GPO)
+
+MITRE Tactic:
+Defense Evasion (TA0005) / Privilege Escalation (TA0004)
+
+MITRE Techniques:
+System Binary Proxy Execution (T1218): Abuse of GPOs to execute unauthorized binaries.
+Modify Cloud Access Policies (T1484.002): Misusing GPO to escalate privileges or evade detection.
+
+Detection Logic:
+Monitor Active Directory logs for GPO modifications.
+Alert on changes made by unauthorized users or outside scheduled changes.
+Correlate with privilege escalation or lateral movement attempts.
