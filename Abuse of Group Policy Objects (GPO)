@@ -11,3 +11,11 @@ Detection Logic:
 Monitor Active Directory logs for GPO modifications.
 Alert on changes made by unauthorized users or outside scheduled changes.
 Correlate with privilege escalation or lateral movement attempts.
+
+MS Sentinel:
+SecurityEvent
+| where EventID == 5136 // Directory service changes
+| where ObjectClass == "groupPolicyContainer"
+| summarize ChangeCount = count() by AccountName, ObjectName, bin(TimeGenerated, 1h)
+| where ChangeCount > 3 // Adjust threshold based on expected changes
+| project TimeGenerated, AccountName, ObjectName, ChangeCount
