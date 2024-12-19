@@ -1,0 +1,16 @@
+Policy Non-Compliance
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Policy Modification (T1484)
+
+Detection Logic:
+Identify violations of defined security policies.
+
+Microsoft Sentinel KQL Query:
+ComplianceLogs
+| where ComplianceStatus == "Non-Compliant"
+| project TimeGenerated, Resource, PolicyName, ComplianceStatus
+
+Testing:
+Modify a configuration to trigger a policy non-compliance alert.
