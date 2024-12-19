@@ -1,0 +1,12 @@
+DDoS Attack Detection
+
+MITRE Tactic:
+Impact (TA0040)
+
+MITRE Techniques:
+Network Denial of Service (T1498): Overwhelming network resources to deny access.
+
+Detection Logic:
+Monitor network traffic for high volumes of requests or anomalous traffic spikes.
+Alert on excessive SYN flood, HTTP requests, or ICMP traffic.
+Correlate with firewall and server logs to identify targeted endpoints.
