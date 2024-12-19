@@ -1,0 +1,13 @@
+Network Time Protocol (NTP) Traffic
+
+MITRE Tactic:
+Defense Evasion (TA0005) / Command and Control (TA0011)
+
+MITRE Techniques:
+Protocol Tunneling (T1572): NTP traffic could be used for covert communication.
+Fallback Channels (T1008): NTP may serve as a fallback C2 channel.
+
+Detection Logic:
+Monitor network traffic for unusual NTP requests, especially to non-standard servers.
+Detect spikes in NTP traffic volume or requests to known malicious IPs.
+Alert on abnormal packet sizes or frequency in NTP communication.
