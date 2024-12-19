@@ -1,0 +1,16 @@
+Proxy Bypass Attempts
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Traffic Proxy (T1090)
+
+Detection Logic:
+Detect connections bypassing organizational proxies.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationPort in (80, 443) and ProxyUsed == false
+| project TimeGenerated, SourceIP, DestinationIP, DestinationPort
+
+Testing:
+Disable proxy and connect directly to external resources.
