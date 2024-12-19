@@ -1,0 +1,18 @@
+High Volume of TCP Reset Packets
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Network Denial of Service (T1498)
+
+Detection Logic:
+Detect a surge in TCP RST packets.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol == "TCP" and TCPFlags contains "RST"
+| summarize TCPResetCount = count() by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| where TCPResetCount > 50 // Adjust threshold
+| project TimeGenerated, SourceIP, DestinationIP, TCPResetCount
+
+Testing:
+Use tools like hping3 to generate TCP RST packets.
