@@ -1,0 +1,16 @@
+New User Account Creation
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Account Manipulation (T1098)
+
+Detection Logic:
+Detect the creation of new user accounts.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID == 4720 // User account created
+| project TimeGenerated, AccountName, InitiatingAccount
+
+Testing:
+Create a new user account using Windows or Active Directory tools.
