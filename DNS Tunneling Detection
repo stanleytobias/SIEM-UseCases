@@ -1,0 +1,22 @@
+DNS Tunneling Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Exfiltration Over Alternative Protocol (T1048.003)
+
+Detection Logic:
+Detect large amounts of DNS traffic with encoded payloads or unusually long DNS queries.
+
+Microsoft Sentinel KQL Query:
+DNSLogs
+| where strlen(QueryName) > 100 // Adjust threshold for long queries
+| summarize QueryCount = count() by ClientIP, QueryName, bin(TimeGenerated, 1h)
+| project TimeGenerated, ClientIP, QueryName, QueryCount
+
+Testing:
+Atomic Red Team:
+Test case: T1048.003 https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1048.003/T1048.003.yaml
+Simulate DNS tunneling.
+
+Simplest Test:
+Use a DNS tunneling tool such as dnscat2.
