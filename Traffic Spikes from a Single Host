@@ -1,0 +1,13 @@
+Traffic Spikes from a Single Host
+
+MITRE Tactic:
+Command and Control (TA0011) / Exfiltration (TA0010)
+
+MITRE Techniques:
+Data Exfiltration Over Network Medium (T1048): Unusual spikes may indicate exfiltration attempts.
+Beaconing (T1071): Large amounts of data or frequent connections to a C2 server.
+
+Detection Logic:
+Monitor traffic volume per host over time and alert on significant spikes.
+Correlate spikes with unusual destinations or non-standard ports.
+Compare against normal usage patterns for the specific host.
