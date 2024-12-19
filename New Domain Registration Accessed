@@ -1,0 +1,16 @@
+New Domain Registration Accessed
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Application Layer Protocol (T1071)
+
+Detection Logic:
+Detect access to domains recently registered.
+
+Microsoft Sentinel KQL Query:
+DNSLogs
+| join kind=inner (ThreatIntelligenceIndicator | where Source == "Newly Registered Domains") on $left.QueryName == $right.Indicator
+| project TimeGenerated, ClientIP, QueryName, Indicator
+
+Testing:
+Access a domain flagged as newly registered from a test system.
