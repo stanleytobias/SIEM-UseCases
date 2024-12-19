@@ -1,0 +1,16 @@
+Suspicious Network Anomalies in DMZ
+
+MITRE ATT&CK Mapping:
+Tactic: Initial Access (TA0001)
+Technique: Exploit Public-Facing Application (T1190)
+
+Detection Logic:
+Detect unexpected traffic or access patterns within the DMZ.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationZone == "DMZ" and (BytesTransferred > 10000000 or Protocol not in ("HTTP", "HTTPS"))
+| project TimeGenerated, SourceIP, DestinationIP, BytesTransferred, Protocol
+
+Testing:
+Perform a test scan or data transfer to DMZ systems.
