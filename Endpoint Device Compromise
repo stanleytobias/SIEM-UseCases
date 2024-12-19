@@ -1,0 +1,18 @@
+Endpoint Device Compromise
+
+MITRE ATT&CK Mapping:
+Tactic: Initial Access (TA0001)
+Technique: Exploit Public-Facing Application (T1190)
+
+Detection Logic:
+Monitor antivirus, EDR, or suspicious process creation logs for compromise indicators.
+
+Microsoft Sentinel KQL Query:
+SecurityAlert
+| where ProductName == "EDR" or ProductName == "Antivirus"
+| where AlertSeverity in ("High", "Critical")
+| project TimeGenerated, DeviceName, AlertName, Severity, AccountName
+
+Testing:
+Simplest Test:
+Deploy an EICAR test file or run benign malware simulators like Metasploit in a test environment.
