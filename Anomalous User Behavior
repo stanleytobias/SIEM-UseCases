@@ -10,3 +10,9 @@ Detection Logic:
 Establish behavioral baselines (e.g., login times, resource access patterns).
 Detect deviations such as access to unusual resources, abnormal login times, or geolocations.
 Correlate anomalies with privilege escalation or lateral movement attempts.
+
+MS Sentinel:
+UserActivityLogs
+| summarize ActivityCount = count() by User, ActivityType, bin(TimeGenerated, 1h)
+| where ActivityCount > 100 // Define threshold for anomalous activity
+| project TimeGenerated, User, ActivityType, ActivityCount
