@@ -1,0 +1,13 @@
+Increase in Failed Command-Line Operations
+
+MITRE Tactic:
+Execution (TA0002) / Defense Evasion (TA0005)
+
+MITRE Techniques:
+Command-Line Interface (T1059): Repeated failed operations may indicate unauthorized or exploratory activity.
+Execution Guardrails (T1480): Failed attempts could result from bypass failures.
+
+Detection Logic:
+Track command-line execution logs for repeated failures within a short period.
+Correlate with unusual user behavior or access attempts.
+Alert on command-line usage with common errors like "command not found" or syntax errors.
