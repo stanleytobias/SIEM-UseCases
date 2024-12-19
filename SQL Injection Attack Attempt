@@ -1,0 +1,16 @@
+SQL Injection Attack Attempt
+
+MITRE ATT&CK Mapping:
+Tactic: Initial Access (TA0001)
+Technique: Exploit Public-Facing Application (T1190)
+
+Detection Logic:
+Detect SQL injection patterns in web application logs.
+
+Microsoft Sentinel KQL Query:
+WebApplicationFirewallLogs
+| where RequestUri matches regex "('.+--)|(%27)|(\w+\sOR\s\w+)"
+| project TimeGenerated, ClientIP, RequestUri
+
+Testing:
+Perform an SQL injection test on a web application using tools like sqlmap.
