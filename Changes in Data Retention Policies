@@ -11,3 +11,10 @@ Detection Logic:
 Track changes to data retention policies in audit logs.
 Compare against a baseline of typical policy update frequency and authorized accounts.
 Alert on changes made by unauthorized or unusual accounts.
+
+MS Sentinel:
+AuditLogs
+| where OperationName == "ModifyRetentionPolicy"
+| summarize ChangeCount = count() by InitiatedBy, bin(TimeGenerated, 1h)
+| where ChangeCount > 1 // Adjust based on expected frequency
+| project TimeGenerated, InitiatedBy, ChangeCount
