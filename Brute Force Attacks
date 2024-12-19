@@ -17,3 +17,10 @@ SecurityEvent
 | summarize FailedLoginAttempts = count() by AccountName, SourceIP, bin(TimeGenerated, 1h)
 | where FailedLoginAttempts > 10 // Adjust threshold for brute force
 | project TimeGenerated, AccountName, SourceIP, FailedLoginAttempts
+
+AuthenticationLogs
+| where ResultType == "Failure"
+| summarize FailureCount = count() by UserPrincipalName, SourceIP, bin(TimeGenerated, 1h)
+| where FailureCount > 20 // Adjust threshold
+| project TimeGenerated, UserPrincipalName, SourceIP, FailureCount
+
