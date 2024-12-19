@@ -1,0 +1,12 @@
+Data Access Spikes
+
+MITRE Tactic:
+Collection (TA0009)
+
+MITRE Techniques:
+Data from Network Shared Drive (T1039): Spikes in data access could signal data collection for exfiltration.
+
+Detection Logic:
+Monitor file access logs for rapid spikes in read or copy operations.
+Alert on access to sensitive or high-value files by unauthorized users.
+Correlate with user behavior, such as privilege escalation or geolocation anomalies.
