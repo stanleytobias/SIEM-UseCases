@@ -1,0 +1,12 @@
+Use of Debug Privileges
+
+MITRE Tactic:
+Privilege Escalation (TA0004) / Defense Evasion (TA0005)
+
+MITRE Techniques:
+Abuse Elevation Control Mechanism (T1548): Abnormal debug privilege usage could signal privilege escalation attempts.
+
+Detection Logic:
+Monitor system audit logs for processes started with debug privileges.
+Alert on debug privilege usage by unauthorized or non-administrative accounts.
+Correlate with abnormal process execution or system changes.
