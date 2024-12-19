@@ -1,0 +1,18 @@
+Suspicious ARP Spoofing Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: ARP Cache Poisoning (T1557.002)
+
+Detection Logic:
+Detect duplicate IP addresses with different MAC addresses.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol == "ARP"
+| summarize MACCount = dcount(MACAddress) by SourceIP
+| where MACCount > 1
+| project TimeGenerated, SourceIP, MACCount
+
+Testing:
+Use a tool like arpspoof to perform ARP spoofing in a controlled environment.
