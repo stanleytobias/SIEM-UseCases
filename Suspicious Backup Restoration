@@ -1,0 +1,16 @@
+Suspicious Backup Restoration
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Data Destruction (T1485)
+
+Detection Logic:
+Detect backup restorations outside of scheduled times or from unusual accounts.
+
+Microsoft Sentinel KQL Query:
+BackupLogs
+| where Action == "Restore" and TimeGenerated outside (datetime(09:00:00) .. datetime(17:00:00))
+| project TimeGenerated, User, BackupFile, Action
+
+Testing:
+Perform a test restoration outside of business hours.
