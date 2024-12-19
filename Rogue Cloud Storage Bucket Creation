@@ -1,0 +1,16 @@
+Rogue Cloud Storage Bucket Creation
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Exfiltration Over Cloud Storage (T1567.002)
+
+Detection Logic:
+Detect unauthorized cloud storage bucket creation.
+
+Microsoft Sentinel KQL Query:
+AzureActivity
+| where OperationName == "CreateStorageBucket" and Caller not in (authorizedUsers)
+| project TimeGenerated, BucketName, Caller
+
+Testing:
+Create a storage bucket from an unauthorized account in a test environment.
