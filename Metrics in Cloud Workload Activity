@@ -11,3 +11,10 @@ Detection Logic:
 Monitor cloud metrics like CPU, memory, and network activity for unexpected spikes.
 Correlate metrics with time of day, user accounts, or workload types.
 Alert on deviations from historical baselines or sudden, unexplained activity increases.
+
+MS Sentinel:
+AzureMetrics
+| where MetricName in ("CPUUsage", "MemoryUsage", "NetworkTraffic")
+| summarize MaxMetricValue = max(MetricValue) by ResourceName, MetricName, bin(TimeGenerated, 1h)
+| where MaxMetricValue > 80 // Adjust threshold
+| project TimeGenerated, ResourceName, MetricName, MaxMetricValue
