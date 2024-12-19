@@ -1,0 +1,16 @@
+Misuse of Command-Line Interfaces
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: Command and Scripting Interpreter (T1059)
+
+Detection Logic:
+Detect unusual or suspicious command-line activity.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where CommandLine contains_any ("curl", "wget", "powershell", "Invoke-WebRequest")
+| project TimeGenerated, ProcessName, CommandLine, User
+
+Testing:
+Execute commands with suspicious arguments using tools like curl or PowerShell.
