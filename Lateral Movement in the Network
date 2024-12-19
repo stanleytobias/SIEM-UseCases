@@ -1,0 +1,17 @@
+Lateral Movement in the Network
+
+MITRE ATT&CK Mapping:
+Tactic: Lateral Movement (TA0008)
+Technique: Windows Admin Shares (T1077)
+
+Detection Logic:
+Detect access to administrative network shares.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where FilePath contains "\\\\Admin$"
+| summarize ShareAccessCount = count() by User, SourceIP, bin(TimeGenerated, 1h)
+| project TimeGenerated, User, SourceIP, ShareAccessCount
+
+Testing:
+Access administrative shares from a test account.
