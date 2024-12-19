@@ -1,0 +1,17 @@
+Suspicious Configurations of Group Memberships
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Account Manipulation (T1098)
+
+Detection Logic:
+Detect unauthorized changes to group memberships.
+
+Microsoft Sentinel KQL Query:
+AuditLogs
+| where OperationName == "AddMemberToGroup" or OperationName == "RemoveMemberFromGroup"
+| where InitiatedBy not in (authorizedAdmins)
+| project TimeGenerated, GroupName, InitiatedBy, Action
+
+Testing:
+Add or remove a test user from a sensitive group.
