@@ -1,0 +1,17 @@
+Sudden Privilege Downgrades
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Impair Defenses (T1562)
+
+Detection Logic:
+Detect accounts whose privileges have been suddenly reduced.
+
+Microsoft Sentinel KQL Query:
+AuditLogs
+| where OperationName == "ChangeAccountPrivileges"
+| where NewPrivileges < OldPrivileges
+| project TimeGenerated, AccountName, OldPrivileges, NewPrivileges
+
+Testing:
+Downgrade privileges for a test account.
