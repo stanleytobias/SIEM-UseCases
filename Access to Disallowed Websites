@@ -10,3 +10,8 @@ Detection Logic:
 Monitor web proxy logs for access to blacklisted or disallowed domains.
 Compare against a threat intelligence feed for known malicious websites.
 Alert on users or systems repeatedly attempting to bypass restrictions.
+
+MS Sentinel:
+WebProxyLogs
+| where URL in (dynamic(["disallowed1.com", "disallowed2.com"])) // Add disallowed domains
+| project TimeGenerated, User, URL, Action
