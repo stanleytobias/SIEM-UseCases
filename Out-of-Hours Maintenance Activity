@@ -1,0 +1,16 @@
+Out-of-Hours Maintenance Activity
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: Scheduled Task/Job (T1053)
+
+Detection Logic:
+Monitor for scheduled tasks or other activities outside normal business hours.
+
+Microsoft Sentinel KQL Query:
+TaskSchedulerLogs
+| where TimeGenerated outside (datetime(09:00:00) .. datetime(17:00:00))
+| project TimeGenerated, TaskName, InitiatingAccount
+
+Testing:
+Schedule a task or perform maintenance outside of defined business hours.
