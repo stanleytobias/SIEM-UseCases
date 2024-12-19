@@ -11,3 +11,10 @@ Detection Logic:
 Monitor DHCP logs for new or unauthorized devices connecting to the network.
 Detect MAC address spoofing or unusual IP allocations.
 Correlate device connections with network activity logs for anomalies.
+
+MS Sentinel:
+NetworkConnectionEvents
+| where DeviceType != "KnownDeviceType" // Replace with trusted device types
+| summarize ConnectionCount = count() by SourceIP, DeviceType, bin(TimeGenerated, 1h)
+| where ConnectionCount > 10 // Define threshold for abnormal connections
+| project TimeGenerated, SourceIP, DeviceType, ConnectionCount
