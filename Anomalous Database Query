@@ -1,0 +1,13 @@
+Anomalous Database Query
+
+MITRE Tactic:
+Discovery (TA0007) / Credential Access (TA0006)
+
+MITRE Techniques:
+Application Layer Protocol (T1071): Unusual queries may indicate reconnaissance or data theft.
+Data Exfiltration (T1567): Anomalous queries could signal data theft attempts.
+
+Detection Logic:
+Monitor database logs for queries outside normal patterns (e.g., unusual SELECT, DELETE, or DROP statements).
+Alert on queries by non-privileged users targeting sensitive tables.
+Correlate queries with login sessions and user access logs.
