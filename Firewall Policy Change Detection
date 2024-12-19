@@ -1,0 +1,17 @@
+Firewall Policy Change Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Modify System Firewall (T1562.004)
+
+Detection Logic:
+Monitor for changes to firewall policies.
+
+Microsoft Sentinel KQL Query:
+FirewallLogs
+| where ActionType == "PolicyChange"
+| project TimeGenerated, User, PolicyName, ActionType
+
+Testing:
+Simplest Test:
+Modify a firewall policy and check for detection.
