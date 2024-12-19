@@ -1,0 +1,16 @@
+Suspicious Database Query Anomalies
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Information Repositories (T1213)
+
+Detection Logic:
+Detect unusual database queries, such as mass data extraction or schema access.
+
+Microsoft Sentinel KQL Query:
+DatabaseQueryLogs
+| where QueryType in ("DROP", "SELECT *", "SHOW SCHEMA")
+| project TimeGenerated, User, QueryType, DatabaseName
+
+Testing:
+Execute a test query (e.g., SELECT * FROM sensitive_table) in a controlled environment.
