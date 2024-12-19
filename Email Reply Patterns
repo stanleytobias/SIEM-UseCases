@@ -1,0 +1,13 @@
+Email Reply Patterns
+
+MITRE Tactic:
+Collection (TA0009) / Credential Access (TA0006)
+
+MITRE Techniques:
+Spear Phishing (T1566.002): Abnormal replies could indicate phishing activity or compromised accounts.
+Email Collection (T1114): Monitoring reply behavior to collect sensitive information.
+
+Detection Logic:
+Monitor email metadata for reply patterns deviating from normal (e.g., time of reply, recipient domain).
+Detect multiple replies to unknown or flagged external domains.
+Alert on replies containing unusual keywords or large attachments.
