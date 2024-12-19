@@ -1,0 +1,13 @@
+SSL Certificate Validity Changes
+
+MITRE Tactic:
+Defense Evasion (TA0005) / Credential Access (TA0006)
+
+MITRE Techniques:
+Indicator Removal on Host (T1070): Validity changes may be used to evade detection or mislead defenses.
+Network Traffic Obfuscation (T1027): Modifying validity periods to bypass inspection.
+
+Detection Logic:
+Track certificate issuance and validity updates from Certificate Authority logs.
+Alert on sudden reductions or extensions of validity for critical services.
+Compare validity changes against baseline patterns for the affected domain.
