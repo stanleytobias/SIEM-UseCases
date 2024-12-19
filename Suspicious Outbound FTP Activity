@@ -1,0 +1,12 @@
+Suspicious Outbound FTP Activity
+
+MITRE Tactic:
+Exfiltration (TA0010)
+
+MITRE Techniques:
+Exfiltration Over FTP (T1048.002): Using FTP for unauthorized data exfiltration.
+
+Detection Logic:
+Monitor FTP logs for connections to unknown or external IP addresses.
+Alert on large file transfers or repeated login attempts to FTP servers.
+Correlate with user access logs and privilege changes.
