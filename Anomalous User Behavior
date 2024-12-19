@@ -1,0 +1,12 @@
+Anomalous User Behavior
+
+MITRE Tactic:
+Credential Access (TA0006) / Defense Evasion (TA0005)
+
+MITRE Techniques:
+Valid Accounts (T1078): Deviations from baseline user behavior could signal account compromise.
+
+Detection Logic:
+Establish behavioral baselines (e.g., login times, resource access patterns).
+Detect deviations such as access to unusual resources, abnormal login times, or geolocations.
+Correlate anomalies with privilege escalation or lateral movement attempts.
