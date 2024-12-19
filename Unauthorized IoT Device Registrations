@@ -1,0 +1,12 @@
+Unauthorized IoT Device Registrations
+
+MITRE Tactic:
+Initial Access (TA0001) / Persistence (TA0003)
+
+MITRE Techniques:
+Exploitation of IoT Devices (T1200): Registering unauthorized IoT devices for persistence or surveillance.
+
+Detection Logic:
+Monitor network and IoT management logs for new device registrations.
+Alert on registrations from unknown MAC addresses or outside approved IP ranges.
+Correlate with DHCP logs to identify unauthorized devices on the network.
