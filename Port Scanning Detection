@@ -1,0 +1,17 @@
+Port Scanning Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Discovery (TA0007)
+Technique: Network Service Scanning (T1046)
+
+Detection Logic:
+Identify scans based on patterns such as sequential port access.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| summarize ScannedPorts = dcount(DestinationPort) by SourceIP, bin(TimeGenerated, 1h)
+| where ScannedPorts > 20 // Adjust threshold
+| project TimeGenerated, SourceIP, ScannedPorts
+
+Testing:
+Perform a comprehensive port scan using tools like nmap or hping.
