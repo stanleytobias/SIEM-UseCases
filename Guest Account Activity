@@ -1,0 +1,16 @@
+Guest Account Activity
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Account Manipulation (T1098)
+
+Detection Logic:
+Monitor activity from guest accounts.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where AccountName == "Guest"
+| project TimeGenerated, AccountName, LogonType, Computer
+
+Testing:
+Enable and use a guest account to access resources.
