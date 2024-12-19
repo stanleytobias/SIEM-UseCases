@@ -1,0 +1,13 @@
+Anomalous Outbound Traffic
+
+MITRE Tactic:
+Command and Control (TA0011) / Exfiltration (TA0010)
+
+MITRE Techniques:
+Exfiltration Over Alternative Protocol (T1048): Unexpected outbound traffic may indicate exfiltration.
+C2 Communication over Web Protocols (T1071.001): Anomalous outbound traffic may suggest malicious communication.
+
+Detection Logic:
+Monitor for traffic spikes or connections to rare or suspicious IPs/domains.
+Detect traffic patterns deviating from normal baselines (e.g., unusual ports, protocols).
+Alert on traffic to geolocations with no business relevance.
