@@ -1,0 +1,18 @@
+File Encryption Activities
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Data Encrypted for Impact (T1486)
+
+Detection Logic:
+Monitor file events for patterns of encryption activity.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where FileExtension in (".encrypted", ".lock", ".crypto") // Common ransomware extensions
+| summarize EncryptionActivity = count() by FilePath, User, bin(TimeGenerated, 1h)
+| project TimeGenerated, FilePath, User, EncryptionActivity
+
+Testing:
+Simplest Test:
+Encrypt files with a known encryption tool on a test system.
