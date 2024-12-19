@@ -1,0 +1,12 @@
+Detection of Abnormal Device Enrollment in MDM
+
+MITRE Tactic:
+Persistence (TA0003) / Credential Access (TA0006)
+
+MITRE Techniques:
+Abuse of Device Enrollment (T1098): Unauthorized device enrollments in MDM systems.
+
+Detection Logic:
+Monitor MDM enrollment logs for unusual activity, such as devices registered outside business hours.
+Alert on devices with suspicious identifiers or IP addresses.
+Correlate with user behavior logs to detect compromised accounts.
