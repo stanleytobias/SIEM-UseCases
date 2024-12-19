@@ -10,3 +10,9 @@ Detection Logic:
 Monitor for files with unusual metadata or high entropy (indicative of hidden data).
 Detect large image or multimedia files being uploaded or downloaded outside normal baselines.
 Correlate file activity with user behavior, focusing on anomalies in file creation or access.
+
+MS Sentinel:
+FileEvents
+| where FileExtension in (".png", ".jpg", ".bmp", ".wav") // Common file types for steganography
+| where FileEntropy > 7.5 // Adjust entropy threshold based on environment
+| project TimeGenerated, FileName, FileExtension, FileEntropy, User, FilePath
