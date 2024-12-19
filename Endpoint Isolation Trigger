@@ -1,0 +1,16 @@
+Endpoint Isolation Trigger
+
+MITRE ATT&CK Mapping:
+Tactic: Containment (N/A in ATT&CK but operationally significant)
+
+Detection Logic:
+Detect triggers for endpoint isolation from EDR tools or threat response systems.
+
+Microsoft Sentinel KQL Query:
+SecurityAlert
+| where AlertName == "Device Isolation Triggered"
+| project TimeGenerated, DeviceName, Initiator, IsolationReason
+
+Testing:
+Simplest Test:
+Manually isolate a test device using your EDR platform (e.g., Microsoft Defender for Endpoint).
