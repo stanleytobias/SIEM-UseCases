@@ -1,0 +1,12 @@
+Denial of Service Attacks on Web Servers
+
+MITRE Tactic:
+Impact (TA0040)
+
+MITRE Techniques:
+Application Denial of Service (T1499): Flooding web servers with traffic to deny access.
+
+Detection Logic:
+Monitor web server logs for spikes in HTTP requests or high error rates (e.g., 503 errors).
+Alert on traffic patterns with high request volumes from a single IP or range.
+Correlate with WAF or load balancer logs for additional context.
