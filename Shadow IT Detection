@@ -1,0 +1,16 @@
+Shadow IT Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Exfiltration Over Web Service (T1567.001)
+
+Detection Logic:
+Detect traffic to unmonitored or unauthorized SaaS applications.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationDomain not in (authorizedDomains)
+| project TimeGenerated, SourceIP, DestinationDomain
+
+Testing:
+Simulate traffic to an unmonitored application.
