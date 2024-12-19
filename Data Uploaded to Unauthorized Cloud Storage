@@ -10,3 +10,11 @@ Detection Logic:
 Monitor cloud storage logs for uploads to external accounts or unregistered services.
 Alert on significant increases in upload volumes by non-privileged users.
 Correlate with access logs to detect compromised accounts.
+
+MS Sentinel:
+AzureDiagnostics
+| where Category == "Storage"
+| where OperationName == "PutBlob"
+| where AccountName !in (authorizedStorageAccounts) // Replace with a whitelist
+| summarize UploadVolume = sum(BytesTransferred) by User, AccountName, bin(TimeGenerated, 1h)
+| project TimeGenerated, User, AccountName, UploadVolume
