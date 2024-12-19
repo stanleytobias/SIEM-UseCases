@@ -1,0 +1,12 @@
+New Public Key Infrastructure (PKI) Certificates Issued
+
+MITRE Tactic:
+Credential Access (TA0006) / Defense Evasion (TA0005)
+
+MITRE Techniques:
+Abuse of PKI (T1553.004): Malicious actors may issue unauthorized certificates.
+
+Detection Logic:
+Monitor PKI systems for the issuance of new certificates, especially those with elevated privileges.
+Alert on certificates issued to unknown or unauthorized domains.
+Correlate issuance activity with access logs to detect misuse.
