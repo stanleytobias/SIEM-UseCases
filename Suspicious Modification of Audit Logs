@@ -1,0 +1,16 @@
+Suspicious Modification of Audit Logs
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Indicator Removal on Host (T1070.002)
+
+Detection Logic:
+Detect unauthorized modifications to audit logs.
+
+Microsoft Sentinel KQL Query:
+AuditLogs
+| where Action == "Modify" and User not in (authorizedUsers)
+| project TimeGenerated, LogName, User, Action
+
+Testing:
+Modify audit logs using a test account in a controlled environment.
