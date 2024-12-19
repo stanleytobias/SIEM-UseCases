@@ -1,0 +1,17 @@
+Lateral Traffic Between Containers
+
+MITRE ATT&CK Mapping:
+Tactic: Lateral Movement (TA0008)
+Technique: Exploitation for Lateral Movement (T1210)
+
+Detection Logic:
+Detect high volumes of traffic between containers.
+
+Microsoft Sentinel KQL Query:
+ContainerNetworkLogs
+| summarize TrafficVolume = sum(BytesTransferred) by SourceContainer, DestinationContainer, bin(TimeGenerated, 1h)
+| where TrafficVolume > 1000000 // Adjust threshold in bytes
+| project TimeGenerated, SourceContainer, DestinationContainer, TrafficVolume
+
+Testing:
+Simulate communication between test containers.
