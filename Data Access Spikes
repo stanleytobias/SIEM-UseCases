@@ -10,3 +10,9 @@ Detection Logic:
 Monitor file access logs for rapid spikes in read or copy operations.
 Alert on access to sensitive or high-value files by unauthorized users.
 Correlate with user behavior, such as privilege escalation or geolocation anomalies.
+
+MS Sentinel:
+FileAccessLogs
+| summarize AccessCount = count() by User, FilePath, bin(TimeGenerated, 1h)
+| where AccessCount > 100 // Adjust based on baseline
+| project TimeGenerated, User, FilePath, AccessCount
