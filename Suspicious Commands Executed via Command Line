@@ -1,0 +1,16 @@
+Suspicious Commands Executed via Command Line
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: Command and Scripting Interpreter (T1059.001)
+
+Detection Logic:
+Identify commands executed with suspicious arguments or patterns.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where CommandLine contains_any ("--payload", "--encrypt", "--decrypt")
+| project TimeGenerated, ProcessName, CommandLine, User
+
+Testing:
+Execute a test script with suspicious arguments.
