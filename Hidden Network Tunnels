@@ -10,3 +10,11 @@ Detection Logic:
 Analyze network traffic for anomalies, such as traffic on non-standard ports or unexpected protocols.
 Detect consistent traffic patterns resembling tunneling activity (e.g., DNS, ICMP tunnels).
 Use deep packet inspection (DPI) to identify encapsulated traffic in legitimate protocols.
+
+MS Sentinel:
+NetworkTraffic
+| where BytesSent > 0 and BytesReceived > 0
+| where DestinationPort !in (80, 443, 22, 3389) // Exclude standard ports
+| summarize TunnelTraffic = count() by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| where TunnelTraffic > 100 // Adjust threshold for environment
+| project TimeGenerated, SourceIP, DestinationIP, TunnelTraffic
