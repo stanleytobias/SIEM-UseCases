@@ -1,0 +1,13 @@
+Cloud Storage Sharing Behavior
+
+MITRE Tactic:
+Collection (TA0009) / Exfiltration (TA0010)
+
+MITRE Techniques:
+Data Transfer to Cloud Accounts (T1567.002): Suspicious sharing or transfer of data.
+Exfiltration Over Web Service (T1567.001): Misusing sharing features for exfiltration.
+
+Detection Logic:
+Track sharing activity in cloud storage audit logs.
+Alert on public sharing of sensitive files or unusually high sharing volumes.
+Monitor file access permissions and detect sudden changes to "everyone" or external domains.
