@@ -10,3 +10,10 @@ Detection Logic:
 Monitor FTP logs for connections to unknown or external IP addresses.
 Alert on large file transfers or repeated login attempts to FTP servers.
 Correlate with user access logs and privilege changes.
+
+MS Sentinel:
+NetworkTraffic
+| where DestinationPort == 21
+| summarize FTPConnectionCount = count() by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| where FTPConnectionCount > 10 // Adjust threshold
+| project TimeGenerated, SourceIP, DestinationIP, FTPConnectionCount
