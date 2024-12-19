@@ -1,0 +1,12 @@
+Web Shell Installation
+
+MITRE Tactic:
+Persistence (TA0003) / Execution (TA0002)
+
+MITRE Techniques:
+Web Shell (T1505.003): Installing web shells to maintain access to compromised systems.
+
+Detection Logic:
+Monitor web server logs for file uploads to unusual directories (e.g., /uploads).
+Alert on script files (e.g., .php, .aspx) uploaded to web directories.
+Correlate with system changes, such as privilege escalation or suspicious connections.
