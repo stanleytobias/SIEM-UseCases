@@ -10,3 +10,9 @@ Detection Logic:
 Monitor for unauthorized root certificate installations in certificate stores.
 Compare certificate issuance logs against trusted Certificate Authorities (CAs).
 Alert on certificates with unusual attributes (e.g., self-signed, expired).
+
+MS Sentinel:
+CertificateEvents
+| where EventType == "CertificateInstalled"
+| where CertificateThumbprint !in (trustedCertificateThumbprints) // Replace with trusted certificates
+| project TimeGenerated, CertificateThumbprint, Issuer, Subject, User
