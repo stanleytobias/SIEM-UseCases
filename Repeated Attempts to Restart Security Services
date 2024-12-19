@@ -1,0 +1,18 @@
+Repeated Attempts to Restart Security Services
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Disable or Modify Tools (T1562.001)
+
+Detection Logic:
+Monitor logs for repeated service start events targeting security services.
+
+Microsoft Sentinel KQL Query:
+ServiceControlLogs
+| where ServiceName contains "Security" and ActionType == "Start"
+| summarize RestartCount = count() by ServiceName, AccountName, bin(TimeGenerated, 10m)
+| where RestartCount > 3 // Adjust threshold
+| project TimeGenerated, ServiceName, AccountName, RestartCount
+
+Testing:
+Repeatedly attempt to restart a security service in a test environment.
