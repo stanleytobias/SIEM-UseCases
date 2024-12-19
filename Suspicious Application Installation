@@ -1,0 +1,16 @@
+Suspicious Application Installation
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: Install Malicious Software (T1204.002)
+
+Detection Logic:
+Detect installation of unauthorized or suspicious applications.
+
+Microsoft Sentinel KQL Query:
+ApplicationInstallationLogs
+| where ApplicationName not in (approvedApplications)
+| project TimeGenerated, ApplicationName, User
+
+Testing:
+Install a benign but unauthorized application.
