@@ -11,3 +11,10 @@ Detection Logic:
 Track certificate issuance and validity updates from Certificate Authority logs.
 Alert on sudden reductions or extensions of validity for critical services.
 Compare validity changes against baseline patterns for the affected domain.
+
+MS Sentinel:
+CertificateEvents
+| where EventType == "CertificateModified"
+| summarize ChangeCount = count() by CertificateThumbprint, Issuer, bin(TimeGenerated, 1h)
+| where ChangeCount > 1 // Define abnormal threshold
+| project TimeGenerated, CertificateThumbprint, Issuer, ChangeCount
