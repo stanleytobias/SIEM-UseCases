@@ -1,0 +1,13 @@
+Changes in Data Retention Policies
+
+MITRE Tactic:
+Impact (TA0040) / Defense Evasion (TA0005)
+
+MITRE Techniques:
+Data Destruction (T1485): Changes in retention policies might facilitate data deletion to cover tracks.
+Impair Defenses (T1562): Modifying retention policies to evade detection or audits.
+
+Detection Logic:
+Track changes to data retention policies in audit logs.
+Compare against a baseline of typical policy update frequency and authorized accounts.
+Alert on changes made by unauthorized or unusual accounts.
