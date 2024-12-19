@@ -1,0 +1,12 @@
+Hidden Network Tunnels
+
+MITRE Tactic:
+Command and Control (TA0011) / Exfiltration (TA0010)
+
+MITRE Techniques:
+Protocol Tunneling (T1572): Hidden tunnels can be used for C2 traffic or data exfiltration.
+
+Detection Logic:
+Analyze network traffic for anomalies, such as traffic on non-standard ports or unexpected protocols.
+Detect consistent traffic patterns resembling tunneling activity (e.g., DNS, ICMP tunnels).
+Use deep packet inspection (DPI) to identify encapsulated traffic in legitimate protocols.
