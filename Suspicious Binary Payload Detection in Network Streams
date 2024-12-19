@@ -1,0 +1,16 @@
+Suspicious Binary Payload Detection in Network Streams
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Exfiltration Over Network Medium (T1048)
+
+Detection Logic:
+Monitor network streams for binary payloads in unexpected protocols.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol in ("HTTP", "DNS") and Payload contains_binary_pattern "MZ" // Binary pattern for executables
+| project TimeGenerated, SourceIP, DestinationIP, Payload
+
+Testing:
+Send a binary file over HTTP or DNS in a test environment.
