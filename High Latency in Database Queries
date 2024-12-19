@@ -1,0 +1,17 @@
+High Latency in Database Queries
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Data Manipulation (T1565)
+
+Detection Logic:
+Identify queries with high execution time.
+
+Microsoft Sentinel KQL Query:
+DatabaseQueryLogs
+| where QueryExecutionTime > 5000 // Time in milliseconds
+| summarize QueryCount = count() by User, DatabaseName, bin(TimeGenerated, 1h)
+| project TimeGenerated, User, DatabaseName, QueryExecutionTime
+
+Testing:
+Execute complex queries on a test database to simulate latency.
