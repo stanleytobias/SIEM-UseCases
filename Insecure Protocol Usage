@@ -1,0 +1,17 @@
+Insecure Protocol Usage
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Network Service Scanning (T1046)
+
+Detection Logic:
+Detect usage of deprecated or insecure protocols.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol in ("SMBv1", "Telnet", "FTP")
+| summarize UsageCount = count() by SourceIP, Protocol, bin(TimeGenerated, 1h)
+| project TimeGenerated, SourceIP, Protocol, UsageCount
+
+Testing:
+Use insecure protocols such as telnet or FTP to simulate traffic.
