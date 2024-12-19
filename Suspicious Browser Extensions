@@ -1,0 +1,12 @@
+Suspicious Browser Extensions
+
+MITRE Tactic:
+Execution (TA0002) / Collection (TA0009)
+
+MITRE Techniques:
+Malicious Browser Extensions (T1176): Extensions used for credential harvesting or data collection.
+
+Detection Logic:
+Monitor browser logs for newly installed extensions, especially from unverified sources.
+Alert on extensions with permissions to access sensitive data or inject scripts.
+Correlate with network traffic to detect data exfiltration or malicious domains.
