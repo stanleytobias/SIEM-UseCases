@@ -1,0 +1,19 @@
+Excessive Number of Queries to WHOIS Services
+
+MITRE ATT&CK Mapping:
+Tactic: Discovery (TA0007)
+Technique: Domain Information Query (T1596.002)
+
+Detection Logic:
+Detect repeated WHOIS queries.
+
+Microsoft Sentinel KQL Query:
+DNSLogs
+| where QueryName contains "whois"
+| summarize QueryCount = count() by SourceIP, bin(TimeGenerated, 1h)
+| where QueryCount > 10 // Adjust threshold
+| project TimeGenerated, SourceIP, QueryCount
+
+Testing:
+Simplest Test:
+Use whois command to query multiple domains.
