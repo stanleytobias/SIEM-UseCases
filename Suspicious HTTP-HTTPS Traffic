@@ -1,0 +1,16 @@
+Suspicious HTTP/HTTPS Traffic
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Application Layer Protocol (T1071.001)
+
+Detection Logic:
+Detect HTTP/HTTPS traffic to flagged or unknown domains.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol in ("HTTP", "HTTPS") and DestinationDomain not in (trustedDomains)
+| project TimeGenerated, SourceIP, DestinationDomain
+
+Testing:
+Send HTTP/HTTPS requests to untrusted or flagged domains.
