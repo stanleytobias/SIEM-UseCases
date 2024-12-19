@@ -1,0 +1,12 @@
+Cloud Resource Overprovisioning
+
+MITRE Tactic:
+Impact (TA0040)
+
+MITRE Techniques:
+Resource Hijacking (T1586): Overprovisioning could indicate misuse, such as crypto-mining.
+
+Detection Logic:
+Monitor for unexpected increases in cloud resource allocations, such as CPU or GPU usage.
+Alert on provisioning actions outside of normal usage patterns or business hours.
+Correlate with billing alerts for sudden cost increases.
