@@ -10,3 +10,10 @@ Detection Logic:
 Monitor network traffic for deprecated protocols like SMBv1, Telnet, or FTP.
 Alert on traffic using known insecure or outdated protocols.
 Correlate with device and application logs to identify misconfigurations or malicious activity.
+
+MS Sentinel:
+NetworkTraffic
+| where Protocol in ("SMBv1", "TLS 1.0", "TLS 1.1", "FTP")
+| summarize DeprecatedProtocolUsage = count() by SourceIP, DestinationIP, Protocol, bin(TimeGenerated, 1h)
+| where DeprecatedProtocolUsage > 5 // Adjust threshold
+| project TimeGenerated, SourceIP, DestinationIP, Protocol, DeprecatedProtocolUsage
