@@ -11,3 +11,10 @@ Detection Logic:
 Establish a baseline of normal cloud service usage patterns (e.g., service type, volume, time).
 Monitor for deviations, such as sudden spikes in resource utilization or access outside business hours.
 Alert on usage by accounts with limited historical activity or unauthorized access.
+
+MS Sentinel:
+AzureDiagnostics
+| where Category == "ServiceUsage"
+| summarize UsageCount = count() by Caller, ServiceName, bin(TimeGenerated, 1h)
+| where UsageCount > 100 // Define threshold for abnormal service usage
+| project TimeGenerated, Caller, ServiceName, UsageCount
