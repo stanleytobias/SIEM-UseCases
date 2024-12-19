@@ -1,0 +1,16 @@
+Suspicious Cloud VM Spinning During O-Hours
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Exploitation for Privilege Escalation (T1068)
+
+Detection Logic:
+Monitor cloud logs for VM creation outside of business hours.
+
+Microsoft Sentinel KQL Query:
+AzureActivity
+| where OperationName == "CreateVirtualMachine" and TimeGenerated outside (datetime(09:00:00) .. datetime(17:00:00))
+| project TimeGenerated, User, ResourceId
+
+Testing:
+Spin up a cloud VM after business hours in a test account.
