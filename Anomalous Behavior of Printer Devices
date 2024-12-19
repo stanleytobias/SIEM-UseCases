@@ -11,3 +11,9 @@ Detection Logic:
 Monitor network traffic from printers for unusual patterns (e.g., data spikes, non-standard ports).
 Alert on unauthorized printer configurations or firmware updates.
 Detect print jobs with suspicious content (e.g., mass printing of sensitive files).
+
+MS Sentinel:
+PrintLogs
+| summarize PrintJobCount = count() by PrinterName, User, bin(TimeGenerated, 1h)
+| where PrintJobCount > 50 // Define threshold for anomalous printing
+| project TimeGenerated, PrinterName, User, PrintJobCount
