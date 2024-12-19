@@ -1,0 +1,18 @@
+Repeated Access Denials
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Brute Force (T1110)
+
+Detection Logic:
+Detect multiple access denial events within a short timeframe.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID == 4625 // Failed login
+| summarize DenialCount = count() by AccountName, bin(TimeGenerated, 5m)
+| where DenialCount > 5 // Adjust threshold
+| project TimeGenerated, AccountName, DenialCount
+
+Testing:
+Attempt multiple incorrect logins to a test account.
