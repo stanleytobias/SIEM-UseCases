@@ -10,3 +10,9 @@ Detection Logic:
 Monitor web server logs for requests containing malicious scripts or encoded payloads.
 Detect attempts to inject <script> tags, JavaScript, or unusual URL parameters.
 Correlate with WAF alerts and user activity to identify targeted sessions.
+
+MS Sentinel:
+WAFLogs
+| where RequestUri contains "<script>" or RequestUri contains "javascript:"
+| summarize XSSAttemptCount = count() by ClientIP, RequestUri, HttpMethod, bin(TimeGenerated, 1h)
+| project TimeGenerated, ClientIP, RequestUri, HttpMethod, XSSAttemptCount
