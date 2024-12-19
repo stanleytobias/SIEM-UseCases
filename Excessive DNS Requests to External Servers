@@ -1,0 +1,18 @@
+Excessive DNS Requests to External Servers
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: DNS Communication Channels (T1071.004)
+
+Detection Logic:
+Detect large volumes of DNS requests to external or unknown domains.
+
+Microsoft Sentinel KQL Query:
+DNSLogs
+| summarize DNSRequestCount = count() by ClientIP, QueryName, bin(TimeGenerated, 1h)
+| where DNSRequestCount > 100 // Adjust threshold for anomalies
+| project TimeGenerated, ClientIP, QueryName, DNSRequestCount
+
+Testing:
+Simplest Test:
+Use nslookup to query multiple external domains in rapid succession.
