@@ -10,3 +10,8 @@ Detection Logic:
 Monitor for processes associated with known RAT binaries or behaviors.
 Detect network connections to flagged C2 IPs or domains.
 Alert on unauthorized remote access attempts or tools installed on endpoints.
+
+MS Sentinel:
+ProcessCreationEvents
+| where ProcessName in (dynamic(["rat_tool1.exe", "rat_tool2.exe"])) // Replace with known RAT executables
+| project TimeGenerated, DeviceName, ProcessName, CommandLine, User
