@@ -1,0 +1,18 @@
+High Volume of Failed SFTP Transfers
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Brute Force (T1110)
+
+Detection Logic:
+Monitor logs for repeated failed SFTP transfer attempts.
+
+Microsoft Sentinel KQL Query:
+SFTPLogs
+| where Status == "Failed"
+| summarize FailedTransferCount = count() by SourceIP, User, bin(TimeGenerated, 1h)
+| where FailedTransferCount > 10 // Adjust threshold
+| project TimeGenerated, SourceIP, User, FailedTransferCount
+
+Testing:
+Attempt SFTP transfers with incorrect credentials or invalid files.
