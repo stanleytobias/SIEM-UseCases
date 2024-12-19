@@ -11,3 +11,10 @@ Detection Logic:
 Monitor for traffic spikes or connections to rare or suspicious IPs/domains.
 Detect traffic patterns deviating from normal baselines (e.g., unusual ports, protocols).
 Alert on traffic to geolocations with no business relevance.
+
+MS Sentinel:
+NetworkTraffic
+| where Direction == "Outbound"
+| summarize OutboundTraffic = sum(BytesSent) by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| where OutboundTraffic > 100000000 // Adjust threshold for large traffic spikes
+| project TimeGenerated, SourceIP, DestinationIP, OutboundTraffic
