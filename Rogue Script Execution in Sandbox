@@ -1,0 +1,16 @@
+Rogue Script Execution in Sandbox
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: Scripting (T1059)
+
+Detection Logic:
+Detect unauthorized or unexpected scripts executed in a sandbox environment.
+
+Microsoft Sentinel KQL Query:
+SandboxExecutionLogs
+| where ScriptName not in (approvedScripts)
+| project TimeGenerated, ScriptName, User
+
+Testing:
+Execute a benign but unauthorized script in a sandbox.
