@@ -10,3 +10,10 @@ Detection Logic:
 Monitor for unauthorized DHCP servers responding to client requests.
 Alert on IP or MAC addresses not matching the known authorized DHCP servers.
 Correlate with network logs to identify the origin of rogue responses.
+
+MS Sentinel:
+NetworkTraffic
+| where DestinationPort == 67 and Protocol == "UDP"
+| summarize DHCPServerCount = count() by SourceIP, bin(TimeGenerated, 1h)
+| where SourceIP !in (authorizedDHCPServers) // Replace with authorized DHCP server IPs
+| project TimeGenerated, SourceIP, DHCPServerCount
