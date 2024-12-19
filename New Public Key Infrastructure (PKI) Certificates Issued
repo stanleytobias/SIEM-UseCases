@@ -10,3 +10,10 @@ Detection Logic:
 Monitor PKI systems for the issuance of new certificates, especially those with elevated privileges.
 Alert on certificates issued to unknown or unauthorized domains.
 Correlate issuance activity with access logs to detect misuse.
+
+MS Sentinel:
+CertificateEvents
+| where EventType == "CertificateIssued"
+| summarize IssuedCertificateCount = count() by Issuer, Subject, bin(TimeGenerated, 1h)
+| where IssuedCertificateCount > 5 // Adjust threshold for environment
+| project TimeGenerated, Issuer, Subject, IssuedCertificateCount
