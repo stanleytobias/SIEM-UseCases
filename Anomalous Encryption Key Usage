@@ -11,3 +11,10 @@ Detection Logic:
 Monitor logs for unusual key usage, such as keys being used at odd times or by unauthorized users.
 Alert on attempts to access or export encryption keys from key management systems.
 Correlate key usage with anomalies in system or application logs.
+
+MS Sentinel:
+KeyManagementLogs
+| where ActionType in ("KeyAccessed", "KeyUsed")
+| summarize KeyUsageCount = count() by User, KeyName, bin(TimeGenerated, 1h)
+| where KeyUsageCount > 10 // Define threshold for anomalous usage
+| project TimeGenerated, User, KeyName, KeyUsageCount
