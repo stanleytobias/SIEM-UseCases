@@ -10,3 +10,9 @@ Detection Logic:
 Monitor for unexpected increases in cloud resource allocations, such as CPU or GPU usage.
 Alert on provisioning actions outside of normal usage patterns or business hours.
 Correlate with billing alerts for sudden cost increases.
+
+MS Sentinel:
+AzureDiagnostics
+| where Category == "ResourceUsage"
+| where MetricValue > Threshold // Replace Threshold with allowed limits
+| project TimeGenerated, ResourceName, MetricName, MetricValue, User
