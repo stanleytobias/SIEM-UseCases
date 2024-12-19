@@ -1,0 +1,18 @@
+Suspicious ARP Traffic
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: ARP Cache Poisoning (T1557.002)
+
+Detection Logic:
+Detect abnormal ARP traffic, such as high volumes of requests.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol == "ARP"
+| summarize ARPCount = count() by SourceIP, bin(TimeGenerated, 1h)
+| where ARPCount > 100 // Adjust threshold
+| project TimeGenerated, SourceIP, ARPCount
+
+Testing:
+Simulate high ARP traffic using tools like hping3.
