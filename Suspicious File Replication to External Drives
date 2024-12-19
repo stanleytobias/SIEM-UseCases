@@ -1,0 +1,18 @@
+Suspicious File Replication to External Drives
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Exfiltration Over Physical Medium (T1052)
+
+Detection Logic:
+Monitor for file copy operations to removable storage devices.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where TargetDeviceType == "RemovableMedia"
+| summarize FileReplicationCount = count() by User, bin(TimeGenerated, 1h)
+| where FileReplicationCount > 50 // Adjust threshold
+| project TimeGenerated, User, FileReplicationCount
+
+Testing:
+Copy multiple files to a USB drive on a test machine.
