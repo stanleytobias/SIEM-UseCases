@@ -11,3 +11,10 @@ Detection Logic:
 Monitor the number of account lockouts per user in a given time frame.
 Correlate failed login attempts from specific IPs or geolocations leading to lockouts.
 Alert on a threshold of lockouts within a short period for multiple accounts.
+
+Sentinel KQL Query
+SecurityEvent
+| where EventID == 4740 // Account lockout event
+| summarize LockoutCount = count() by AccountName, bin(TimeGenerated, 1h)
+| where LockoutCount > 5 // Adjust threshold as needed
+| project-reorder TimeGenerated, AccountName, LockoutCount
