@@ -1,0 +1,16 @@
+Inactive Account Usage
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Valid Accounts (T1078)
+
+Detection Logic:
+Monitor logins from accounts flagged as inactive.
+
+Microsoft Sentinel KQL Query:
+AuthenticationLogs
+| where AccountName in (inactiveAccounts) // Replace with a list of inactive accounts
+| project TimeGenerated, AccountName, ClientIP
+
+Testing:
+Reactivate a dormant account and attempt a login.
