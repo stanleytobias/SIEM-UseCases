@@ -1,0 +1,17 @@
+High Rate of Packet Fragmentation in Network Traffic
+
+MITRE ATT&CK Mapping:
+Tactic: Discovery (TA0007)
+Technique: Network Service Scanning (T1046)
+
+Detection Logic:
+Monitor for fragmented packets.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where PacketFragmented == true
+| summarize FragmentedPacketCount = count() by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| project TimeGenerated, SourceIP, DestinationIP, FragmentedPacketCount
+
+Testing:
+Use tools like hping3 to generate fragmented packets.
