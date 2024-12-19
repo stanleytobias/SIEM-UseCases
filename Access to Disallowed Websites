@@ -1,0 +1,12 @@
+Access to Disallowed Websites
+
+MITRE Tactic:
+Initial Access (TA0001) / Command and Control (TA0011)
+
+MITRE Techniques:
+Malicious Website Access (T1566): Visiting disallowed websites may indicate phishing or malware delivery.
+
+Detection Logic:
+Monitor web proxy logs for access to blacklisted or disallowed domains.
+Compare against a threat intelligence feed for known malicious websites.
+Alert on users or systems repeatedly attempting to bypass restrictions.
