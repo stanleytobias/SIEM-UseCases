@@ -1,0 +1,16 @@
+Outbound Connections to Known Malicious IPs
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Application Layer Protocol (T1071)
+
+Detection Logic:
+Detect connections to flagged malicious IPs.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationIP in (maliciousIPs)
+| project TimeGenerated, SourceIP, DestinationIP
+
+Testing:
+Simulate traffic to a test malicious IP using tools like curl.
