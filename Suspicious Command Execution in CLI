@@ -1,0 +1,17 @@
+Suspicious Command Execution in CLI
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: Command and Scripting Interpreter (T1059.003)
+
+Detection Logic:
+Detect anomalous command-line activity from users or scripts.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where CommandLine startswith "cmd.exe" or CommandLine startswith "bash"
+| where CommandLine contains_any ("adduser", "net user", "chmod 777")
+| project TimeGenerated, CommandLine, User
+
+Testing:
+Run a potentially dangerous command (e.g., net user test /add) on a test system.
