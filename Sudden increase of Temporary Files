@@ -1,0 +1,13 @@
+Sudden increase of Temporary Files
+
+MITRE Tactic:
+Persistence (TA0003) / Impact (TA0040)
+
+MITRE Techniques:
+Temporary File Creation (T1074): Abnormal file growth could indicate malware staging or data collection.
+Disk Wipe (T1561): Temporary files may be used as part of destructive operations.
+
+Detection Logic:
+Monitor filesystem events for high rates of temporary file creation.
+Compare against baseline activity for the specific system or user.
+Alert on excessive growth in directories like /tmp or %TEMP%.
