@@ -1,0 +1,18 @@
+File Sharing Service Anomalies
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Exfiltration Over Web Service (T1567)
+
+Detection Logic:
+Detect unusual file uploads or access patterns in file sharing services.
+
+icrosoft Sentinel KQL Query:
+FileSharingLogs
+| summarize AccessCount = count() by User, SharedFile, bin(TimeGenerated, 1h)
+| where AccessCount > 50 // Adjust threshold
+| project TimeGenerated, User, SharedFile, AccessCount
+
+Testing:
+Simplest Test:
+Perform bulk file uploads or downloads from a test account.
