@@ -1,0 +1,16 @@
+Suspicious Cross-Domain Authentication Attempts
+
+MITRE ATT&CK Mapping:
+Tactic: Lateral Movement (TA0008)
+Technique: Valid Accounts (T1078)
+
+Detection Logic:
+Detect authentication attempts across domains from unauthorized accounts.
+
+Microsoft Sentinel KQL Query:
+AuthenticationLogs
+| where DomainName != "expectedDomain" and AccountName not in (trustedAccounts)
+| project TimeGenerated, AccountName, DomainName, SourceIP
+
+Testing:
+Attempt cross-domain authentication using a test account.
