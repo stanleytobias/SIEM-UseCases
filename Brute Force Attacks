@@ -10,3 +10,10 @@ Detection Logic:
 Monitor authentication logs for repeated failed login attempts followed by a success.
 Alert on login attempts from unknown or flagged IPs.
 Correlate with geolocation or time-based anomalies.
+
+MS Sentinel:
+SecurityEvent
+| where EventID == 4625 // Failed login attempts
+| summarize FailedLoginAttempts = count() by AccountName, SourceIP, bin(TimeGenerated, 1h)
+| where FailedLoginAttempts > 10 // Adjust threshold for brute force
+| project TimeGenerated, AccountName, SourceIP, FailedLoginAttempts
