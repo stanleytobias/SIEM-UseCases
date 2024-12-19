@@ -10,3 +10,10 @@ Detection Logic:
 Monitor cloud activity logs for API calls deviating from normal usage patterns.
 Alert on infrastructure changes, such as unexpected VM launches or storage expansions.
 Correlate anomalies with privilege escalation or compromised accounts.
+
+MS Sentinel:
+AzureActivity
+| where OperationName startswith "Create" or OperationName startswith "Delete"
+| summarize AnomalyCount = count() by ResourceGroup, Caller, bin(TimeGenerated, 1h)
+| where AnomalyCount > 10 // Adjust based on expected activity
+| project TimeGenerated, ResourceGroup, Caller, AnomalyCount
