@@ -10,3 +10,10 @@ Detection Logic:
 Monitor DLP logs for flagged file types, keywords, or sensitive data being transferred.
 Alert on data transfers exceeding size thresholds or bypassing security controls.
 Correlate with user behavior and access logs for anomaly detection.
+
+MS Sentinel:
+FileAuditLogs
+| where ActionType == "Export"
+| where FileClassification contains "Confidential" or FileClassification contains "Sensitive"
+| summarize ExportCount = count() by User, FileName, bin(TimeGenerated, 1h)
+| project TimeGenerated, User, FileName, ExportCount
