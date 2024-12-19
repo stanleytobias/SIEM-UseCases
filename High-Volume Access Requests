@@ -1,0 +1,17 @@
+High-Volume Access Requests
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Brute Force (T1110)
+
+Detection Logic:
+Detect multiple access attempts to sensitive resources.
+
+Microsoft Sentinel KQL Query:
+AccessLogs
+| summarize AccessCount = count() by User, Resource, bin(TimeGenerated, 1h)
+| where AccessCount > 100 // Adjust threshold
+| project TimeGenerated, User, Resource, AccessCount
+
+Testing:
+Use a script to request access to sensitive resources repeatedly.
