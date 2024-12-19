@@ -10,3 +10,9 @@ Detection Logic:
 Monitor endpoint logs for changes to antivirus or EDR configurations.
 Alert on process termination attempts targeting security tools.
 Detect uninstallation commands issued for endpoint protection software.
+
+MS Sentinel:
+SecurityEvent
+| where EventID in (7036, 7045) // Service state changes or uninstallation
+| where ServiceName contains "Antivirus" or ServiceName contains "EDR"
+| project TimeGenerated, Computer, ServiceName, EventDescription
