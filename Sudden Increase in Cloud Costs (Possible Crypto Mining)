@@ -1,0 +1,17 @@
+Sudden Increase in Cloud Costs (Possible Crypto Mining)
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Resource Hijacking (T1496)
+
+Detection Logic:
+Monitor cloud billing logs for a significant increase in costs.
+
+Microsoft Sentinel KQL Query:
+CloudBillingLogs
+| summarize CostIncrease = max(TotalCost) - min(TotalCost) by bin(TimeGenerated, 1d)
+| where CostIncrease > 1000 // Adjust threshold
+| project TimeGenerated, CostIncrease
+
+Testing:
+Deploy a resource-intensive application in a cloud test environment.
