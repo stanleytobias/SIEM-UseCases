@@ -1,0 +1,12 @@
+Brute Force Attacks on Email Accounts
+
+MITRE Tactic:
+Credential Access (TA0006)
+
+MITRE Techniques:
+Password Guessing (T1110.001): Repeated login attempts to guess email account credentials.
+
+Detection Logic:
+Monitor email server logs for multiple failed login attempts followed by a success.
+Detect unusual login attempts from unknown IPs or geolocations.
+Correlate with account lockouts or privilege escalation attempts.
