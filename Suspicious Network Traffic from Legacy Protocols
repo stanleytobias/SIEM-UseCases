@@ -1,0 +1,16 @@
+Suspicious Network Traffic from Legacy Protocols
+
+MITRE ATT&CK Mapping:
+Tactic: Lateral Movement (TA0008)
+Technique: Exploitation of Remote Services (T1210)
+
+Detection Logic:
+Detect traffic using outdated protocols such as SMBv1 or Telnet.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol in ("SMBv1", "Telnet", "FTP")
+| project TimeGenerated, SourceIP, DestinationIP, Protocol
+
+Testing:
+Use legacy protocol tools to generate traffic in a controlled environment.
