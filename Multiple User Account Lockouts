@@ -1,0 +1,18 @@
+Multiple User Account Lockouts
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Brute Force (T1110)
+
+Detection Logic:
+Detect spikes in account lockouts within a short period.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID == 4740 // Account lockout
+| summarize LockoutCount = count() by TargetAccount, bin(TimeGenerated, 1h)
+| where LockoutCount > 5 // Adjust threshold
+| project TimeGenerated, TargetAccount, LockoutCount
+
+Testing:
+Attempt multiple failed logins to trigger account lockouts.
