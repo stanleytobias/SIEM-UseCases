@@ -11,3 +11,10 @@ Detection Logic:
 Analyze file access logs for rare or sensitive file paths accessed by users.
 Correlate with user privilege levels and prior behavior.
 Detect access to restricted directories or paths with no prior legitimate access.
+
+MS Sentinel:
+FileAuditLogs
+| where ActionType == "Read"
+| summarize AccessCount = count() by User, FilePath, bin(TimeGenerated, 1h)
+| where AccessCount > 50 // Adjust threshold based on environment
+| project TimeGenerated, User, FilePath, AccessCount
