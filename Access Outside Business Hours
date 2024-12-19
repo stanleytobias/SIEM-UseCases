@@ -1,0 +1,12 @@
+Access Outside Business Hours
+
+MITRE Tactic:
+Credential Access (TA0006) / Defense Evasion (TA0005)
+
+MITRE Techniques:
+Valid Accounts (T1078): Use of valid accounts at unusual times may indicate compromise.
+
+Detection Logic:
+Track login activity against pre-defined business hours.
+Alert on logins or resource access during weekends, holidays, or late at night.
+Correlate with geolocation and access device logs for anomalies.
