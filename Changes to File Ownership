@@ -1,0 +1,13 @@
+Changes to File Ownership
+
+MITRE Tactic:
+Persistence (TA0003) / Defense Evasion (TA0005)
+
+MITRE Techniques:
+Permission Changes (T1222): Changing file ownership to gain or maintain unauthorized access.
+Indicator Removal on Host (T1070): Altering ownership to hide malicious activity.
+
+Detection Logic:
+Monitor file system event logs for ownership change operations.
+Correlate changes with known administrative accounts or unusual user activity.
+Alert on unexpected ownership changes for sensitive files or directories.
