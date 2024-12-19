@@ -11,3 +11,10 @@ Detection Logic:
 Track sharing activity in cloud storage audit logs.
 Alert on public sharing of sensitive files or unusually high sharing volumes.
 Monitor file access permissions and detect sudden changes to "everyone" or external domains.
+
+MS Sentinel:
+AzureActivity
+| where OperationName contains "SetFileShareACL"
+| summarize ShareChangeCount = count() by Caller, ResourceId, bin(TimeGenerated, 1h)
+| where ShareChangeCount > 3 // Adjust based on normal usage
+| project TimeGenerated, Caller, ResourceId, ShareChangeCount
