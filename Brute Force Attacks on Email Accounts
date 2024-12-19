@@ -10,3 +10,10 @@ Detection Logic:
 Monitor email server logs for multiple failed login attempts followed by a success.
 Detect unusual login attempts from unknown IPs or geolocations.
 Correlate with account lockouts or privilege escalation attempts.
+
+MS Sentinel:
+OfficeActivity
+| where Operation == "FailedLogin"
+| summarize FailedLoginCount = count() by UserId, ClientIP, bin(TimeGenerated, 1h)
+| where FailedLoginCount > 10 // Adjust threshold for brute force
+| project TimeGenerated, UserId, ClientIP, FailedLoginCount
