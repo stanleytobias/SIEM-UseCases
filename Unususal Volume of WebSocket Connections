@@ -10,3 +10,10 @@ Detection Logic:
 Monitor traffic logs for WebSocket connections and alert on unusually high volume.
 Correlate with user behavior and the presence of suspicious processes.
 Detect connections to domains or IPs associated with C2 activity.
+
+MS Sentinel:
+NetworkTraffic
+| where Protocol == "WebSocket"
+| summarize ConnectionCount = count() by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| where ConnectionCount > 50 // Adjust threshold for environment
+| project TimeGenerated, SourceIP, DestinationIP, ConnectionCount
