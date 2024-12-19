@@ -1,0 +1,16 @@
+Privilege Escalation via Scheduled Tasks
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Scheduled Task/Job (T1053)
+
+Detection Logic:
+Monitor for creation of scheduled tasks with elevated privileges.
+
+Microsoft Sentinel KQL Query:
+TaskSchedulerLogs
+| where EventID == 106
+| project TimeGenerated, TaskName, AccountName, Privileges
+
+Testing:
+Create a scheduled task with elevated privileges in a test environment.
