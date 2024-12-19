@@ -10,3 +10,9 @@ Detection Logic:
 Monitor web server logs for file uploads to unusual directories (e.g., /uploads).
 Alert on script files (e.g., .php, .aspx) uploaded to web directories.
 Correlate with system changes, such as privilege escalation or suspicious connections.
+
+MS Sentinel:
+FileEvents
+| where FilePath contains "/uploads" or FileExtension in (".php", ".aspx")
+| where FileAction == "Write"
+| project TimeGenerated, FileName, FilePath, User, FileSize
