@@ -1,0 +1,12 @@
+Rogue DHCP Server
+
+MITRE Tactic:
+Initial Access (TA0001) / Credential Access (TA0006)
+
+MITRE Techniques:
+Exploitation of Network Protocols (T1210): Rogue DHCP servers can redirect traffic or facilitate MITM attacks.
+
+Detection Logic:
+Monitor for unauthorized DHCP servers responding to client requests.
+Alert on IP or MAC addresses not matching the known authorized DHCP servers.
+Correlate with network logs to identify the origin of rogue responses.
