@@ -11,3 +11,9 @@ Detection Logic:
 Monitor logs for unauthorized or unusual use of remote management tools.
 Detect connections from unknown IPs or during non-business hours.
 Alert on lateral movement patterns following remote access.
+
+MS Sentinel:
+SecurityEvent
+| where EventID in (7045, 4688) // Service installation or process creation
+| where ProcessName in ("PsExec.exe", "RemoteDesktop.exe", "WinRM.exe") // Add other known tools
+| project TimeGenerated, AccountName, ProcessName, CommandLine
