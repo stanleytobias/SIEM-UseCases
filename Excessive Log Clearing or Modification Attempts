@@ -1,0 +1,19 @@
+Excessive Log Clearing or Modification Attempts
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Indicator Removal on Host (T1070)
+
+Detection Logic:
+Detect repeated attempts to clear or modify logs.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID == 1102 // Audit log cleared
+| summarize LogClearCount = count() by AccountName, bin(TimeGenerated, 1h)
+| where LogClearCount > 3 // Adjust threshold
+| project TimeGenerated, AccountName, LogClearCount
+
+Testing:
+Simplest Test:
+Clear system logs on a test machine.
