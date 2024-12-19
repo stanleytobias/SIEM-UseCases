@@ -10,3 +10,9 @@ Detection Logic:
 Monitor PowerShell logs for commands containing encoded payloads (e.g., -EncodedCommand).
 Alert on script executions with known malicious patterns or flagged keywords.
 Correlate with user behavior and privilege escalation attempts.
+
+MS Sentinel:
+PowerShellCommandLogs
+| where CommandLine contains "-EncodedCommand"
+| where CommandLine matches regex @"[A-Za-z0-9+/=]{100,}" // Detect base64-encoded payloads
+| project TimeGenerated, User, CommandLine, Computer
