@@ -1,0 +1,17 @@
+IoT Device Anomalies
+
+MITRE ATT&CK Mapping:
+Tactic: Discovery (TA0007)
+Technique: Network Service Scanning (T1046)
+
+Detection Logic:
+Detect abnormal behaviors or traffic patterns from IoT devices.
+
+Microsoft Sentinel KQL Query:
+IoTDeviceLogs
+| summarize TrafficCount = count() by DeviceID, TrafficType, bin(TimeGenerated, 1h)
+| where TrafficCount > 1000 // Adjust threshold
+| project TimeGenerated, DeviceID, TrafficType, TrafficCount
+
+Testing:
+Simulate anomalous traffic using an IoT test device or emulator.
