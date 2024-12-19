@@ -10,3 +10,9 @@ Detection Logic:
 Monitor browser logs for newly installed extensions, especially from unverified sources.
 Alert on extensions with permissions to access sensitive data or inject scripts.
 Correlate with network traffic to detect data exfiltration or malicious domains.
+
+MS Sentinel:
+BrowserExtensionEvents
+| where ExtensionId !in (trustedExtensions) // Replace with list of trusted extensions
+| summarize ExtensionInstallCount = count() by User, ExtensionId, ExtensionName, bin(TimeGenerated, 1h)
+| project TimeGenerated, User, ExtensionId, ExtensionName, ExtensionInstallCount
