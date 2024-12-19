@@ -11,3 +11,9 @@ Detection Logic:
 Analyze web proxy logs for sudden increases in browsing activity or visits to flagged URLs.
 Monitor for access to known malicious or newly registered domains.
 Alert on non-standard HTTP methods or unusually high HTTP error rates.
+
+MS Sentinel:
+WebProxyLogs
+| summarize RequestCount = count() by User, URL, bin(TimeGenerated, 1h)
+| where RequestCount > 100 // Define abnormal request threshold
+| project TimeGenerated, User, URL, RequestCount
