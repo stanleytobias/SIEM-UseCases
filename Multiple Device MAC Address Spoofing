@@ -1,0 +1,17 @@
+Multiple Device MAC Address Spoofing
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Network Service Manipulation (T1570)
+
+Detection Logic:
+Detect multiple MAC addresses sharing the same IP.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| summarize MACCount = dcount(MACAddress) by ClientIP, bin(TimeGenerated, 1h)
+| where MACCount > 2 // Adjust threshold
+| project TimeGenerated, ClientIP, MACCount
+
+Testing:
+Spoof MAC addresses using tools like macchanger.
