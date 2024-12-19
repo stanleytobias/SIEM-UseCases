@@ -10,3 +10,10 @@ Detection Logic:
 Monitor FTP server logs for unauthorized access attempts or unusual activity.
 Detect large file uploads/downloads or connections from rare IPs.
 Alert on non-standard FTP commands or high-frequency requests.
+
+MS Sentinel:
+NetworkTraffic
+| where DestinationPort == 21
+| summarize FTPActivityCount = count() by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| where FTPActivityCount > 10 // Adjust threshold based on environment
+| project TimeGenerated, SourceIP, DestinationIP, FTPActivityCount
