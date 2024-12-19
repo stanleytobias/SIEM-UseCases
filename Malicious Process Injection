@@ -1,0 +1,16 @@
+Malicious Process Injection
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Process Injection (T1055)
+
+Detection Logic:
+Monitor for signs of process injection, such as suspicious WriteProcessMemory API calls.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where CommandLine contains "WriteProcessMemory" or CommandLine contains "VirtualAllocEx"
+| project TimeGenerated, ProcessName, CommandLine, User
+
+Testing:
+Use a benign process injection tool in a controlled test environment.
