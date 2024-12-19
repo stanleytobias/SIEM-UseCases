@@ -1,0 +1,16 @@
+Rootkit Detection on Endpoints
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Rootkit (T1014)
+
+Detection Logic:
+Monitor for signs of hidden processes, files, or kernel modifications.
+
+Microsoft Sentinel KQL Query:
+EndpointProtectionLogs
+| where DetectionType == "Rootkit"
+| project TimeGenerated, DeviceName, DetectionName
+
+Testing:
+Deploy a benign rootkit detection simulator.
