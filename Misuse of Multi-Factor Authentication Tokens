@@ -1,0 +1,18 @@
+Misuse of Multi-Factor Authentication Tokens
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Multi-Factor Authentication Interception (T1111)
+
+Detection Logic:
+Detect reuse or interception of MFA tokens.
+
+Microsoft Sentinel KQL Query:
+AuthenticationLogs
+| where AuthenticationMethod == "MFA" and ResultType == "Failure"
+| summarize FailureCount = count() by UserPrincipalName, bin(TimeGenerated, 1h)
+| where FailureCount > 3
+| project TimeGenerated, UserPrincipalName, FailureCount
+
+Testing:
+Simulate failed MFA token use from a monitored account.
