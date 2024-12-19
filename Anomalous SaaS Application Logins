@@ -1,0 +1,13 @@
+Anomalous SaaS Application Logins
+
+MITRE Tactic:
+Credential Access (TA0006) / Initial Access (TA0001)
+
+MITRE Techniques:
+Valid Accounts (T1078): Anomalous logins may indicate compromised accounts.
+Cloud Account Compromise (T1580): Suspicious logins to SaaS applications may be used to escalate access.
+
+Detection Logic:
+Monitor login attempts for geolocation, time, and device anomalies.
+Detect multiple failed logins followed by a successful login (indicative of brute force).
+Alert on logins from flagged IPs or devices not previously associated with the account.
