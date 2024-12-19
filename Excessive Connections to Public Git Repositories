@@ -1,0 +1,19 @@
+Excessive Connections to Public Git Repositories
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Transfer Data to Cloud Accounts (T1567.002)
+
+Detection Logic:
+Detect repeated connections to public Git repositories from internal systems.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationDomain endswith "github.com" or DestinationDomain endswith "gitlab.com"
+| summarize ConnectionCount = count() by SourceIP, DestinationDomain, bin(TimeGenerated, 1h)
+| where ConnectionCount > 10 // Adjust threshold
+| project TimeGenerated, SourceIP, DestinationDomain, ConnectionCount
+
+Testing:
+Simplest Test:
+Clone multiple public repositories from a monitored system.
