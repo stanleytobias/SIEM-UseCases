@@ -10,3 +10,11 @@ Detection Logic:
 Monitor for LDAP queries targeting sensitive AD objects (e.g., user accounts, group memberships).
 Detect unusual tools or processes performing AD enumeration.
 Correlate with login activity and privilege escalation attempts.
+
+MS Sentinel:
+SecurityEvent
+| where EventID in (4662, 4720) // Object enumeration or new account creation
+| where ObjectClass == "User" or ObjectClass == "Computer"
+| summarize EnumerationCount = count() by AccountName, bin(TimeGenerated, 1h)
+| where EnumerationCount > 10 // Adjust based on baseline
+| project TimeGenerated, AccountName, EnumerationCount
