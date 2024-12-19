@@ -1,0 +1,17 @@
+Multiple Concurrent Sessions
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Valid Accounts (T1078)
+
+Detection Logic:
+Detect simultaneous active sessions from a single account.
+
+Microsoft Sentinel KQL Query:
+AuthenticationLogs
+| summarize SessionCount = count() by UserPrincipalName, ClientIP, bin(TimeGenerated, 1h)
+| where SessionCount > 2 // Adjust threshold
+| project TimeGenerated, UserPrincipalName, ClientIP, SessionCount
+
+Testing:
+Log in from multiple devices using the same account.
