@@ -1,0 +1,13 @@
+SSL Certificate Misuse
+
+MITRE Tactic:
+Credential Access (TA0006) / Defense Evasion (TA0005)
+
+MITRE Techniques:
+Exploitation for Credential Material (T1552): Misuse of SSL certificates to intercept or authenticate unauthorized traffic.
+Network Traffic Obfuscation (T1027): Use of SSL certificates to mask malicious traffic.
+
+Detection Logic:
+Monitor SSL certificates for unapproved issuers or expired certificates in use.
+Alert on certificates being reused across unrelated systems or domains.
+Analyze traffic for certificates used by unauthorized applications or suspicious servers.
