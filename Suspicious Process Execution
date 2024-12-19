@@ -1,0 +1,16 @@
+Suspicious Process Execution
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: Process Injection (T1055)
+
+Detection Logic:
+Identify execution of processes associated with known malicious tools.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where ProcessName in ("mimikatz.exe", "procdump.exe", "rundll32.exe")
+| project TimeGenerated, ProcessName, CommandLine, User
+
+Testing:
+Execute a flagged process, such as a benign rundll32 command.
