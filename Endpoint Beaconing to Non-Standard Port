@@ -1,0 +1,22 @@
+Endpoint Beaconing to Non-Standard Port
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Non-Standard Port (T1571)
+
+Detection Logic:
+Detect frequent outbound traffic to uncommon ports.
+
+Microsoft Sentinel KQL Query:
+
+NetworkTraffic
+| where DestinationPort !in (80, 443, 22)
+| summarize BeaconingFrequency = count() by SourceIP, DestinationIP, DestinationPort, bin(TimeGenerated, 1m)
+| where BeaconingFrequency > 10 // Adjust threshold
+| project TimeGenerated, SourceIP, DestinationIP, DestinationPort, BeaconingFrequency
+
+Testing:
+Atomic Red Team:
+Test case: T1571.
+Simplest Test:
+Simulate traffic using curl or similar tools to non-standard ports.
