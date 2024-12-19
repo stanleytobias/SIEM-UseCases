@@ -1,0 +1,12 @@
+Malicious PowerShell Commands with Encoded Payloads
+
+MITRE Tactic:
+Execution (TA0002) / Defense Evasion (TA0005)
+
+MITRE Techniques:
+PowerShell (T1059.001): Encoding is often used to obfuscate malicious PowerShell commands.
+
+Detection Logic:
+Monitor PowerShell logs for commands containing encoded payloads (e.g., -EncodedCommand).
+Alert on script executions with known malicious patterns or flagged keywords.
+Correlate with user behavior and privilege escalation attempts.
