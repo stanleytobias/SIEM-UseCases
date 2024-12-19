@@ -10,3 +10,10 @@ Detection Logic:
 Monitor network traffic for port scans or sweeps (e.g., high connection attempts across multiple ports).
 Detect patterns of SYN/ACK responses from multiple devices.
 Alert on known scanning tools or scripts initiated from endpoints.
+
+MS Sentinel:
+NetworkTraffic
+| where DestinationPort in (dynamic(range(1, 65535, 1))) // Ports in scanning range
+| summarize ScanAttempts = count() by SourceIP, bin(TimeGenerated, 1h)
+| where ScanAttempts > 500 // Adjust threshold for scanning behavior
+| project TimeGenerated, SourceIP, ScanAttempts
