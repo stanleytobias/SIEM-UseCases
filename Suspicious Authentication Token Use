@@ -1,0 +1,16 @@
+Suspicious Authentication Token Use
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Token Impersonation (T1550)
+
+Detection Logic:
+Detect token use from unexpected locations or IPs.
+
+Microsoft Sentinel KQL Query:
+AuthenticationLogs
+| where TokenUsed == true and SourceIP not in (authorizedIPs)
+| project TimeGenerated, User, SourceIP, TokenDetails
+
+Testing:
+Use a test token from an unauthorized IP or device.
