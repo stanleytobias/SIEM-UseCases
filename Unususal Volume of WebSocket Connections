@@ -1,0 +1,12 @@
+Unususal Volume of WebSocket Connections
+
+MITRE Tactic:
+Command and Control (TA0011) / Exfiltration (TA0010)
+
+MITRE Techniques:
+Web Protocols for C2 (T1071.001): Excessive WebSocket connections could signal C2 communication.
+
+Detection Logic:
+Monitor traffic logs for WebSocket connections and alert on unusually high volume.
+Correlate with user behavior and the presence of suspicious processes.
+Detect connections to domains or IPs associated with C2 activity.
