@@ -1,0 +1,13 @@
+Abuse of Remote Management Tools
+
+MITRE Tactic:
+Execution (TA0002) / Lateral Movement (TA0008)
+
+MITRE Techniques:
+Remote Services (T1021): Unauthorized use of tools like RDP, PSExec, or SSH.
+Use of Remote Management Tools (T1219): Abuse of legitimate tools to execute commands or exfiltrate data.
+
+Detection Logic:
+Monitor logs for unauthorized or unusual use of remote management tools.
+Detect connections from unknown IPs or during non-business hours.
+Alert on lateral movement patterns following remote access.
