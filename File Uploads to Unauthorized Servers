@@ -1,0 +1,18 @@
+File Uploads to Unauthorized Servers
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Exfiltration Over Web Service (T1567)
+
+Detection Logic:
+Detect uploads to unknown or unauthorized servers.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationIP !in (authorizedServerIPs) // Replace with authorized IPs
+| summarize UploadCount = count() by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| project TimeGenerated, SourceIP, DestinationIP, UploadCount
+
+Testing:
+Simplest Test:
+Upload test files to unauthorized or external servers.
