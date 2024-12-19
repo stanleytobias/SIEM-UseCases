@@ -11,3 +11,10 @@ Detection Logic:
 Monitor outbound traffic for large or unusual data transfers.
 Detect connections to unauthorized external hosts or flagged cloud storage services.
 Correlate with file access logs to identify potential staging activities.
+
+MS Sentinel:
+NetworkTraffic
+| where Direction == "Outbound"
+| summarize TotalDataTransferred = sum(BytesSent) by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| where TotalDataTransferred > 1000000000 // Adjust threshold for exfiltration volume
+| project TimeGenerated, SourceIP, DestinationIP, TotalDataTransferred
