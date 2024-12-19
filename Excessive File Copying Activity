@@ -1,0 +1,19 @@
+Excessive File Copying Activity
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Exfiltration Over Physical Medium (T1052)
+
+Detection Logic:
+Detect a high number of file copy operations.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where ActionType == "Copy"
+| summarize CopyCount = count() by User, DestinationPath, bin(TimeGenerated, 1h)
+| where CopyCount > 50 // Adjust threshold
+| project TimeGenerated, User, DestinationPath, CopyCount
+
+Testing:
+Simplest Test:
+Copy multiple files to a location using a script.
