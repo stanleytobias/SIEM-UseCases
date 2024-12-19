@@ -1,0 +1,16 @@
+Suspicious Connections to Obsolete Protocol Endpoints
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Protocol Tunneling (T1572)
+
+Detection Logic:
+Monitor for traffic to endpoints using outdated protocols (e.g., SMBv1).
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol in ("SMBv1", "Telnet")
+| project TimeGenerated, SourceIP, DestinationIP, Protocol
+
+Testing:
+Use a test system to connect via an outdated protocol like telnet.
