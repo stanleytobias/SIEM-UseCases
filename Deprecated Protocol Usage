@@ -1,0 +1,12 @@
+Deprecated Protocol Usage
+
+MITRE Tactic:
+Defense Evasion (TA0005) / Command and Control (TA0011)
+
+MITRE Techniques:
+Protocol Tunneling (T1572): Deprecated protocols like SMBv1 or Telnet can be exploited for communication or evasion.
+
+Detection Logic:
+Monitor network traffic for deprecated protocols (e.g., SMBv1, FTP, Telnet).
+Alert on protocol usage from unauthorized systems or outside approved baselines.
+Correlate protocol usage with device logs to identify misconfigurations or malicious use.
