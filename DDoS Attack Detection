@@ -10,3 +10,10 @@ Detection Logic:
 Monitor network traffic for high volumes of requests or anomalous traffic spikes.
 Alert on excessive SYN flood, HTTP requests, or ICMP traffic.
 Correlate with firewall and server logs to identify targeted endpoints.
+
+MS Sentinel:
+NetworkTraffic
+| where DestinationIP in (criticalAssets) // Replace with IPs of critical assets
+| summarize ConnectionCount = count() by SourceIP, DestinationIP, bin(TimeGenerated, 1m)
+| where ConnectionCount > 1000 // Adjust threshold for DDoS detection
+| project TimeGenerated, SourceIP, DestinationIP, ConnectionCount
