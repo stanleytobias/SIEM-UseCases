@@ -1,0 +1,16 @@
+Suspicious ARP Cache Poisoning
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: ARP Cache Poisoning (T1557.002)
+
+Detection Logic:
+Detect ARP packets with mismatched IP and MAC addresses.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol == "ARP" and MACAddress != ExpectedMACAddress
+| project TimeGenerated, SourceIP, MACAddress, ExpectedMACAddress
+
+Testing:
+Perform ARP cache poisoning using a tool like arpspoof in a controlled environment.
