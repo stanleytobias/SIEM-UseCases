@@ -1,0 +1,19 @@
+Email Attachment with Executable Files
+
+MITRE ATT&CK Mapping:
+Tactic: Initial Access (TA0001)
+Technique: Spear Phishing Attachment (T1566.001)
+
+Detection Logic:
+Detect email attachments with .exe, .dll, or other executable extensions.
+
+Microsoft Sentinel KQL Query:
+EmailEvents
+| where AttachmentFileType in (".exe", ".dll", ".bat")
+| project TimeGenerated, Sender, Recipient, AttachmentName
+
+Testing:
+Atomic Red Team:
+Test case: T1566.001. https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1566.001/T1566.001.yaml
+Simplest Test:
+Send a test email with a dummy executable attachment.
