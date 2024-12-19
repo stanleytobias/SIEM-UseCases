@@ -1,0 +1,17 @@
+Security Policy Change Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Modify System Security Policy (T1601)
+
+Detection Logic:
+Detect unauthorized changes to security policies.
+
+Microsoft Sentinel KQL Query:
+AuditLogs
+| where OperationName == "ModifySecurityPolicy"
+| where InitiatedBy not in (authorizedUsers)
+| project TimeGenerated, PolicyName, InitiatedBy
+
+Testing:
+Modify a security policy using a test account.
