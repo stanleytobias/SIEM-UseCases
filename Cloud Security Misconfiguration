@@ -10,3 +10,9 @@ Detection Logic:
 Monitor for changes in cloud security configurations, such as open storage buckets or unrestricted firewall rules.
 Alert on policy modifications outside of approved change windows or by unauthorized users.
 Correlate with logs from Infrastructure as Code (IaC) tools to detect unapproved changes.
+
+MS Sentinel:
+AzurePolicyComplianceLogs
+| where ComplianceState == "NonCompliant"
+| summarize MisconfigurationCount = count() by ResourceId, PolicyName, bin(TimeGenerated, 1h)
+| project TimeGenerated, ResourceId, PolicyName, MisconfigurationCount
