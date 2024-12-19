@@ -1,0 +1,18 @@
+Hidden File Creation on Endpoints
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Indicator Removal on Host (T1070)
+
+Detection Logic:
+Monitor for files with hidden attributes.
+
+Microsoft Sentinel KQL Query:
+
+FileAuditLogs
+| where FileAttributes contains "Hidden"
+| project TimeGenerated, FilePath, User
+Testing:
+
+Create a hidden file using a script:
+attrib +h testfile.txt
