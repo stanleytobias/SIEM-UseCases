@@ -1,0 +1,16 @@
+Rogue Wireless Network Beaconing
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Network Service Manipulation (T1570)
+
+Detection Logic:
+Detect unauthorized wireless network SSIDs.
+
+Microsoft Sentinel KQL Query:
+WirelessNetworkLogs
+| where SSID not in (authorizedSSIDs)
+| project TimeGenerated, SSID, SourceMAC
+
+Testing:
+Set up a rogue wireless access point and observe detection logs.
