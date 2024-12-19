@@ -1,0 +1,17 @@
+Suspicious Network Activity
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Application Layer Protocol (T1071)
+
+Detection Logic:
+Monitor for unusual traffic patterns, such as spikes or connections to suspicious IPs.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| summarize TrafficVolume = sum(BytesTransferred) by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| where TrafficVolume > 100000000 // Adjust threshold
+| project TimeGenerated, SourceIP, DestinationIP, TrafficVolume
+
+Testing:
+Simulate high network traffic using tools like iperf or hping3.
