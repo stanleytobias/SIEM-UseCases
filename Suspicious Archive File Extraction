@@ -1,0 +1,16 @@
+Suspicious Archive File Extraction
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Archive Collected Data (T1560)
+
+Detection Logic:
+Detect extraction of archive files with sensitive content.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where FileExtension in (".zip", ".rar", ".7z") and Action == "Extract"
+| project TimeGenerated, FilePath, User
+
+Testing:
+Extract archive files containing dummy data in a test environment.
