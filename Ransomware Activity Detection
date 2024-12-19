@@ -1,0 +1,17 @@
+Ransomware Activity Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Data Encrypted for Impact (T1486)
+
+Detection Logic:
+Monitor for unusual file extension changes and high file encryption rates.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where FileExtension in (".encrypted", ".lock", ".crypto")
+| summarize EncryptionActivity = count() by FilePath, User, bin(TimeGenerated, 1h)
+| project TimeGenerated, FilePath, User, EncryptionActivity
+
+Testing:
+Execute a benign ransomware simulation tool in a test environment.
