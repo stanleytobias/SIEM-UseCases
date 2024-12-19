@@ -1,0 +1,16 @@
+Remote Desktop Protocol (RDP) Anomalies
+
+MITRE ATT&CK Mapping:
+Tactic: Lateral Movement (TA0008)
+Technique: Remote Services (T1021.001)
+
+Detection Logic:
+Monitor for unusual RDP activity, such as connections from unknown IPs.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID == 4624 and LogonType == 10 // RDP logon
+| project TimeGenerated, AccountName, SourceIP, TargetComputer
+
+Testing:
+Perform RDP logins from various IP addresses to simulate anomalies.
