@@ -1,0 +1,19 @@
+Failed Login Attempts Threshold
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Brute Force (T1110)
+
+Detection Logic:
+Detect excessive failed login attempts.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID == 4625 // Failed login attempts
+| summarize FailedLoginAttempts = count() by AccountName, bin(TimeGenerated, 1h)
+| where FailedLoginAttempts > 10 // Adjust threshold
+| project TimeGenerated, AccountName, FailedLoginAttempts
+
+Testing:
+Simplest Test:
+Attempt multiple logins with incorrect credentials.
