@@ -11,3 +11,9 @@ Detection Logic:
 Inspect packet headers and alert on unusually large or fragmented packets.
 Monitor for spikes in non-standard payload sizes.
 Correlate abnormal packet sizes with known malicious domains or protocols.
+
+MS Sentinel:
+NetworkTraffic
+| where PacketSize > 1500 or PacketSize < 100 // Adjust thresholds for abnormal sizes
+| summarize PacketCount = count() by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| project TimeGenerated, SourceIP, DestinationIP, PacketSize, PacketCount
