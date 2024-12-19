@@ -1,0 +1,18 @@
+Rogue DNS Tunnel Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Application Layer Protocol (T1071.004)
+
+Detection Logic:
+Detect high volumes of DNS TXT queries or abnormal DNS traffic patterns.
+
+Microsoft Sentinel KQL Query:
+DNSLogs
+| where QueryType == "TXT"
+| summarize QueryCount = count() by SourceIP, bin(TimeGenerated, 1h)
+| where QueryCount > 50 // Adjust threshold
+| project TimeGenerated, SourceIP, QueryCount
+
+Testing:
+Use a DNS tunneling tool (e.g., dnscat2) in a controlled environment.
