@@ -11,3 +11,10 @@ Detection Logic:
 Monitor email metadata for reply patterns deviating from normal (e.g., time of reply, recipient domain).
 Detect multiple replies to unknown or flagged external domains.
 Alert on replies containing unusual keywords or large attachments.
+
+MS Sentinel:
+OfficeActivity
+| where Operation == "Send"
+| summarize ReplyCount = count() by UserId, Recipient, bin(TimeGenerated, 1h)
+| where ReplyCount > 50 // Adjust threshold for normal reply frequency
+| project TimeGenerated, UserId, Recipient, ReplyCount
