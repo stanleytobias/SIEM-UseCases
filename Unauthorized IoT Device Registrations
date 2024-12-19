@@ -10,3 +10,10 @@ Detection Logic:
 Monitor network and IoT management logs for new device registrations.
 Alert on registrations from unknown MAC addresses or outside approved IP ranges.
 Correlate with DHCP logs to identify unauthorized devices on the network.
+
+MS Sentinel:
+DeviceManagementLogs
+| where DeviceType == "IoT"
+| where DeviceID !in (authorizedDeviceIDs) // Replace with authorized device IDs
+| summarize RegistrationCount = count() by DeviceID, User, bin(TimeGenerated, 1h)
+| project TimeGenerated, DeviceID, User, RegistrationCount
