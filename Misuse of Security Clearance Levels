@@ -1,0 +1,16 @@
+Misuse of Security Clearance Levels
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Account Manipulation (T1098)
+
+Detection Logic:
+Monitor activity outside the user's clearance level or permissions.
+
+Microsoft Sentinel KQL Query:
+AccessLogs
+| where ClearanceLevel < ResourceSensitivity
+| project TimeGenerated, User, Resource, ClearanceLevel, ResourceSensitivity
+
+Testing:
+Attempt to access resources requiring a higher clearance level.
