@@ -1,0 +1,16 @@
+Rogue Network Device Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Network Service Manipulation (T1570)
+
+Detection Logic:
+Detect unauthorized devices connected to the network.
+
+Microsoft Sentinel KQL Query:
+DeviceLogs
+| where DeviceID not in (authorizedDevices)
+| project TimeGenerated, DeviceID, SourceIP
+
+Testing:
+Connect a rogue device to the network and observe logs.
