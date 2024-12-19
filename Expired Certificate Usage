@@ -1,0 +1,17 @@
+Expired Certificate Usage
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Network Service Manipulation (T1570)
+
+Detection Logic:
+Detect connections using expired SSL/TLS certificates.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol == "TLS" and CertificateStatus == "Expired"
+| project TimeGenerated, DestinationIP, CertificateName, CertificateStatus
+
+Testing:
+Simplest Test:
+Use a test service with an expired certificate for connections.
