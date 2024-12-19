@@ -1,0 +1,18 @@
+High Volume of 404 Errors
+
+MITRE ATT&CK Mapping:
+Tactic: Discovery (TA0007)
+Technique: Application Layer Protocol (T1071.001)
+
+Detection Logic:
+Detect a surge in HTTP 404 (Not Found) errors.
+
+Microsoft Sentinel KQL Query:
+WebServerLogs
+| where ResponseCode == 404
+| summarize ErrorCount = count() by URL, bin(TimeGenerated, 1h)
+| where ErrorCount > 50 // Adjust threshold
+| project TimeGenerated, URL, ErrorCount
+
+Testing:
+Request non-existent URLs on a test server.
