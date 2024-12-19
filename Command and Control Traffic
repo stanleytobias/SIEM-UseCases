@@ -1,0 +1,13 @@
+Command and Control Traffic
+
+MITRE Tactic:
+Command and Control (TA0011)
+
+MITRE Techniques:
+Application Layer Protocols (T1071): C2 traffic may use application-layer protocols like DNS or HTTPS.
+Protocol Tunneling (T1572): Obfuscating C2 traffic within legitimate protocols.
+
+Detection Logic:
+Monitor for DNS queries to dynamically generated domains (DGA) or rare domains.
+Detect anomalies in TLS handshakes, such as self-signed certificates.
+Alert on non-standard port usage or high volumes of encrypted traffic.
