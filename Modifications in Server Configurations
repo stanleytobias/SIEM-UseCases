@@ -10,3 +10,10 @@ Detection Logic:
 Monitor server configuration files for unauthorized changes.
 Alert on changes to logging, authentication, or network settings.
 Correlate with user activity logs to identify the initiator of the changes.
+
+MS Sentinel:
+ConfigurationChangeEvents
+| where ConfigurationType == "Server"
+| where Initiator !in (authorizedAdmins) // Replace with authorized admin accounts
+| summarize ModificationCount = count() by ServerName, ConfigurationChange, Initiator, bin(TimeGenerated, 1h)
+| project TimeGenerated, ServerName, ConfigurationChange, Initiator, ModificationCount
