@@ -11,3 +11,10 @@ Detection Logic:
 Track token usage logs and alert on tokens used by unauthorized accounts or systems.
 Correlate token use with geolocations or times inconsistent with baseline behavior.
 Detect reuse of expired or compromised tokens.
+
+MS Sentinel:
+AuthenticationLogs
+| where AuthenticationMethod == "TokenBased"
+| summarize TokenUsageCount = count() by User, TokenID, bin(TimeGenerated, 1h)
+| where TokenUsageCount > 10 // Adjust threshold for abnormal usage
+| project TimeGenerated, User, TokenID, TokenUsageCount
