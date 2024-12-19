@@ -1,0 +1,18 @@
+Suspicious DNS TXT Record Queries
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Application Layer Protocol (T1071.004)
+
+Detection Logic:
+Detect DNS TXT record queries with unusual patterns or high volume.
+
+Microsoft Sentinel KQL Query:
+DNSLogs
+| where QueryType == "TXT"
+| summarize QueryCount = count() by SourceIP, bin(TimeGenerated, 1h)
+| where QueryCount > 20 // Adjust threshold
+| project TimeGenerated, SourceIP, QueryCount
+
+Testing:
+Use a DNS tunneling tool like dnscat2 in a controlled environment.
