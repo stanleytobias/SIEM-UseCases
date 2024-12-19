@@ -1,0 +1,13 @@
+Cloud API Calls
+
+MITRE Tactic:
+Execution (TA0002) / Credential Access (TA0006)
+
+MITRE Techniques:
+Exploitation of Cloud APIs (T1587.002): Unauthorized or unusual API calls to exploit cloud services.
+Cloud Service Discovery (T1580): Unusual API calls may indicate reconnaissance activity.
+
+Detection Logic:
+Monitor cloud provider API audit logs for rare or anomalous API calls.
+Detect calls to high-privilege or sensitive APIs outside of normal patterns.
+Use baselines for normal API activity per user and alert on deviations.
