@@ -1,0 +1,16 @@
+Suspicious Activity Involving Trusted Third-Party Applications
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Trusted Relationship (T1199)
+
+Detection Logic:
+Monitor for unusual activity from trusted third-party applications.
+
+Microsoft Sentinel KQL Query:
+ThirdPartyApplicationLogs
+| where Action not in (expectedActions)
+| project TimeGenerated, ApplicationName, User, Action
+
+Testing:
+Perform unauthorized actions using a test third-party app.
