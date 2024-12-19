@@ -1,0 +1,16 @@
+Suspicious PowerShell Command Execution
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: Command and Scripting Interpreter (T1059.001)
+
+Detection Logic:
+Monitor for PowerShell commands with obfuscation or suspicious arguments.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where ProcessName == "powershell.exe" and CommandLine contains_any ("Invoke-Expression", "-EncodedCommand", "DownloadString")
+| project TimeGenerated, CommandLine, User
+
+Testing:
+Run a flagged PowerShell command (e.g., Invoke-WebRequest) on a test machine.
