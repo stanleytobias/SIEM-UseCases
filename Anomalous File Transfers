@@ -11,3 +11,10 @@ Detection Logic:
 Monitor file transfer logs for uploads to unauthorized destinations or domains.
 Alert on large file transfers or unusual file types being transferred.
 Correlate with user behavior and access logs to detect anomalies.
+
+MS Sentinel:
+FileTransferLogs
+| where TransferType in ("Upload", "Download")
+| summarize TransferCount = count() by User, DestinationIP, bin(TimeGenerated, 1h)
+| where TransferCount > 50 // Adjust based on environment
+| project TimeGenerated, User, DestinationIP, TransferCount
