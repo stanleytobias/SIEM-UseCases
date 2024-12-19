@@ -1,0 +1,16 @@
+Suspicious Changes to OS Kernel Parameters
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Boot or Logon Autostart Execution (T1547)
+
+Detection Logic:
+Monitor logs for modifications to kernel parameters.
+
+Microsoft Sentinel KQL Query:
+SystemLogs
+| where ParameterType == "Kernel" and Action == "Modify"
+| project TimeGenerated, ParameterName, InitiatedBy
+
+Testing:
+Modify a kernel parameter using tools like sysctl in a test environment.
