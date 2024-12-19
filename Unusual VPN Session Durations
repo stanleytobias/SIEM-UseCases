@@ -10,3 +10,9 @@ Detection Logic:
 Monitor VPN session duration and alert on sessions exceeding normal thresholds.
 Correlate with unusual data transfer volumes or connections to restricted resources.
 Detect concurrent sessions for the same user from multiple locations.
+
+MS Sentinel:
+VPNLogs
+| extend SessionDuration = DisconnectTime - ConnectTime
+| where SessionDuration > 86400 // Define abnormal duration in seconds (e.g., 24 hours)
+| project TimeGenerated, User, SessionDuration, VPNIP
