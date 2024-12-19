@@ -1,0 +1,16 @@
+Phishing Site Access Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Phishing for Credentials (T1566.002)
+
+Detection Logic:
+Detect user access to domains flagged as phishing sites.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationDomain in (phishingDomains) // Replace with known phishing domains
+| project TimeGenerated, SourceIP, DestinationDomain
+
+Testing:
+Access a safe test domain flagged as phishing (e.g., a benign test site).
