@@ -10,3 +10,10 @@ Detection Logic:
 Monitor for unusual ARP, NetBIOS, or multicast broadcasts on the network.
 Alert on broadcast storms or traffic originating from unauthorized devices.
 Correlate with network logs to identify anomalies in broadcast behavior.
+
+MS Sentinel:
+NetworkTraffic
+| where DestinationPort in (137, 138, 5353) // Common broadcast ports
+| where Protocol == "UDP"
+| summarize BroadcastCount = count() by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| project TimeGenerated, SourceIP, DestinationIP, BroadcastCount
