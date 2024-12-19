@@ -1,0 +1,16 @@
+Suspicious LNK File Execution
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: LNK Files (T1204.002)
+
+Detection Logic:
+Detect execution of LNK files with suspicious paths or arguments.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where FileExtension == ".lnk" and FilePath contains "suspicious"
+| project TimeGenerated, FilePath, User
+
+Testing:
+Execute a benign but flagged LNK file in a test environment.
