@@ -1,0 +1,17 @@
+Geolocation Access Policy Breach
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Impair Defenses (T1562)
+
+Detection Logic:
+Monitor logins from restricted or unusual geolocations.
+
+Microsoft Sentinel KQL Query:
+AuthenticationLogs
+| extend GeoLocation = GetGeoLocation(ClientIP)
+| where GeoLocation.Country !in (allowedCountries) // Replace with a list of allowed countries
+| project TimeGenerated, User, ClientIP, GeoLocation.Country
+
+Testing:
+Use a VPN to simulate a login attempt from a restricted country.
