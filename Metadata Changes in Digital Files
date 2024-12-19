@@ -1,0 +1,13 @@
+Metadata Changes in Digital Files
+
+MITRE Tactic:
+Defense Evasion (TA0005) / Impact (TA0040)
+
+MITRE Techniques:
+Data Manipulation (T1565): Metadata tampering could indicate attempts to obfuscate activity.
+Indicator Removal on Host (T1070): Changing timestamps or metadata to evade detection.
+
+Detection Logic:
+Monitor changes in file metadata, such as timestamps, owners, or access permissions.
+Alert on metadata changes without corresponding content changes.
+Correlate metadata changes with user or process activity for anomalies.
