@@ -11,3 +11,10 @@ Detection Logic:
 Monitor authentication logs for repeated failed attempts leading to lockouts.
 Alert on lockouts across multiple accounts within a short period.
 Correlate with geolocation or device logs to identify unauthorized access attempts.
+
+MS Sentinel:
+SecurityEvent
+| where EventID == 4740 // Account lockout event
+| summarize LockoutCount = count() by AccountName, bin(TimeGenerated, 1h)
+| where LockoutCount > 5 // Adjust threshold for abnormal frequency
+| project TimeGenerated, AccountName, LockoutCount
