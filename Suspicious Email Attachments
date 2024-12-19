@@ -1,0 +1,16 @@
+Suspicious Email Attachments
+
+MITRE ATT&CK Mapping:
+Tactic: Initial Access (TA0001)
+Technique: Spear Phishing Attachment (T1566.001)
+
+Detection Logic:
+Detect emails with suspicious attachment types or sizes.
+
+Microsoft Sentinel KQL Query:
+EmailEvents
+| where AttachmentFileType in (".exe", ".js", ".bat", ".vbs")
+| project TimeGenerated, Sender, Recipient, AttachmentName, AttachmentFileType
+
+Testing:
+Send a benign email with a flagged attachment type.
