@@ -1,0 +1,23 @@
+DNS Anomalies
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: DNS Communication Channels (T1071.004)
+
+Detection Logic:
+Detect anomalous DNS queries, such as spikes in queries, queries for non-existent domains, or rare subdomains.
+
+Microsoft Sentinel KQL Query:
+
+DNSLogs
+| summarize QueryCount = count() by ClientIP, QueryName, bin(TimeGenerated, 1h)
+| where QueryCount > 100 // Adjust threshold for anomalies
+| project TimeGenerated, ClientIP, QueryName, QueryCount
+
+Testing:
+Atomic Red Team:
+Test case: T1071.004 - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1071.004/T1071.004.yaml
+Execute a script to generate unusual DNS queries.
+
+Simplest Test:
+Use nslookup or dig to query multiple non-existent or uncommon domains rapidly.
