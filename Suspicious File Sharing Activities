@@ -1,0 +1,16 @@
+Suspicious File Sharing Activities
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Data Transfer to Cloud Storage (T1537)
+
+Detection Logic:
+Detect sharing of files with unusual recipients or via unauthorized platforms.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where Action == "Shared" and Recipient not in (authorizedRecipients)
+| project TimeGenerated, FilePath, User, Recipient
+
+Testing:
+Share a test file with an unauthorized recipient.
