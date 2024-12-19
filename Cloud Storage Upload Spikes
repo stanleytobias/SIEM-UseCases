@@ -1,0 +1,12 @@
+Cloud Storage Upload Spikes
+
+MITRE Tactic:
+Exfiltration (TA0010) / Impact (TA0040)
+
+MITRE Techniques:
+Data Transfer to Cloud Accounts (T1567.002): Sudden upload spikes could indicate data exfiltration.
+
+Detection Logic:
+Monitor cloud storage metrics for sudden increases in upload activity.
+Detect uploads of unusual file types or large volumes of data to external destinations.
+Correlate with user access logs and geolocation to identify unauthorized transfers.
