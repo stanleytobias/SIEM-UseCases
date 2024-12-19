@@ -1,0 +1,19 @@
+Excessive Changes to Security Group Rules in Cloud Environments
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Modify Cloud Compute Infrastructure (T1578)
+
+Detection Logic:
+Detect multiple rule modifications in a short period in cloud security groups.
+
+Microsoft Sentinel KQL Query:
+AzureActivity
+| where OperationName contains "SecurityGroupRule"
+| summarize RuleChangeCount = count() by InitiatedBy, bin(TimeGenerated, 1h)
+| where RuleChangeCount > 5 // Adjust threshold
+| project TimeGenerated, InitiatedBy, RuleChangeCount
+
+Testing:
+Simplest Test:
+Modify security group rules in a test cloud environment.
