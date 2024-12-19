@@ -1,0 +1,18 @@
+File Integrity Monitoring
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Indicator Removal on Host (T1070)
+
+Detection Logic:
+Monitor changes to critical files and directories.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where ActionType in ("Modified", "Deleted")
+| summarize ChangeCount = count() by FilePath, User, bin(TimeGenerated, 1h)
+| project TimeGenerated, FilePath, User, ChangeCount
+
+Testing:
+Simplest Test:
+Modify files in monitored directories.
