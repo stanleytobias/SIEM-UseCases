@@ -1,0 +1,12 @@
+Unauthorized Remote Access Tools (RATs)
+
+MITRE Tactic:
+Command and Control (TA0011) / Persistence (TA0003)
+
+MITRE Techniques:
+Remote Access Software (T1219): RATs provide unauthorized remote access to compromised systems.
+
+Detection Logic:
+Monitor for processes associated with known RAT binaries or behaviors.
+Detect network connections to flagged C2 IPs or domains.
+Alert on unauthorized remote access attempts or tools installed on endpoints.
