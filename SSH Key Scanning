@@ -1,0 +1,13 @@
+SSH Key Scanning
+
+MITRE Tactic:
+Credential Access (TA0006) / Discovery (TA0007)
+
+MITRE Techniques:
+SSH Hijacking (T1563.001): Scanning for SSH keys to gain unauthorized access.
+Private Keys (T1552.004): Attempts to locate and misuse private keys.
+
+Detection Logic:
+Monitor for excessive file read operations targeting .ssh directories.
+Detect repeated access attempts to private keys by unusual processes or users.
+Correlate with failed login attempts or privilege escalation activities.
