@@ -1,0 +1,13 @@
+Anomalous Behavior of Printer Devices
+
+MITRE Tactic:
+Impact (TA0040) / Defense Evasion (TA0005)
+
+MITRE Techniques:
+Network Device Discovery (T1120): Anomalous printer behavior may indicate network reconnaissance.
+Data Destruction (T1485): Misuse of printers to disrupt operations or destroy data.
+
+Detection Logic:
+Monitor network traffic from printers for unusual patterns (e.g., data spikes, non-standard ports).
+Alert on unauthorized printer configurations or firmware updates.
+Detect print jobs with suspicious content (e.g., mass printing of sensitive files).
