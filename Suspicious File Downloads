@@ -1,0 +1,17 @@
+Suspicious File Downloads
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: User Execution (T1204.001)
+
+Detection Logic:
+Detect excessive file download activity from a single user.
+
+Microsoft Sentinel KQL Query:
+WebProxyLogs
+| summarize DownloadCount = count() by User, bin(TimeGenerated, 1h)
+| where DownloadCount > 50 // Adjust threshold
+| project TimeGenerated, User, DownloadCount
+
+Testing:
+Use a script to download multiple files from a test account.
