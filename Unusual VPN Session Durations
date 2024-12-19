@@ -1,0 +1,12 @@
+Unusual VPN Session Durations
+
+MITRE Tactic:
+Defense Evasion (TA0005) / Exfiltration (TA0010)
+
+MITRE Techniques:
+Valid Accounts (T1078): Unusually long VPN sessions may indicate unauthorized or malicious activity.
+
+Detection Logic:
+Monitor VPN session duration and alert on sessions exceeding normal thresholds.
+Correlate with unusual data transfer volumes or connections to restricted resources.
+Detect concurrent sessions for the same user from multiple locations.
