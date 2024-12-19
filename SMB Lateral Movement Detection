@@ -1,0 +1,16 @@
+SMB Lateral Movement Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Lateral Movement (TA0008)
+Technique: SMB/Windows Admin Shares (T1077)
+
+Detection Logic:
+Detect file access attempts on administrative SMB shares.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where FilePath contains "\\\\Admin$" or FilePath contains "\\\\C$"
+| project TimeGenerated, AccountName, FilePath, Action
+
+Testing:
+Access administrative SMB shares using a test account.
