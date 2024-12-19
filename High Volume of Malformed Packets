@@ -1,0 +1,18 @@
+High Volume of Malformed Packets
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Network Denial of Service (T1498)
+
+Detection Logic:
+Monitor for malformed packets in network traffic.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where PacketValidity == "Malformed"
+| summarize MalformedPacketCount = count() by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| where MalformedPacketCount > 100 // Adjust threshold
+| project TimeGenerated, SourceIP, DestinationIP, MalformedPacketCount
+
+Testing:
+Use tools like scapy to craft and send malformed packets.
