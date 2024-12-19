@@ -1,0 +1,19 @@
+Failed Attempts to Escalate Privileges in Containers
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Container Escaping (T1611)
+
+Detection Logic:
+Monitor container logs for failed privilege escalation attempts.
+
+Microsoft Sentinel KQL Query:
+ContainerLogs
+| where LogMessage contains "permission denied"
+| summarize EscalationAttempts = count() by ContainerName, User, bin(TimeGenerated, 1h)
+| where EscalationAttempts > 3
+| project TimeGenerated, ContainerName, User, EscalationAttempts
+
+Testing:
+Simplest Test:
+Attempt to execute privileged commands within a container.
