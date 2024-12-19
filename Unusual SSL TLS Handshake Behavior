@@ -11,3 +11,10 @@ Detection Logic:
 Monitor traffic for incomplete or failed SSL/TLS handshakes.
 Alert on certificates with unusual attributes (e.g., self-signed, expired).
 Detect handshakes involving uncommon cipher suites or deprecated protocols.
+
+MS Sentinel:
+NetworkTraffic
+| where Protocol == "TLS" and HandshakeErrorCode != "None"
+| summarize HandshakeErrorCount = count() by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| where HandshakeErrorCount > 5 // Adjust based on baseline
+| project TimeGenerated, SourceIP, DestinationIP, HandshakeErrorCount
