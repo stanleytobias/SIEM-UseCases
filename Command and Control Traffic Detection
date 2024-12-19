@@ -1,0 +1,13 @@
+Command and Control Traffic Detection
+
+MITRE Tactic:
+Command and Control (TA0011)
+
+MITRE Techniques:
+C2 Communication over Web Protocols (T1071.001): Detectable through anomalies in HTTP/S traffic.
+Encrypted Channel Communication (T1573): Using encryption to obfuscate malicious traffic.
+
+Detection Logic:
+Analyze outbound traffic for beaconing patterns or frequent connections to rare domains.
+Use threat intelligence feeds to flag traffic to known C2 domains or IPs.
+Correlate with endpoint activity, such as suspicious processes initiating traffic.
