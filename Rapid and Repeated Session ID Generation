@@ -1,0 +1,17 @@
+Rapid and Repeated Session ID Generation
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Session Hijacking (T1561)
+
+Detection Logic:
+Detect multiple session ID generations within a short timeframe.
+
+Microsoft Sentinel KQL Query:
+AuthenticationLogs
+| summarize SessionIDCount = count() by AccountName, bin(TimeGenerated, 1m)
+| where SessionIDCount > 5 // Adjust threshold
+| project TimeGenerated, AccountName, SessionIDCount
+
+Testing:
+Simulate session ID creation with repeated logins or authentication events.
