@@ -1,0 +1,17 @@
+New Executable in Startup Folder
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Startup Items (T1547.001)
+
+Detection Logic:
+Detect new files added to the startup folder.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where FilePath startswith "C:\\Users\\%USERNAME%\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
+| where ActionType == "Created"
+| project TimeGenerated, FilePath, User
+
+Testing:
+Place a dummy executable file in the startup folder.
