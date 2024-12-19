@@ -10,3 +10,10 @@ Detection Logic:
 Track login activity against pre-defined business hours.
 Alert on logins or resource access during weekends, holidays, or late at night.
 Correlate with geolocation and access device logs for anomalies.
+
+MS Sentinel:
+SecurityEvent
+| where EventID == 4624 // Successful login
+| extend LoginHour = datetime_part("hour", TimeGenerated)
+| where LoginHour < 8 or LoginHour > 18 // Define business hours
+| project TimeGenerated, AccountName, LogonType, LoginHour
