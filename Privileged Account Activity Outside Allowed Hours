@@ -1,0 +1,16 @@
+Privileged Account Activity Outside Allowed Hours
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Valid Accounts (T1078)
+
+Detection Logic:
+Detect privileged account usage outside predefined working hours.
+
+Microsoft Sentinel KQL Query:
+AuthenticationLogs
+| where AccountName contains "Admin" and TimeGenerated outside (datetime(09:00:00) .. datetime(17:00:00))
+| project TimeGenerated, AccountName, SourceIP
+
+Testing:
+Log in with a privileged account during non-business hours.
