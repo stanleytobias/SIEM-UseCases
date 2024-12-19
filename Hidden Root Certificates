@@ -1,0 +1,12 @@
+Hidden Root Certificates
+
+MITRE Tactic:
+Defense Evasion (TA0005)
+
+MITRE Techniques:
+Rootkit Detection (T1014): Hidden root certificates can evade monitoring or facilitate MITM attacks.
+
+Detection Logic:
+Monitor for unauthorized root certificate installations in certificate stores.
+Compare certificate issuance logs against trusted Certificate Authorities (CAs).
+Alert on certificates with unusual attributes (e.g., self-signed, expired).
