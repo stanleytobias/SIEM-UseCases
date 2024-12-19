@@ -1,0 +1,13 @@
+Unusual Packet Size in Network Traffic
+
+MITRE Tactic:
+Command and Control (TA0011) / Exfiltration (TA0010)
+
+MITRE Techniques:
+Exfiltration Over Alternative Protocol (T1048): Abnormal packet sizes may indicate data exfiltration.
+Network Traffic Obfuscation (T1027): Large or irregular packets could signal obfuscation attempts.
+
+Detection Logic:
+Inspect packet headers and alert on unusually large or fragmented packets.
+Monitor for spikes in non-standard payload sizes.
+Correlate abnormal packet sizes with known malicious domains or protocols.
