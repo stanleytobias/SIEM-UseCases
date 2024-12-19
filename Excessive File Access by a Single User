@@ -1,0 +1,19 @@
+Excessive File Access by a Single User
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data Staged (T1074)
+
+Detection Logic:
+Detect unusually high file access rates by a single user.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where ActionType == "Read"
+| summarize FileAccessCount = count() by User, bin(TimeGenerated, 1h)
+| where FileAccessCount > 100 // Adjust threshold
+| project TimeGenerated, User, FileAccessCount
+
+Testing:
+Simplest Test:
+Use a script to read multiple files in rapid succession.
