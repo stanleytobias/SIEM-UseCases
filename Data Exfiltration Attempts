@@ -11,3 +11,10 @@ Detection Logic:
 Monitor outbound traffic for large data transfers to unauthorized destinations.
 Alert on unusual encryption in outgoing traffic, especially to unknown IPs.
 Correlate with file access and upload logs to detect staging of data for exfiltration.
+
+MS Sentinel:
+NetworkTraffic
+| where Direction == "Outbound"
+| summarize TotalDataExfiltrated = sum(BytesSent) by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| where TotalDataExfiltrated > 1000000000 // Adjust threshold (in bytes)
+| project TimeGenerated, SourceIP, DestinationIP, TotalDataExfiltrated
