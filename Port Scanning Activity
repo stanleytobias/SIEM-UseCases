@@ -1,0 +1,17 @@
+Port Scanning Activity
+
+MITRE ATT&CK Mapping:
+Tactic: Discovery (TA0007)
+Technique: Network Service Scanning (T1046)
+
+Detection Logic:
+Detect multiple connection attempts to a wide range of ports.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| summarize ConnectionAttempts = count() by SourceIP, DestinationPort, bin(TimeGenerated, 1h)
+| where ConnectionAttempts > 50 // Adjust threshold
+| project TimeGenerated, SourceIP, DestinationPort, ConnectionAttempts
+
+Testing:
+Use nmap to perform a port scan on a test network.
