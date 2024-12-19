@@ -1,0 +1,17 @@
+Rogue Access Point Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Network Service Manipulation (T1570)
+
+Detection Logic:
+Detect unauthorized access points in the network.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationIP not in (authorizedAccessPoints)
+| summarize ConnectionCount = count() by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| project TimeGenerated, SourceIP, DestinationIP, ConnectionCount
+
+Testing:
+Introduce a rogue access point and monitor connections.
