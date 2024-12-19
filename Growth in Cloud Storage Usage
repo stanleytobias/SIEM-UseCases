@@ -11,3 +11,10 @@ Detection Logic:
 Monitor cloud storage metrics for sudden spikes in usage.
 Correlate growth with specific users, IPs, or unusual file uploads.
 Set thresholds for storage usage growth over a defined period and alert on breaches.
+
+MS Sentinel:
+AzureDiagnostics
+| where Category == "Storage"
+| summarize TotalDataTransferred = sum(DataTransferredMB) by AccountName, bin(TimeGenerated, 1h)
+| where TotalDataTransferred > 1000 // Adjust threshold for abnormal growth
+| project TimeGenerated, AccountName, TotalDataTransferred
