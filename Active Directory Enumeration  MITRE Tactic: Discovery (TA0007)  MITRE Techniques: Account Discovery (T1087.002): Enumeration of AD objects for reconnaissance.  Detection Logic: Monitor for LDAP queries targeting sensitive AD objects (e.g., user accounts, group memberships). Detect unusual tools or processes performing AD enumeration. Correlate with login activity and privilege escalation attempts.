@@ -1,0 +1,12 @@
+Active Directory Enumeration
+
+MITRE Tactic:
+Discovery (TA0007)
+
+MITRE Techniques:
+Account Discovery (T1087.002): Enumeration of AD objects for reconnaissance.
+
+Detection Logic:
+Monitor for LDAP queries targeting sensitive AD objects (e.g., user accounts, group memberships).
+Detect unusual tools or processes performing AD enumeration.
+Correlate with login activity and privilege escalation attempts.
