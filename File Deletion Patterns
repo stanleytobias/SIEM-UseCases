@@ -1,0 +1,13 @@
+File Deletion Patterns
+
+MITRE Tactic:
+Defense Evasion (TA0005) / Impact (TA0040)
+
+MITRE Techniques:
+Indicator Removal on Host (T1070): Deleting files to hide activity.
+Data Destruction (T1485): Erasing files as part of a broader malicious goal.
+
+Detection Logic:
+Monitor file system activity for bulk deletion events.
+Compare deletion activity against normal user or system patterns.
+Correlate deletions with recent file access or modification logs to detect malicious intent.
