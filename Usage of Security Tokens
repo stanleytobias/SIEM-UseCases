@@ -1,0 +1,13 @@
+Usage of Security Tokens
+
+MITRE Tactic:
+Credential Access (TA0006) / Defense Evasion (TA0005)
+
+MITRE Techniques:
+Abuse of Authentication Tokens (T1550): Security tokens used in unusual ways could signal compromise.
+Valid Accounts (T1078): Unauthorized token use for privileged access.
+
+Detection Logic:
+Track token usage logs and alert on tokens used by unauthorized accounts or systems.
+Correlate token use with geolocations or times inconsistent with baseline behavior.
+Detect reuse of expired or compromised tokens.
