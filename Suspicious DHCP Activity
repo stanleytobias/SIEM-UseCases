@@ -1,0 +1,16 @@
+Suspicious DHCP Activity
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Network Service Manipulation (T1570)
+
+Detection Logic:
+Monitor for unusual DHCP behavior, such as rogue servers or IP conflicts.
+
+Microsoft Sentinel KQL Query:
+DHCPLogs
+| where Action == "Offer" and ServerIP not in (trustedDHCPServers)
+| project TimeGenerated, ServerIP, ClientIP
+
+Testing:
+Set up a rogue DHCP server in a controlled environment.
