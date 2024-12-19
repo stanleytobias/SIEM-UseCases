@@ -1,0 +1,16 @@
+Suspicious Command Execution
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: Command and Scripting Interpreter (T1059)
+
+Detection Logic:
+Detect execution of commands flagged as suspicious or malicious.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where CommandLine contains_any ("wget", "curl", "Invoke-WebRequest", "PowerShell")
+| project TimeGenerated, ProcessName, CommandLine, User
+
+Testing:
+Execute a flagged command (e.g., curl http://example.com) in a controlled environment.
