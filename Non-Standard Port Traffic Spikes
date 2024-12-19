@@ -1,0 +1,12 @@
+Non-Standard Port Traffic Spikes
+
+MITRE Tactic:
+Command and Control (TA0011) / Exfiltration (TA0010)
+
+MITRE Techniques:
+Non-Standard Port Traffic (T1571): Traffic on uncommon ports may indicate malicious communication.
+
+Detection Logic:
+Monitor for traffic spikes on non-standard or rarely used ports.
+Correlate with DNS and endpoint logs to identify the source of the traffic.
+Alert on non-standard port usage associated with flagged IPs or domains.
