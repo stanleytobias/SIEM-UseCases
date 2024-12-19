@@ -1,0 +1,19 @@
+Elevated Error Rates in Application Logs
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Resource Hijacking (T1496)
+
+Detection Logic:
+Detect surges in error logs, such as HTTP 500 errors or database query failures.
+
+Microsoft Sentinel KQL Query:
+AppLogs
+| where SeverityLevel == "Error"
+| summarize ErrorCount = count() by ApplicationName, bin(TimeGenerated, 1h)
+| where ErrorCount > 50 // Adjust threshold
+| project TimeGenerated, ApplicationName, ErrorCount
+
+Testing:
+Simplest Test:
+Trigger errors in the application by submitting invalid input or requests.
