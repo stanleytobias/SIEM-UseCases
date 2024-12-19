@@ -1,0 +1,19 @@
+Lateral Movement via Remote Desktop Protocol (RDP)
+
+MITRE ATT&CK Mapping:
+Tactic: Lateral Movement (TA0008)
+Technique: Remote Services (T1021.001)
+
+Detection Logic:
+Monitor RDP logons or unusual usage patterns.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID == 4624 // Successful logon
+| where LogonType == 10 // RDP logon
+| summarize RDPLogons = count() by User, TargetComputer, bin(TimeGenerated, 1h)
+| where RDPLogons > 5 // Adjust threshold
+| project TimeGenerated, User, TargetComputer, RDPLogons
+
+Testing:
+Perform multiple RDP logins using a test account.
