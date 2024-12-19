@@ -1,0 +1,13 @@
+Anomalous Resource Scaling in Cloud Environments
+
+MITRE Tactic:
+Impact (TA0040) / Discovery (TA0007)
+
+MITRE Techniques:
+Resource Hijacking (T1586): Unusual scaling may indicate misuse of resources for crypto-mining or other malicious purposes.
+Cloud Infrastructure Discovery (T1580): Scaling anomalies may indicate reconnaissance or preparation for abuse.
+
+Detection Logic:
+Monitor cloud activity logs for unexpected resource scaling events.
+Alert on scaling triggered by non-administrative accounts or at odd times.
+Correlate scaling with changes in cloud costs or resource utilization.
