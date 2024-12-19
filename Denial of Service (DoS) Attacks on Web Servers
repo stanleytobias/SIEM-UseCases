@@ -10,3 +10,11 @@ Detection Logic:
 Monitor web server logs for spikes in HTTP requests or high error rates (e.g., 503 errors).
 Alert on traffic patterns with high request volumes from a single IP or range.
 Correlate with WAF or load balancer logs for additional context.
+
+MS Sentinel:
+WebServerLogs
+| where ResponseCode == 503 // Service Unavailable
+| summarize DoSRequestCount = count() by ClientIP, URL, bin(TimeGenerated, 1m)
+| where DoSRequestCount > 1000 // Adjust threshold for detection
+| project TimeGenerated, ClientIP, URL, DoSRequestCount
+
