@@ -1,0 +1,17 @@
+Firewall Rule Changes
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Modify System Firewall (T1562.004)
+
+Detection Logic:
+Detect additions, deletions, or modifications of firewall rules.
+
+Microsoft Sentinel KQL Query:
+FirewallLogs
+| where ActionType in ("RuleAdded", "RuleDeleted", "RuleModified")
+| project TimeGenerated, RuleName, ActionType, Initiator
+
+Testing:
+Simplest Test:
+Add or modify a firewall rule in a test environment.
