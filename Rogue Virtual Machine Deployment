@@ -1,0 +1,17 @@
+Rogue Virtual Machine Deployment
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Create Cloud Instance (T1578.002)
+
+Detection Logic:
+Monitor for virtual machine creation by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+AzureActivity
+| where OperationName == "CreateVirtualMachine"
+| where Caller not in (authorizedUsers)
+| project TimeGenerated, Caller, ResourceId
+
+Testing:
+Deploy a virtual machine using an unauthorized account in a test environment.
