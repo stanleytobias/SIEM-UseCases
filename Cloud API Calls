@@ -11,3 +11,10 @@ Detection Logic:
 Monitor cloud provider API audit logs for rare or anomalous API calls.
 Detect calls to high-privilege or sensitive APIs outside of normal patterns.
 Use baselines for normal API activity per user and alert on deviations.
+
+MS Sentinel:
+AzureActivity
+| where OperationName startswith "List" or OperationName startswith "Get"
+| summarize APICallCount = count() by Caller, bin(TimeGenerated, 1h)
+| where APICallCount > 100 // Define abnormal threshold
+| project TimeGenerated, Caller, APICallCount
