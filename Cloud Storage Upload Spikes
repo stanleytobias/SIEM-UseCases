@@ -10,3 +10,11 @@ Detection Logic:
 Monitor cloud storage metrics for sudden increases in upload activity.
 Detect uploads of unusual file types or large volumes of data to external destinations.
 Correlate with user access logs and geolocation to identify unauthorized transfers.
+
+MS Sentinel:
+AzureDiagnostics
+| where Category == "Storage"
+| where OperationName == "PutBlob"
+| summarize UploadVolume = sum(BytesTransferred) by AccountName, User, bin(TimeGenerated, 1h)
+| where UploadVolume > 1000000000 // Adjust threshold for upload spikes (in bytes)
+| project TimeGenerated, AccountName, User, UploadVolume
