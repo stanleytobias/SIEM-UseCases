@@ -1,0 +1,16 @@
+Policy-Based Email Monitoring
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Email Collection (T1114)
+
+Detection Logic:
+Monitor email activity that violates security policies.
+
+Microsoft Sentinel KQL Query:
+EmailEvents
+| where PolicyViolation == true
+| project TimeGenerated, Sender, Recipient, PolicyName
+
+Testing:
+Send an email that breaches a defined policy.
