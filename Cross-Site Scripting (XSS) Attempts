@@ -1,0 +1,12 @@
+Cross-Site Scripting (XSS) Attempts
+
+MITRE Tactic:
+Initial Access (TA0001) / Execution (TA0002)
+
+MITRE Techniques:
+Exploitation for Client Execution (T1203): Exploiting vulnerabilities in web applications.
+
+Detection Logic:
+Monitor web server logs for requests containing malicious scripts or encoded payloads.
+Detect attempts to inject <script> tags, JavaScript, or unusual URL parameters.
+Correlate with WAF alerts and user activity to identify targeted sessions.
