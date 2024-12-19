@@ -1,0 +1,16 @@
+Policy-Based Data Access Anomalies
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Valid Accounts (T1078)
+
+Detection Logic:
+Monitor for access to restricted data that violates policies.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where AccessPolicy != "Compliant"
+| project TimeGenerated, User, FilePath, AccessPolicy
+
+Testing:
+Attempt to access restricted files from a test account.
