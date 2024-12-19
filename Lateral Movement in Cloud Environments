@@ -1,0 +1,18 @@
+Lateral Movement in Cloud Environments
+
+MITRE ATT&CK Mapping:
+Tactic: Lateral Movement (TA0008)
+Technique: Exploitation of Cloud Compute Infrastructure (T1578)
+
+Detection Logic:
+Monitor for unusual API calls or access patterns in cloud environments.
+
+Microsoft Sentinel KQL Query:
+AzureActivity
+| where OperationName contains "Access"
+| summarize AccessCount = count() by ResourceId, Caller, bin(TimeGenerated, 1h)
+| where AccessCount > 5 // Adjust threshold
+| project TimeGenerated, ResourceId, Caller, AccessCount
+
+Testing:
+Use test credentials to access multiple cloud resources.
