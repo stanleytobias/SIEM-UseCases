@@ -1,0 +1,13 @@
+Traffic to Geographically Unusual Locations
+
+MITRE Tactic:
+Command and Control (TA0011) / Exfiltration (TA0010)
+
+MITRE Techniques:
+Exfiltration Over Web Service (T1567.001): Traffic to unusual locations could signal data exfiltration.
+Remote Access Software (T1219): Connections to unexpected geolocations may indicate unauthorized remote access.
+
+Detection Logic:
+Monitor traffic geolocation and alert on connections to countries with no business relevance.
+Compare against a whitelist of expected geolocations based on historical traffic.
+Correlate with new domains or IPs in threat intelligence feeds.
