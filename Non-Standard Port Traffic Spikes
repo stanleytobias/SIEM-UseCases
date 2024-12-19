@@ -10,3 +10,10 @@ Detection Logic:
 Monitor for traffic spikes on non-standard or rarely used ports.
 Correlate with DNS and endpoint logs to identify the source of the traffic.
 Alert on non-standard port usage associated with flagged IPs or domains.
+
+MS Sentinel:
+NetworkTraffic
+| where DestinationPort !in (80, 443, 22, 3389) // Exclude common ports
+| summarize TrafficVolume = sum(BytesSent + BytesReceived) by DestinationPort, bin(TimeGenerated, 1h)
+| where TrafficVolume > 100000000 // Adjust threshold for spikes (in bytes)
+| project TimeGenerated, DestinationPort, TrafficVolume
