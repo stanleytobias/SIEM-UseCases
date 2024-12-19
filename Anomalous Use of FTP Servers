@@ -1,0 +1,12 @@
+Anomalous Use of FTP Servers
+
+MITRE Tactic:
+Exfiltration (TA0010) / Command and Control (TA0011)
+
+MITRE Techniques:
+Exfiltration Over FTP (T1048.002): Suspicious FTP usage may signal data exfiltration.
+
+Detection Logic:
+Monitor FTP server logs for unauthorized access attempts or unusual activity.
+Detect large file uploads/downloads or connections from rare IPs.
+Alert on non-standard FTP commands or high-frequency requests.
