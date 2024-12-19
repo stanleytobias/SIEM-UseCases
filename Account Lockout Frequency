@@ -1,0 +1,13 @@
+Account Lockout Frequency
+
+MITRE Tactic:
+Credential Access (TA0006) / Defense Evasion (TA0005)
+
+MITRE Techniques:
+Brute Force (T1110): Account lockouts may occur due to repeated brute force attempts.
+Account Manipulation (T1098): Malicious activity triggering account lockouts as part of an evasion strategy.
+
+Detection Logic:
+Monitor the number of account lockouts per user in a given time frame.
+Correlate failed login attempts from specific IPs or geolocations leading to lockouts.
+Alert on a threshold of lockouts within a short period for multiple accounts.
