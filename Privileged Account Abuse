@@ -1,0 +1,17 @@
+Privileged Account Abuse
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Abuse Elevation Control Mechanism (T1548)
+
+Detection Logic:
+Detect unusual activity or resource access by privileged accounts.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where AccountName contains "Admin" or PrivilegeName contains "SeTcbPrivilege"
+| summarize AbuseCount = count() by AccountName, bin(TimeGenerated, 1h)
+| project TimeGenerated, AccountName, AbuseCount
+
+Testing:
+Access sensitive resources using a privileged account in a test environment.
