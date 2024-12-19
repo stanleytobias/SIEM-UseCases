@@ -1,0 +1,16 @@
+Rogue MAC Address Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Network Service Manipulation (T1570)
+
+Detection Logic:
+Identify MAC addresses not listed in the asset inventory.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where MACAddress not in (authorizedMACAddresses)
+| project TimeGenerated, SourceIP, MACAddress
+
+Testing:
+Spoof a MAC address using tools like macchanger.
