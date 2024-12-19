@@ -11,3 +11,10 @@ Detection Logic:
 Monitor network traffic for unusual NTP requests, especially to non-standard servers.
 Detect spikes in NTP traffic volume or requests to known malicious IPs.
 Alert on abnormal packet sizes or frequency in NTP communication.
+
+MS Sentinel:
+NetworkTraffic
+| where DestinationPort == 123 and Protocol == "UDP"
+| summarize NTPRequestCount = count() by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| where NTPRequestCount > 100 // Define abnormal threshold
+| project TimeGenerated, SourceIP, DestinationIP, NTPRequestCount
