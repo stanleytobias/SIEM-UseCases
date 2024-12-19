@@ -10,3 +10,10 @@ Detection Logic:
 Monitor MDM enrollment logs for unusual activity, such as devices registered outside business hours.
 Alert on devices with suspicious identifiers or IP addresses.
 Correlate with user behavior logs to detect compromised accounts.
+
+MS Sentinel:
+DeviceManagementLogs
+| where ActionType == "DeviceEnrollment"
+| where DeviceID !in (trustedDeviceIDs) // Replace with a list of authorized devices
+| summarize EnrollmentCount = count() by User, DeviceID, bin(TimeGenerated, 1h)
+| project TimeGenerated, User, DeviceID, EnrollmentCount
