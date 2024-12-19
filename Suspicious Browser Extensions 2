@@ -1,0 +1,16 @@
+Suspicious Browser Extensions 2
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Malicious Browser Extensions (T1176)
+
+Detection Logic:
+Detect unauthorized or suspicious browser extensions installed on endpoints.
+
+Microsoft Sentinel KQL Query:
+BrowserExtensionLogs
+| where ExtensionName not in (approvedExtensions)
+| project TimeGenerated, User, ExtensionName, SourceIP
+
+Testing:
+Install an unauthorized browser extension.
