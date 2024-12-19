@@ -11,3 +11,10 @@ Detection Logic:
 Monitor changes in file metadata, such as timestamps, owners, or access permissions.
 Alert on metadata changes without corresponding content changes.
 Correlate metadata changes with user or process activity for anomalies.
+
+MS Sentinel:
+FileModificationEvents
+| where MetadataChanged == true
+| summarize MetadataChangeCount = count() by FileName, User, bin(TimeGenerated, 1h)
+| where MetadataChangeCount > 10 // Adjust based on baseline activity
+| project TimeGenerated, FileName, User, MetadataChangeCount
