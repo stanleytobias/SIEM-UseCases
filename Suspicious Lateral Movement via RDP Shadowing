@@ -1,0 +1,16 @@
+Suspicious Lateral Movement via RDP Shadowing
+
+MITRE ATT&CK Mapping:
+Tactic: Lateral Movement (TA0008)
+Technique: Remote Services (T1021.001)
+
+Detection Logic:
+Monitor RDP shadowing activity for unauthorized access.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID == 7040 and LogonType == "Shadow"
+| project TimeGenerated, SourceIP, TargetMachine, AccountName
+
+Testing:
+Perform RDP shadowing in a controlled test environment.
