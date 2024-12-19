@@ -1,0 +1,18 @@
+Excessive Anomalies in SSL/TLS Certificates
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Network Service Manipulation (T1570)
+
+Detection Logic:
+Detect anomalies in SSL/TLS certificate usage, such as self-signed or expired certificates.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol == "TLS" and (CertificateStatus in ("SelfSigned", "Expired"))
+| summarize AnomalousCertificateUsage = count() by DestinationIP, CertificateStatus, bin(TimeGenerated, 1h)
+| project TimeGenerated, DestinationIP, CertificateStatus, AnomalousCertificateUsage
+
+Testing:
+Simplest Test:
+Use an application with a self-signed certificate to simulate anomalies.
