@@ -10,3 +10,10 @@ Detection Logic:
 Monitor database logs for unusual query patterns, such as excessive SELECT or DROP statements.
 Alert on access to sensitive tables or data by non-administrative accounts.
 Correlate anomalies with user activity logs for unauthorized behavior.
+
+MS Sentinel:
+DatabaseAuditLogs
+| where ActionType in ("SELECT", "DROP", "DELETE")
+| summarize ActionCount = count() by User, DatabaseName, bin(TimeGenerated, 1h)
+| where ActionCount > 50 // Define threshold for anomalies
+| project TimeGenerated, User, DatabaseName, ActionCount
