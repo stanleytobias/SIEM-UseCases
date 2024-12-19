@@ -11,3 +11,10 @@ Detection Logic:
 Monitor HTTP/S requests for anomalous patterns (e.g., unexpected methods, payloads, or parameters).
 Alert on requests with SQL injection, XSS, or directory traversal indicators.
 Compare against a baseline of normal application traffic patterns.
+
+MS Sentinel:
+WAFLogs
+| where Action in ("Blocked", "Challenged")
+| summarize RequestCount = count() by ClientIP, RequestUri, HttpMethod, bin(TimeGenerated, 1h)
+| where RequestCount > 50 // Adjust threshold based on environment
+| project TimeGenerated, ClientIP, RequestUri, HttpMethod, RequestCount
