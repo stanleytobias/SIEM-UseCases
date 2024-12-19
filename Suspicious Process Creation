@@ -1,0 +1,16 @@
+Suspicious Process Creation
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: Process Injection (T1055)
+
+Detection Logic:
+Detect processes spawned from unexpected parents or with suspicious arguments.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where ParentProcessName in ("powershell.exe", "cmd.exe") and CommandLine contains_any ("-EncodedCommand", "Mimikatz", "Dump")
+| project TimeGenerated, ProcessName, ParentProcessName, CommandLine
+
+Testing:
+Spawn a process with suspicious arguments in a test environment.
