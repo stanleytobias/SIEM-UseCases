@@ -1,0 +1,12 @@
+Database Access Anomalies
+
+MITRE Tactic:
+Discovery (TA0007) / Collection (TA0009)
+
+MITRE Techniques:
+Database Access (T1552.004): Anomalies in database access patterns may indicate unauthorized activity.
+
+Detection Logic:
+Monitor database logs for unusual query patterns, such as excessive SELECT or DROP statements.
+Alert on access to sensitive tables or data by non-administrative accounts.
+Correlate anomalies with user activity logs for unauthorized behavior.
