@@ -1,0 +1,13 @@
+Anomalous File Transfers
+
+MITRE Tactic:
+Collection (TA0009) / Exfiltration (TA0010)
+
+MITRE Techniques:
+Data Staged for Exfiltration (T1074): Unexpected file transfers may indicate staging of data for exfiltration.
+Data Transfer to Cloud Accounts (T1567.002): Suspicious file uploads may indicate exfiltration.
+
+Detection Logic:
+Monitor file transfer logs for uploads to unauthorized destinations or domains.
+Alert on large file transfers or unusual file types being transferred.
+Correlate with user behavior and access logs to detect anomalies.
