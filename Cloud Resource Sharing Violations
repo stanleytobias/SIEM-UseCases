@@ -10,3 +10,9 @@ Detection Logic:
 Monitor cloud storage sharing logs for files shared with external accounts or public links.
 Alert on sharing permissions being changed to "everyone" or "public."
 Correlate with user behavior to detect unauthorized sharing patterns.
+
+MS Sentinel:
+AzureActivity
+| where OperationName contains "SetFileShareACL" or OperationName contains "SetPermissions"
+| where PrincipalName !in ("authorized_user1", "authorized_user2") // Replace with authorized users
+| project TimeGenerated, PrincipalName, ResourceId, OperationName
