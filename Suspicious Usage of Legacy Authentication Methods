@@ -1,0 +1,16 @@
+Suspicious Usage of Legacy Authentication Methods
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Valid Accounts (T1078)
+
+Detection Logic:
+Detect the use of outdated authentication protocols such as NTLM or LDAP.
+
+Microsoft Sentinel KQL Query:
+AuthenticationLogs
+| where Protocol in ("NTLM", "LDAP")
+| project TimeGenerated, User, Protocol, SourceIP
+
+Testing:
+Use a legacy authentication method to log in on a test account.
