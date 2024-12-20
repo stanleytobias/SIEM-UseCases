@@ -1,0 +1,16 @@
+Unauthorised Data Compression Activities
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Archive Collected Data (T1560)
+
+Detection Logic:
+Detect unauthorized creation of compressed files in sensitive directories.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where FileExtension in (".zip", ".rar", ".7z") and User not in (authorizedUsers)
+| project TimeGenerated, FilePath, User, Action
+
+Testing:
+Compress files in sensitive directories using a test unauthorized account.
