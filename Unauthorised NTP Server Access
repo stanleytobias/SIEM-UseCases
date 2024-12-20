@@ -1,0 +1,16 @@
+Unauthorised NTP Server Access
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Network Manipulation (T1565.002)
+
+Detection Logic:
+Detect unauthorized access to NTP servers.
+
+Microsoft Sentinel KQL Query:
+NTPAccessLogs
+| where User not in (authorizedUsers)
+| project TimeGenerated, ServerName, User, Action
+
+Testing:
+Access an NTP server using a test unauthorized account.
