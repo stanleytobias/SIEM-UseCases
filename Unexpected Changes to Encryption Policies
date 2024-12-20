@@ -1,0 +1,16 @@
+Unexpected Changes to Encryption Policies
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Data Encrypted for Impact (T1486)
+
+Detection Logic:
+Detect changes to encryption policies by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+EncryptionPolicyChangeLogs
+| where User not in (authorizedAdmins)
+| project TimeGenerated, PolicyName, User, Action
+
+Testing:
+Modify encryption policies using a test unauthorized account.
