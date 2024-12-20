@@ -1,0 +1,16 @@
+Unauthorised Cluster Node Access
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Exploitation for Privilege Escalation (T1068)
+
+Detection Logic:
+Detect access to cluster nodes by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+ClusterAccessLogs
+| where Action == "Access" and User not in (authorizedAdmins)
+| project TimeGenerated, ClusterNodeName, User, Action
+
+Testing:
+Access a cluster node using an unauthorized account in a test environment.
