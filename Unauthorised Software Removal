@@ -1,0 +1,16 @@
+Unauthorised Software Removal
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Indicator Removal on Host (T1070)
+
+Detection Logic:
+Monitor software removal attempts by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+SoftwareInventoryLogs
+| where Action == "Uninstall" and User not in (authorizedAdmins)
+| project TimeGenerated, SoftwareName, User, Action
+
+Testing:
+Remove a software application using a test unauthorized account.
