@@ -1,0 +1,16 @@
+Unusual IoT Device Behavior
+
+MITRE ATT&CK Mapping:
+Tactic: Discovery (TA0007)
+Technique: Network Sniffing (T1040)
+
+Detection Logic:
+Detect anomalies in IoT device traffic, such as unexpected data rates or communication patterns.
+
+Microsoft Sentinel KQL Query:
+IoTDeviceLogs
+| where DataRate > 1000000 or Action not in ("ExpectedActions")
+| project TimeGenerated, DeviceID, DataRate, Action
+
+Testing:
+Simulate abnormal IoT device behavior by overloading traffic or sending unexpected commands.
