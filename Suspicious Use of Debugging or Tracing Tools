@@ -1,0 +1,16 @@
+Suspicious Use of Debugging or Tracing Tools
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Software Debugging (T1159)
+
+Detection Logic:
+Detect execution of tools like OllyDbg, WinDbg, or gdb.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where ProcessName in ("ollydbg.exe", "windbg.exe", "gdb.exe")
+| project TimeGenerated, ProcessName, CommandLine, User
+
+Testing:
+Run a debugger tool in a test environment.
