@@ -1,0 +1,16 @@
+Unauthorised SNMP Access Attempts
+
+MITRE ATT&CK Mapping:
+Tactic: Discovery (TA0007)
+Technique: Network Service Scanning (T1046)
+
+Detection Logic:
+Monitor SNMP access attempts from unauthorized IPs.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol == "SNMP" and SourceIP not in (trustedIPs)
+| project TimeGenerated, SourceIP, DestinationIP, SNMPQueryType
+
+Testing:
+Attempt SNMP queries from an unauthorized IP in a controlled environment.
