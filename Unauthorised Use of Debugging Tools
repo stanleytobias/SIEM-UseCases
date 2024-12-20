@@ -1,0 +1,16 @@
+Unauthorised Use of Debugging Tools
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Software Debugging (T1159)
+
+Detection Logic:
+Detect execution of debugging tools like gdb or WinDbg by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where ProcessName in ("gdb.exe", "windbg.exe", "ollydbg.exe") and User not in (authorizedUsers)
+| project TimeGenerated, ProcessName, User, CommandLine
+
+Testing:
+Execute a debugging tool using a test unauthorized account.
