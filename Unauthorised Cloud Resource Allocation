@@ -1,0 +1,16 @@
+Unauthorised Cloud Resource Allocation
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Resource Hijacking (T1496)
+
+Detection Logic:
+Monitor for unauthorized creation of cloud resources.
+
+Microsoft Sentinel KQL Query:
+CloudResourceActivityLogs
+| where Action == "Create" and User not in (authorizedAdmins)
+| project TimeGenerated, ResourceName, User, Action
+
+Testing:
+Allocate a cloud resource using a test unauthorized account.
