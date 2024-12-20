@@ -1,0 +1,16 @@
+Unusual Modifications in Firmware Logs
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Firmware Corruption (T1495)
+
+Detection Logic:
+Detect unauthorized changes to firmware logs.
+
+Microsoft Sentinel KQL Query:
+FirmwareLogs
+| where Action == "Modify" and User not in (authorizedAdmins)
+| project TimeGenerated, DeviceName, Action, User
+
+Testing:
+Modify firmware logs using a test unauthorized account.
