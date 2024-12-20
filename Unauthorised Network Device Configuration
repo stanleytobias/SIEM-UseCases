@@ -1,0 +1,16 @@
+Unauthorised Network Device Configuration
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Network Device Configuration Changes (T1599)
+
+Detection Logic:
+Monitor configuration changes on network devices by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+NetworkDeviceConfigLogs
+| where User not in (authorizedAdmins)
+| project TimeGenerated, DeviceName, User, ConfigurationChange
+
+Testing:
+Perform a configuration change on a network device using an unauthorized account.
