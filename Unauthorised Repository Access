@@ -1,0 +1,16 @@
+Unauthorised Repository Access
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Information Repositories (T1213)
+
+Detection Logic:
+Monitor repository access by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+RepositoryAccessLogs
+| where User not in (authorizedUsers)
+| project TimeGenerated, RepositoryName, User, Action
+
+Testing:
+Attempt to access a code repository using a test unauthorized account.
