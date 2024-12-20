@@ -1,0 +1,16 @@
+Suspicious Use of External Email Addresses
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Email Collection (T1114)
+
+Detection Logic:
+Detect sending or receiving emails with unknown or flagged external addresses.
+
+Microsoft Sentinel KQL Query:
+EmailEvents
+| where RecipientDomain !endswith "@trusted.com"
+| project TimeGenerated, Sender, Recipient, Subject
+
+Testing:
+Send an email to a flagged external address from a test account.
