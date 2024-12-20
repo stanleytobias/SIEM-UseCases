@@ -1,0 +1,16 @@
+Unusual Process Parent-Child Relationship
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: Process Injection (T1055)
+
+Detection Logic:
+Monitor for unexpected process hierarchies.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where ParentProcessName not in ("expectedParents") and ProcessName in ("suspiciousProcesses")
+| project TimeGenerated, ParentProcessName, ProcessName, User
+
+Testing:
+Create unusual process hierarchies using test scripts.
