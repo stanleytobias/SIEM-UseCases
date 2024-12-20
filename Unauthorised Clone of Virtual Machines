@@ -1,0 +1,16 @@
+Unauthorised Clone of Virtual Machines
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Resource Hijacking (T1496)
+
+Detection Logic:
+Detect cloning of virtual machines initiated by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+VMActivityLogs
+| where Action == "Clone" and User not in (authorizedAdmins)
+| project TimeGenerated, VMName, User, Action
+
+Testing:
+Clone a virtual machine using an unauthorized account in a test environment.
