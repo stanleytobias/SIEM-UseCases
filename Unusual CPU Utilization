@@ -1,0 +1,16 @@
+Unusual CPU Utilization
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Resource Hijacking (T1496)
+
+Detection Logic:
+Detect unusual spikes in CPU utilization.
+
+Microsoft Sentinel KQL Query:
+PerformanceLogs
+| where CounterName == "CPU Utilization" and CounterValue > 90
+| project TimeGenerated, ServerName, CounterValue
+
+Testing:
+Generate high CPU usage on a server using a resource-intensive process.
