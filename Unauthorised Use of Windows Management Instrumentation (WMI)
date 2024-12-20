@@ -1,0 +1,16 @@
+Unauthorised Use of Windows Management Instrumentation (WMI)
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: Windows Management Instrumentation (T1047)
+
+Detection Logic:
+Detect unauthorized or anomalous use of WMI commands.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where CommandLine contains "wmic" and User not in (authorizedUsers)
+| project TimeGenerated, CommandLine, User
+
+Testing:
+Execute a WMI command, such as wmic process list, with an unauthorized account.
