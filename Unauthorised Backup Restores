@@ -1,0 +1,16 @@
+Unauthorised Backup Restores
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Data Restoration (T1490)
+
+Detection Logic:
+Detect restore operations initiated by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+BackupActivityLogs
+| where Action == "Restore" and User not in (authorizedAdmins)
+| project TimeGenerated, BackupName, User, Action
+
+Testing:
+Restore a backup using a test unauthorized account.
