@@ -1,0 +1,16 @@
+Suspicious Resource Locking in Cloud Environments
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Resource Hijacking (T1496)
+
+Detection Logic:
+Monitor for resources locked by unauthorized users or with high costs.
+
+Microsoft Sentinel KQL Query:
+AzureActivity
+| where OperationName == "LockResource" and Caller not in (authorizedUsers)
+| project TimeGenerated, ResourceId, Caller
+
+Testing:
+Lock a test resource using an unauthorized account.
