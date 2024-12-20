@@ -1,0 +1,16 @@
+Unauthorised Access to Internal Tools
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Information Repositories (T1213)
+
+Detection Logic:
+Detect unauthorized access to internal tools or dashboards.
+
+Microsoft Sentinel KQL Query:
+InternalToolAccessLogs
+| where User not in (authorizedUsers)
+| project TimeGenerated, ToolName, User, Action
+
+Testing:
+Attempt to access an internal tool using an unauthorized account.
