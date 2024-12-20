@@ -1,0 +1,16 @@
+Unexpected Container Spawning
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: Create or Modify System Process (T1543)
+
+Detection Logic:
+Detect container creation events by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+ContainerActivityLogs
+| where Action == "Create" and User not in (authorizedAdmins)
+| project TimeGenerated, ContainerName, User, Action
+
+Testing:
+Spawn a new container using a test unauthorized account.
