@@ -1,0 +1,16 @@
+Unauthorised Access Attempts
+
+MITRE ATT&CK Mapping:
+Tactic: Initial Access (TA0001)
+Technique: Valid Accounts (T1078)
+
+Detection Logic:
+Monitor for failed access attempts to sensitive resources.
+
+Microsoft Sentinel KQL Query:
+AuthenticationLogs
+| where Result == "Failure" and Resource in (sensitiveResources)
+| project TimeGenerated, AccountName, Resource, SourceIP
+
+Testing:
+Attempt to access a sensitive resource with an unauthorized account.
