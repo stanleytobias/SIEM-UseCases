@@ -1,0 +1,16 @@
+Unauthorised Container Privilege Escalation
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Container and Kubernetes Privilege Escalation (T1611)
+
+Detection Logic:
+Detect privilege escalation attempts within container environments.
+
+Microsoft Sentinel KQL Query:
+ContainerActivityLogs
+| where Action == "PrivilegeEscalation" and User not in (authorizedAdmins)
+| project TimeGenerated, ContainerName, User, Action
+
+Testing:
+Perform a privilege escalation attempt within a container using a test unauthorized account.
