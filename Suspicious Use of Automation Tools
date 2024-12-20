@@ -1,0 +1,16 @@
+Suspicious Use of Automation Tools
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: Scripting (T1059)
+
+Detection Logic:
+Detect execution of known automation tools such as Selenium, AutoIt, or Puppeteer.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where ProcessName in ("selenium.exe", "autoit.exe", "puppeteer.exe")
+| project TimeGenerated, ProcessName, CommandLine, User
+
+Testing:
+Execute a script with an automation tool in a controlled environment.
