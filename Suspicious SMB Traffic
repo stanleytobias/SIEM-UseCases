@@ -1,0 +1,16 @@
+Suspicious SMB Traffic
+
+MITRE ATT&CK Mapping:
+Tactic: Lateral Movement (TA0008)
+Technique: SMB/Windows Admin Shares (T1077)
+
+Detection Logic:
+Detect large volumes of SMB traffic or access to sensitive shares.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol == "SMB" and BytesTransferred > 10000000
+| project TimeGenerated, SourceIP, DestinationIP, BytesTransferred
+
+Testing:
+Transfer large files via SMB in a test environment.
