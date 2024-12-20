@@ -1,0 +1,16 @@
+User Access Policy Violations
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Account Manipulation (T1098)
+
+Detection Logic:
+Detect access to resources or actions that violate user policies.
+
+Microsoft Sentinel KQL Query:
+AccessLogs
+| where User not in (authorizedUsers)
+| project TimeGenerated, User, Resource, Action
+
+Testing:
+Attempt unauthorized access using a test account.
