@@ -1,0 +1,16 @@
+Unauthorised Network Share Access
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Network Share Discovery (T1135)
+
+Detection Logic:
+Monitor unauthorized access to sensitive network shares.
+
+Microsoft Sentinel KQL Query:
+FileShareAccessLogs
+| where Action == "Accessed" and ShareName in (sensitiveShares) and User not in (authorizedUsers)
+| project TimeGenerated, ShareName, User, Action
+
+Testing:
+Attempt to access a sensitive network share using an unauthorized account.
