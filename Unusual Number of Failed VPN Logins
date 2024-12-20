@@ -1,0 +1,18 @@
+Unusual Number of Failed VPN Logins
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Brute Force (T1110)
+
+Detection Logic:
+Monitor repeated failed VPN login attempts.
+
+Microsoft Sentinel KQL Query:
+VPNAuthenticationLogs
+| where Result == "Failure"
+| summarize FailureCount = count() by User, bin(TimeGenerated, 1h)
+| where FailureCount > 10
+| project TimeGenerated, User, FailureCount
+
+Testing:
+Attempt multiple failed VPN logins using test credentials.
