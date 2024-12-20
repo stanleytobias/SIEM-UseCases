@@ -1,0 +1,18 @@
+Unusual Rate of Role-Based Access Modifications
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Account Manipulation (T1098)
+
+Detection Logic:
+Monitor spikes in role-based access modifications.
+
+Microsoft Sentinel KQL Query:
+IAMActivityLogs
+| where Action == "RoleChange"
+| summarize ModificationCount = count() by User, bin(TimeGenerated, 1h)
+| where ModificationCount > 10
+| project TimeGenerated, User, ModificationCount
+
+Testing:
+Perform multiple role changes using a test account.
