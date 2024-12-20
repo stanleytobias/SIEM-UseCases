@@ -1,0 +1,16 @@
+System Crash Dump Access
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: OS Credential Dumping (T1003.001)
+
+Detection Logic:
+Detect access to crash dump files.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where FilePath contains "MEMORY.DMP" or FilePath contains "CrashDump"
+| project TimeGenerated, FilePath, User
+
+Testing:
+Access or copy a crash dump file in a test environment.
