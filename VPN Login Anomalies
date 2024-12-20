@@ -1,0 +1,16 @@
+VPN Login Anomalies
+
+MITRE ATT&CK Mapping:
+Tactic: Initial Access (TA0001)
+Technique: Valid Accounts (T1078)
+
+Detection Logic:
+Detect VPN logins from unusual locations or using compromised credentials.
+
+Microsoft Sentinel KQL Query:
+VPNAuthenticationLogs
+| where Location not in (trustedLocations)
+| project TimeGenerated, User, IPAddress, Location
+
+Testing:
+Log in to the VPN from an untrusted location.
