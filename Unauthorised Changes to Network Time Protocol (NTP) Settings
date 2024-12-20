@@ -1,0 +1,16 @@
+Unauthorised Changes to Network Time Protocol (NTP) Settings
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Network Manipulation (T1565.002)
+
+Detection Logic:
+Monitor for changes to NTP settings made by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+SystemConfigurationLogs
+| where Setting == "NTP" and User not in (authorizedAdmins)
+| project TimeGenerated, User, Action, SettingChanged
+
+Testing:
+Modify NTP settings using an unauthorized account in a test environment.
