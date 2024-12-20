@@ -1,0 +1,16 @@
+Unauthorised Use of Admin Consoles
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Valid Accounts (T1078)
+
+Detection Logic:
+Detect unauthorized logins or actions in admin consoles.
+
+Microsoft Sentinel KQL Query:
+AdminConsoleAccessLogs
+| where User not in (authorizedAdmins)
+| project TimeGenerated, ConsoleName, User, Action
+
+Testing:
+Log in to an admin console using a test unauthorized account.
