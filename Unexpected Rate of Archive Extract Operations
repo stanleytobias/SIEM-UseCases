@@ -1,0 +1,17 @@
+Unexpected Rate of Archive Extract Operations
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Archive Collected Data (T1560)
+
+Detection Logic:
+Detect unusually high rates of file extraction operations.
+
+Microsoft Sentinel KQL Query:
+FileActivityLogs
+| where FileExtension in (".zip", ".rar", ".7z") and Action == "Extract"
+| summarize ExtractionRate = count() by bin(TimeGenerated, 1h), User
+| where ExtractionRate > 10
+
+Testing:
+Extract multiple large archives in a short period using a test account.
