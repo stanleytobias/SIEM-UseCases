@@ -1,0 +1,16 @@
+Unauthorised Clipboard Monitoring Tools
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Input Capture (T1056.002)
+
+Detection Logic:
+Detect execution of clipboard monitoring tools.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where ProcessName in ("clipboard.exe", "clipmon.exe") and User not in (authorizedUsers)
+| project TimeGenerated, ProcessName, User, CommandLine
+
+Testing:
+Execute a clipboard monitoring tool using a test unauthorized account.
