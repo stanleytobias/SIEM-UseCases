@@ -1,0 +1,16 @@
+Unauthorised Software Patch Installations
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Modify System Processes (T1031)
+
+Detection Logic:
+Detect software patch installations by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+PatchManagementLogs
+| where Action == "InstallPatch" and User not in (authorizedAdmins)
+| project TimeGenerated, PatchName, User, Action
+
+Testing:
+Install a patch using a test unauthorized account.
