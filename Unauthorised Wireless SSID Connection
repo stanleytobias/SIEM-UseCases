@@ -1,0 +1,16 @@
+Unauthorised Wireless SSID Connection
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Network Sniffing (T1040)
+
+Detection Logic:
+Detect connections to unauthorized SSIDs.
+
+Microsoft Sentinel KQL Query:
+NetworkConnectionLogs
+| where SSID not in (approvedSSIDs)
+| project TimeGenerated, DeviceName, SSID, User
+
+Testing:
+Connect to an unauthorized SSID in a controlled environment.
