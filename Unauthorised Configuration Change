@@ -1,0 +1,16 @@
+Unauthorised Configuration Change
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Modify Cloud Compute Infrastructure (T1578)
+
+Detection Logic:
+Detect configuration changes by unauthorized users or accounts.
+
+Microsoft Sentinel KQL Query:
+ConfigurationChangeLogs
+| where InitiatedBy not in (authorizedUsers)
+| project TimeGenerated, ResourceName, ConfigurationChange, InitiatedBy
+
+Testing:
+Modify a resource configuration in a test environment with an unauthorized account.
