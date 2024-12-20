@@ -1,0 +1,16 @@
+Unusual Outbound UDP Traffic
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Protocol Tunneling (T1572)
+
+Detection Logic:
+Monitor spikes in outbound UDP traffic.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol == "UDP" and BytesTransferred > 1000000
+| project TimeGenerated, SourceIP, DestinationIP, BytesTransferred
+
+Testing:
+Generate a high volume of outbound UDP traffic in a test environment.
