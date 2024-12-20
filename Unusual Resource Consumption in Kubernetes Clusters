@@ -1,0 +1,16 @@
+Unusual Resource Consumption in Kubernetes Clusters
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Resource Hijacking (T1496)
+
+Detection Logic:
+Monitor for high resource usage in Kubernetes clusters.
+
+Microsoft Sentinel KQL Query:
+KubernetesLogs
+| where CPUUsage > 90 or MemoryUsage > 90
+| project TimeGenerated, PodName, NodeName, CPUUsage, MemoryUsage
+
+Testing:
+Simulate resource overconsumption in a Kubernetes cluster.
