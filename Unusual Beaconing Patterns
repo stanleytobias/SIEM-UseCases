@@ -1,0 +1,17 @@
+Unusual Beaconing Patterns
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Application Layer Protocol (T1071)
+
+Detection Logic:
+Detect repetitive and periodic traffic indicative of beaconing.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| summarize Count = count() by bin(TimeGenerated, 1m), DestinationIP
+| where Count > 10
+| project TimeGenerated, DestinationIP, Count
+
+Testing:
+Simulate beaconing traffic using a tool like Metasploit or Cobalt Strike.
