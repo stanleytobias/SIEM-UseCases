@@ -1,0 +1,16 @@
+Unusual Delays in Network Packet Delivery
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Network Denial of Service (T1498)
+
+Detection Logic:
+Detect delays in network packet delivery exceeding normal baselines.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Latency > 1000
+| project TimeGenerated, SourceIP, DestinationIP, Latency
+
+Testing:
+Introduce latency into the network using tools like tc in a controlled environment.
