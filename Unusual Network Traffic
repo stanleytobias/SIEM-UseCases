@@ -1,0 +1,17 @@
+Unusual Network Traffic
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Application Layer Protocol (T1071)
+
+Detection Logic:
+Monitor spikes or anomalies in network traffic volumes or patterns.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| summarize TotalBytes = sum(BytesTransferred) by SourceIP, bin(TimeGenerated, 1h)
+| where TotalBytes > 1000000000
+| project TimeGenerated, SourceIP, TotalBytes
+
+Testing:
+Generate high volumes of network traffic in a test environment.
