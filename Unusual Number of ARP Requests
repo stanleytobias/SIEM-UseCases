@@ -1,0 +1,18 @@
+Unusual Number of ARP Requests
+
+MITRE ATT&CK Mapping:
+Tactic: Discovery (TA0007)
+Technique: Network Sniffing (T1040)
+
+Detection Logic:
+Detect excessive ARP requests from a single host.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol == "ARP"
+| summarize RequestCount = count() by SourceIP, bin(TimeGenerated, 1h)
+| where RequestCount > 100
+| project TimeGenerated, SourceIP, RequestCount
+
+Testing:
+Use a tool to generate excessive ARP requests in a test network.
