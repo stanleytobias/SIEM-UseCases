@@ -1,0 +1,16 @@
+Unauthorised RDP Port Access
+
+MITRE ATT&CK Mapping:
+Tactic: Initial Access (TA0001)
+Technique: Remote Services (T1021.001)
+
+Detection Logic:
+Monitor access attempts to RDP ports by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationPort == 3389 and SourceIP not in (trustedIPs)
+| project TimeGenerated, SourceIP, DestinationIP, DestinationPort
+
+Testing:
+Attempt to access an RDP port using a test unauthorized account.
