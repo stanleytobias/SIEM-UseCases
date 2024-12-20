@@ -1,0 +1,16 @@
+Unauthorised Account Merging
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Account Manipulation (T1098)
+
+Detection Logic:
+Monitor attempts to merge accounts by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+AccountActivityLogs
+| where Action == "MergeAccount" and User not in (authorizedAdmins)
+| project TimeGenerated, TargetAccount, User, Action
+
+Testing:
+Attempt to merge accounts using a test unauthorized account.
