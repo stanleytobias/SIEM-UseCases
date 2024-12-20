@@ -1,0 +1,16 @@
+Traffic to Blacklisted IPs
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Proxy (T1090)
+
+Detection Logic:
+Detect traffic to IP addresses on a blacklist.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationIP in (blacklistedIPs)
+| project TimeGenerated, SourceIP, DestinationIP
+
+Testing:
+Simulate traffic to a benign but blacklisted IP.
