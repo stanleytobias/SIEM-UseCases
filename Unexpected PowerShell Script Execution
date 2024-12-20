@@ -1,0 +1,16 @@
+Unexpected PowerShell Script Execution
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: PowerShell (T1059.001)
+
+Detection Logic:
+Monitor for unusual PowerShell scripts being executed.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where ProcessName == "powershell.exe" and CommandLine contains "unexpectedScript.ps1"
+| project TimeGenerated, ProcessName, CommandLine, User
+
+Testing:
+Execute an unexpected PowerShell script with suspicious content.
