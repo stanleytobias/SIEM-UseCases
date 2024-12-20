@@ -1,0 +1,16 @@
+Unauthorised Backup File Access Attempts
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Information Repositories (T1213)
+
+Detection Logic:
+Detect failed or unauthorized attempts to access backup files.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where FilePath contains "backup" and Result == "Failure"
+| project TimeGenerated, FilePath, User, Action
+
+Testing:
+Attempt to access backup files using an unauthorized test account.
