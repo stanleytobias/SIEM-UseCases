@@ -1,0 +1,16 @@
+Unusual Traffic on Non-Standard Ports
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Application Layer Protocol (T1071.001)
+
+Detection Logic:
+Detect traffic on ports not commonly used.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationPort not in (80, 443, 22, 25) and BytesTransferred > 1000000
+| project TimeGenerated, SourceIP, DestinationIP, DestinationPort, BytesTransferred
+
+Testing:
+Send traffic over uncommon ports using tools like netcat.
