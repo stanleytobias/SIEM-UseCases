@@ -1,0 +1,17 @@
+Unusual Email Sending Patterns
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Exfiltration Over Email (T1041)
+
+Detection Logic:
+Detect spikes in email sending patterns or emails with large attachments.
+
+Microsoft Sentinel KQL Query:
+EmailActivityLogs
+| summarize EmailCount = count() by Sender, bin(TimeGenerated, 1h)
+| where EmailCount > 100
+| project TimeGenerated, Sender, EmailCount
+
+Testing:
+Send a high volume of emails from a test account.
