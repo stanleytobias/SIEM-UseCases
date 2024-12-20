@@ -1,0 +1,16 @@
+Unencrypted Data Transfers
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Exfiltration Over Unencrypted/Obfuscated Channels (T1048.001)
+
+Detection Logic:
+Monitor data transfers over unencrypted channels (e.g., HTTP).
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol == "HTTP" and DestinationPort != 443
+| project TimeGenerated, SourceIP, DestinationIP, BytesTransferred
+
+Testing:
+Transfer data using an unencrypted HTTP channel in a test environment.
