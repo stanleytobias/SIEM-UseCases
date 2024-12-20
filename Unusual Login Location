@@ -1,0 +1,16 @@
+Unusual Login Location
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Valid Accounts (T1078)
+
+Detection Logic:
+Detect logins from geographic locations not typically associated with the user.
+
+Microsoft Sentinel KQL Query:
+SigninLogs
+| where Location not in (UserExpectedLocations)
+| project TimeGenerated, User, Location, IPAddress
+
+Testing:
+Log in from an unusual geographic location using a test account.
