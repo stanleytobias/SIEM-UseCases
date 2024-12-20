@@ -1,0 +1,16 @@
+Unexpected File System Changes
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Modify File System Attributes (T1564.007)
+
+Detection Logic:
+Monitor unexpected modifications to sensitive file directories.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where FilePath startswith "sensitiveDirectory" and Action in ("Create", "Delete", "Modify") and User not in (authorizedUsers)
+| project TimeGenerated, FilePath, User, Action
+
+Testing:
+Modify or delete files in a sensitive directory using a test unauthorized account.
