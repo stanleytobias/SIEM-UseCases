@@ -1,0 +1,16 @@
+Unauthorised Access to Human Resources Systems
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Information Repositories (T1213)
+
+Detection Logic:
+Monitor unauthorized access to HR systems or data.
+
+Microsoft Sentinel KQL Query:
+HRSystemAccessLogs
+| where User not in (authorizedUsers)
+| project TimeGenerated, SystemName, User, Action
+
+Testing:
+Attempt to access HR systems using an unauthorized account.
