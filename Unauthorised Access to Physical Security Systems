@@ -1,0 +1,16 @@
+Unauthorised Access to Physical Security Systems
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Information Repositories (T1213)
+
+Detection Logic:
+Monitor access attempts to physical security systems by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+PhysicalSecuritySystemLogs
+| where User not in (authorizedUsers)
+| project TimeGenerated, DeviceName, User, Action
+
+Testing:
+Attempt to access physical security systems using an unauthorized account.
