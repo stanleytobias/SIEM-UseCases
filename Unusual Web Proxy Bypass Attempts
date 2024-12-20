@@ -1,0 +1,16 @@
+Unusual Web Proxy Bypass Attempts
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Use Alternate Authentication Material (T1550.003)
+
+Detection Logic:
+Detect direct access to restricted websites bypassing the web proxy.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationIP not in (proxyAllowedIPs)
+| project TimeGenerated, SourceIP, DestinationIP, BytesTransferred
+
+Testing:
+Attempt direct access to a restricted website without using the proxy.
