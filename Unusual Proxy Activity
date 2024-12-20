@@ -1,0 +1,17 @@
+Unusual Proxy Activity
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Use Alternate Authentication Material (T1550.003)
+
+Detection Logic:
+Monitor for spikes or anomalies in proxy usage.
+
+Microsoft Sentinel KQL Query:
+ProxyLogs
+| summarize TotalRequests = count() by User, bin(TimeGenerated, 1h)
+| where TotalRequests > 1000
+| project TimeGenerated, User, TotalRequests
+
+Testing:
+Generate high traffic through a proxy in a test environment.
