@@ -1,0 +1,16 @@
+Suspicious Use of System Restore Functionality
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Impair Defenses (T1562)
+
+Detection Logic:
+Monitor for execution of system restore commands or modifications to restore points.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID == 4688 and CommandLine contains "rstrui.exe"
+| project TimeGenerated, AccountName, CommandLine
+
+Testing:
+Initiate a system restore using rstrui.exe on a test system.
