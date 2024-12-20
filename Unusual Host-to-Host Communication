@@ -1,0 +1,17 @@
+Unusual Host-to-Host Communication
+
+MITRE ATT&CK Mapping:
+Tactic: Lateral Movement (TA0008)
+Technique: Remote Services (T1021)
+
+Detection Logic:
+Detect unexpected or high-frequency communications between internal hosts.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationIP in (internalIPs) and SourceIP in (internalIPs)
+| summarize CommunicationCount = count() by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| where CommunicationCount > 50
+
+Testing:
+Generate high-frequency host-to-host communications in a test environment.
