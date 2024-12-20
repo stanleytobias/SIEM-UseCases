@@ -1,0 +1,16 @@
+Unauthorised API Key Usage
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Application API Abuse (T1529)
+
+Detection Logic:
+Detect API calls using keys not associated with authorized users.
+
+Microsoft Sentinel KQL Query:
+APIActivityLogs
+| where APIKey not in (authorizedKeys)
+| project TimeGenerated, APIName, CallerIP, APIKey
+
+Testing:
+Execute API calls using a test unauthorized API key.
