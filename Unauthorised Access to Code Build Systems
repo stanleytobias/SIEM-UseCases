@@ -1,0 +1,16 @@
+Unauthorised Access to Code Build Systems
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Information Repositories (T1213)
+
+Detection Logic:
+Detect unauthorized access to CI/CD systems or repositories.
+
+Microsoft Sentinel KQL Query:
+CodeBuildLogs
+| where User not in (authorizedUsers)
+| project TimeGenerated, BuildSystem, User, Action
+
+Testing:
+Attempt to access or trigger a build using an unauthorized account.
