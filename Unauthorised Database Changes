@@ -1,0 +1,16 @@
+Unauthorised Database Changes
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Data Manipulation (T1565)
+
+Detection Logic:
+Monitor database changes made by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+DatabaseActivityLogs
+| where ActionType in ("INSERT", "DELETE", "UPDATE") and User not in (authorizedAdmins)
+| project TimeGenerated, DatabaseName, User, ActionType
+
+Testing:
+Perform database changes using a test unauthorized account.
