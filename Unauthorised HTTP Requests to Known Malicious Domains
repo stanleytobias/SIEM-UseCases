@@ -1,0 +1,16 @@
+Unauthorised HTTP Requests to Known Malicious Domains
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Application Layer Protocol (T1071.001)
+
+Detection Logic:
+Detect outbound HTTP requests to domains flagged as malicious.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationDomain in (maliciousDomains)
+| project TimeGenerated, SourceIP, DestinationDomain, Protocol
+
+Testing:
+Simulate HTTP requests to a benign but flagged domain.
