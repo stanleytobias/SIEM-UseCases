@@ -1,0 +1,16 @@
+Unauthorised Access to Payment Systems
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Information Repositories (T1213)
+
+Detection Logic:
+Detect unauthorized access to payment systems or financial platforms.
+
+Microsoft Sentinel KQL Query:
+PaymentSystemAccessLogs
+| where User not in (authorizedUsers)
+| project TimeGenerated, SystemName, User, Action
+
+Testing:
+Attempt to log in to a payment system using a test unauthorized account.
