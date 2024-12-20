@@ -1,0 +1,17 @@
+Unusual Traffic Patterns from Web Application Firewall (WAF)
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Use Alternate Authentication Material (T1550.003)
+
+Detection Logic:
+Detect anomalous traffic patterns passing through the WAF.
+
+Microsoft Sentinel KQL Query:
+WAFLogs
+| summarize RequestCount = count() by SourceIP, bin(TimeGenerated, 1h)
+| where RequestCount > 1000
+| project TimeGenerated, SourceIP, RequestCount
+
+Testing:
+Send a high volume of traffic through the WAF.
