@@ -1,0 +1,17 @@
+Suspicious USB Device Activity
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Removable Media (T1025)
+
+Detection Logic:
+Monitor for USB device activity such as large file transfers.
+
+Microsoft Sentinel KQL Query:
+DeviceLogs
+| where DeviceType == "USB" and Action in ("Write", "Copy")
+| summarize ActivityCount = count() by User, DeviceID, bin(TimeGenerated, 1h)
+| project TimeGenerated, User, DeviceID, ActivityCount
+
+Testing:
+Connect a USB device and copy files in a test environment.
