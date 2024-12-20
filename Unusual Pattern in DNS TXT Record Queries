@@ -1,0 +1,16 @@
+Unusual Pattern in DNS TXT Record Queries
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Application Layer Protocol (T1071.004)
+
+Detection Logic:
+Detect repetitive or unusually large DNS TXT queries.
+
+Microsoft Sentinel KQL Query:
+DNSQueryLogs
+| where QueryType == "TXT" and strlen(Response) > 500
+| project TimeGenerated, SourceIP, Query, Response
+
+Testing:
+Perform large DNS TXT queries using test DNS servers.
