@@ -1,0 +1,16 @@
+Unauthorised Access to Sensitive Files
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Local System (T1005)
+
+Detection Logic:
+Detect unauthorized access to files in sensitive directories.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where FilePath contains "sensitive" and User not in (authorizedUsers)
+| project TimeGenerated, FilePath, User, Action
+
+Testing:
+Access sensitive files using a test unauthorized account.
