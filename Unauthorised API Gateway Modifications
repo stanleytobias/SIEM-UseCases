@@ -1,0 +1,16 @@
+Unauthorised API Gateway Modifications
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Application API Abuse (T1529)
+
+Detection Logic:
+Detect unauthorized changes to API gateways.
+
+Microsoft Sentinel KQL Query:
+APIGatewayChangeLogs
+| where InitiatedBy not in (authorizedUsers)
+| project TimeGenerated, GatewayName, Action, InitiatedBy
+
+Testing:
+Modify API gateway settings using a test unauthorized account.
