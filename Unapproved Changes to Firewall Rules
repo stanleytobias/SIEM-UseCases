@@ -1,0 +1,16 @@
+Unapproved Changes to Firewall Rules
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Modify System Processes (T1031)
+
+Detection Logic:
+Monitor for unauthorized changes to firewall rules.
+
+Microsoft Sentinel KQL Query:
+FirewallRuleChangeLogs
+| where InitiatedBy not in (authorizedUsers)
+| project TimeGenerated, RuleName, Action, InitiatedBy
+
+Testing:
+Modify a firewall rule using an unauthorized account.
