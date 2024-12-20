@@ -1,0 +1,16 @@
+Unexpected Use of IPv6 in IPv4 Networks
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Protocol Tunneling (T1572)
+
+Detection Logic:
+Monitor for IPv6 traffic in networks predominantly using IPv4.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol == "IPv6" and SourceIP !startswith "2001:"
+| project TimeGenerated, SourceIP, DestinationIP, Protocol
+
+Testing:
+Send IPv6 packets in an IPv4-only network.
