@@ -1,0 +1,16 @@
+Unusual Traffic on Reserved Network Ranges
+
+MITRE ATT&CK Mapping:
+Tactic: Discovery (TA0007)
+Technique: Network Sniffing (T1040)
+
+Detection Logic:
+Monitor traffic directed to reserved IP ranges.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationIP startswith "192.0.2." or DestinationIP startswith "198.51.100." or DestinationIP startswith "203.0.113."
+| project TimeGenerated, SourceIP, DestinationIP, BytesTransferred
+
+Testing:
+Generate traffic to a reserved network range in a controlled environment.
