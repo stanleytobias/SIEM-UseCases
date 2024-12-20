@@ -1,0 +1,16 @@
+Suspicious YARA Rule Match
+
+MITRE ATT&CK Mapping:
+Tactic: Detection (TA0007)
+Technique: Indicator Detection (T1557)
+
+Detection Logic:
+Alert on YARA rules matching known malicious patterns.
+
+Microsoft Sentinel KQL Query:
+ThreatDetectionLogs
+| where DetectionType == "YARA" and Status == "Match"
+| project TimeGenerated, RuleName, FilePath, DetectionDetails
+
+Testing:
+Use a benign file designed to trigger a specific YARA rule.
