@@ -1,0 +1,16 @@
+Suspicious WMI Activity
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: Windows Management Instrumentation (T1047)
+
+Detection Logic:
+Detect suspicious WMI commands or processes.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID == 4688 and CommandLine contains "wmic"
+| project TimeGenerated, AccountName, CommandLine
+
+Testing:
+Execute a WMI command like wmic process list on a test system.
