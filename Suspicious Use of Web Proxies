@@ -1,0 +1,17 @@
+Suspicious Use of Web Proxies
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Traffic Proxy (T1090)
+
+Detection Logic:
+Detect high volumes of traffic routed through web proxy services.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationIP in (knownProxyIPs)
+| summarize TrafficVolume = sum(BytesTransferred) by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| project TimeGenerated, SourceIP, DestinationIP, TrafficVolume
+
+Testing:
+Configure a test system to use a proxy service.
