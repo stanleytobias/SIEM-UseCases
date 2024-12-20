@@ -1,0 +1,16 @@
+Unauthorised Certificate Issuance
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Steal or Forge Certificates (T1587.004)
+
+Detection Logic:
+Monitor for certificate issuance requests by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+CertificateIssuanceLogs
+| where User not in (authorizedAdmins)
+| project TimeGenerated, CertificateName, User, Action
+
+Testing:
+Issue a certificate using a test unauthorized account.
