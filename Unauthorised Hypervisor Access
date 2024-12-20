@@ -1,0 +1,16 @@
+Unauthorised Hypervisor Access
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Create Cloud Instance (T1578.002)
+
+Detection Logic:
+Detect hypervisor access attempts by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+HypervisorAccessLogs
+| where User not in (authorizedAdmins)
+| project TimeGenerated, HypervisorName, User, Action
+
+Testing:
+Attempt to access the hypervisor using an unauthorized account.
