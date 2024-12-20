@@ -1,0 +1,16 @@
+Unauthorised Browser Configurations
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Browser Extensions (T1176)
+
+Detection Logic:
+Monitor for changes to browser configurations made by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+BrowserConfigurationLogs
+| where User not in (authorizedUsers)
+| project TimeGenerated, SettingChanged, User
+
+Testing:
+Modify browser configurations using a test unauthorized account.
