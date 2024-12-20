@@ -1,0 +1,17 @@
+Unusual File Compression Activity
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Archive Collected Data (T1560)
+
+Detection Logic:
+Monitor file compression operations with abnormal frequency or size.
+
+Microsoft Sentinel KQL Query:
+FileActivityLogs
+| where FileExtension in (".zip", ".rar", ".7z") and User not in (authorizedUsers)
+| summarize CompressionCount = count() by User, bin(TimeGenerated, 1h)
+| where CompressionCount > 10
+
+Testing:
+Compress multiple files in a short timeframe using a test account.
