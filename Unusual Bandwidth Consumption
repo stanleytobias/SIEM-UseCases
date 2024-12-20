@@ -1,0 +1,17 @@
+Unusual Bandwidth Consumption
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Exfiltration Over Network Medium (T1048)
+
+Detection Logic:
+Detect spikes in network bandwidth consumption that deviate from the baseline.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| summarize TotalBytes = sum(BytesTransferred) by bin(TimeGenerated, 1h), SourceIP
+| where TotalBytes > 1000000000
+| project TimeGenerated, SourceIP, TotalBytes
+
+Testing:
+Transfer large amounts of data over the network in a controlled environment.
