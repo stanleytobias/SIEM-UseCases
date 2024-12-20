@@ -1,0 +1,16 @@
+USB Mass Storage Device Data Transfer
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Exfiltration Over Physical Medium (T1052)
+
+Detection Logic:
+Monitor data transfers to USB mass storage devices.
+
+Microsoft Sentinel KQL Query:
+FileActivityLogs
+| where DestinationDevice == "USB" and BytesTransferred > 1000000
+| project TimeGenerated, SourcePath, DestinationDevice, BytesTransferred
+
+Testing:
+Copy large files to a USB mass storage device.
