@@ -1,0 +1,18 @@
+Suspicious Token Generation
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Application API Abuse (T1529)
+
+Detection Logic:
+Detect high token generation activity from the same user or IP.
+
+Microsoft Sentinel KQL Query:
+AuthenticationLogs
+| where Action == "GenerateToken"
+| summarize TokenCount = count() by User, bin(TimeGenerated, 1h)
+| where TokenCount > 10
+| project TimeGenerated, User, TokenCount
+
+Testing:
+Simulate token generation via API calls in a test environment.
