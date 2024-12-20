@@ -1,0 +1,17 @@
+Unusual Correlation in SIEM Event Sources
+
+MITRE ATT&CK Mapping:
+Tactic: Detection (TA0028)
+Technique: Event Correlation (T1566)
+
+Detection Logic:
+Detect anomalies or patterns across multiple event sources.
+
+Microsoft Sentinel KQL Query:
+union AuthenticationLogs, NetworkTraffic, ProcessCreationEvents
+| summarize EventCount = count() by User, bin(TimeGenerated, 1h)
+| where EventCount > threshold
+| project TimeGenerated, User, EventCount
+
+Testing:
+Generate anomalous activities across different log sources.
