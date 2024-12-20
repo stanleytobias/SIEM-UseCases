@@ -1,0 +1,17 @@
+Unauthorised Modification of Active Directory Group Memberships
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Account Manipulation (T1098)
+
+Detection Logic:
+Detect unauthorized additions or removals of group members.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID == 4728 or EventID == 4729
+| where AccountName not in (authorizedAdmins)
+| project TimeGenerated, GroupName, AccountName, Action
+
+Testing:
+Add or remove a user from an AD group using an unauthorized account.
