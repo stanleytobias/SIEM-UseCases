@@ -1,0 +1,16 @@
+Unauthorised Cloud Storage Access
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Cloud Storage Object (T1530)
+
+Detection Logic:
+Detect access to cloud storage buckets by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+CloudStorageAccessLogs
+| where Action == "Access" and User not in (authorizedUsers)
+| project TimeGenerated, StorageBucketName, User, Action
+
+Testing:
+Access a cloud storage bucket using a test unauthorized account.
