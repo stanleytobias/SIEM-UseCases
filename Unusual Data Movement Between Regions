@@ -1,0 +1,16 @@
+Unusual Data Movement Between Regions
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Exfiltration Over Alternative Protocol (T1048)
+
+Detection Logic:
+Monitor for large data transfers between geographic regions.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where RegionSrc != RegionDest and BytesTransferred > 100000000
+| project TimeGenerated, SourceIP, DestinationIP, RegionSrc, RegionDest, BytesTransferred
+
+Testing:
+Transfer large files between regions in a controlled test environment.
