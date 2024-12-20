@@ -1,0 +1,17 @@
+User Account Deletion
+
+MITRE ATT&CK Mapping:
+
+Tactic: Defense Evasion (TA0005)
+Technique: Account Manipulation (T1098)
+
+Detection Logic:
+Detect deletions of user accounts.
+
+Microsoft Sentinel KQL Query:
+AccountManagementLogs
+| where Action == "Delete"
+| project TimeGenerated, DeletedAccount, DeleterAccount
+
+Testing:
+Delete a user account in a controlled environment.
