@@ -1,0 +1,16 @@
+Unauthorised Tampering with Security Policies
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Modify Cloud Compute Infrastructure (T1578)
+
+Detection Logic:
+Monitor changes to security policies by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+SecurityPolicyChangeLogs
+| where User not in (authorizedAdmins)
+| project TimeGenerated, PolicyName, User, Action
+
+Testing:
+Modify security policies using a test unauthorized account.
