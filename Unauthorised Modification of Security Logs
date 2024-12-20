@@ -1,0 +1,17 @@
+Unauthorised Modification of Security Logs
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Indicator Removal on Host (T1070.001)
+
+Detection Logic:
+Detect deletions or edits of security logs by unauthorized accounts.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID == 1102 or EventID == 104
+| where AccountName not in (authorizedAdmins)
+| project TimeGenerated, AccountName, LogName, EventID
+
+Testing:
+Clear or modify security logs using a test unauthorized account.
