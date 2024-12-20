@@ -1,0 +1,16 @@
+Unauthorised Cloud Account Login
+
+MITRE ATT&CK Mapping:
+Tactic: Initial Access (TA0001)
+Technique: Valid Accounts (T1078)
+
+Detection Logic:
+Detect login attempts from unrecognized devices or locations.
+
+Microsoft Sentinel KQL Query:
+CloudAccountLogs
+| where LoginStatus == "Success" and Location not in (trustedLocations)
+| project TimeGenerated, AccountName, Location, DeviceDetails
+
+Testing:
+Log in to a cloud account from an untrusted device or IP.
