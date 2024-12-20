@@ -1,0 +1,16 @@
+Unauthorised Firmware Updates
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Firmware Corruption (T1495)
+
+Detection Logic:
+Detect firmware updates initiated by unauthorized users or tools.
+
+Microsoft Sentinel KQL Query:
+DeviceFirmwareLogs
+| where Action == "Update" and User not in (authorizedAdmins)
+| project TimeGenerated, DeviceName, FirmwareVersion, User
+
+Testing:
+Initiate a firmware update in a test environment using an unauthorized account.
