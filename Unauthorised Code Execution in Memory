@@ -1,0 +1,16 @@
+Unauthorised Code Execution in Memory
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Process Injection (T1055)
+
+Detection Logic:
+Monitor execution of scripts or binaries directly in memory by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where CommandLine contains "reflective" and User not in (authorizedUsers)
+| project TimeGenerated, ProcessName, User, CommandLine
+
+Testing:
+Execute a script in memory using a tool like ReflectiveDLLInjection in a controlled environment.
