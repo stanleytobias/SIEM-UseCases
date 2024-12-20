@@ -1,0 +1,16 @@
+Suspicious Script Execution in Browsers
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: User Execution (T1204.002)
+
+Detection Logic:
+Monitor for execution of scripts from unauthorized domains in browsers.
+
+Microsoft Sentinel KQL Query:
+BrowserLogs
+| where ScriptSourceDomain not in (trustedDomains)
+| project TimeGenerated, ScriptSourceDomain, User
+
+Testing:
+Open a test webpage with a flagged script in a controlled environment.
