@@ -1,0 +1,16 @@
+Traffic Directed Toward Sinkhole IPs
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Domain Name System (T1071.004)
+
+Detection Logic:
+Detect traffic sent to sinkhole IPs.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationIP in (sinkholeIPs)
+| project TimeGenerated, SourceIP, DestinationIP
+
+Testing:
+Route traffic to a known sinkhole IP in a controlled environment.
