@@ -1,0 +1,16 @@
+Unauthorised API Call Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Application API Abuse (T1529)
+
+Detection Logic:
+Detect API calls from unauthorized users or IPs.
+
+Microsoft Sentinel KQL Query:
+APIActivityLogs
+| where CallerIP not in (trustedIPs) or User not in (authorizedUsers)
+| project TimeGenerated, APIName, CallerIP, User
+
+Testing:
+Execute unauthorized API calls using a test account.
