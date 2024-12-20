@@ -1,0 +1,16 @@
+Unusual User Agent Strings
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Use Alternate Authentication Material (T1550.003)
+
+Detection Logic:
+Detect HTTP requests with uncommon or suspicious user-agent strings.
+
+Microsoft Sentinel KQL Query:
+WebProxyLogs
+| where UserAgent not in (commonUserAgents)
+| project TimeGenerated, SourceIP, DestinationIP, UserAgent
+
+Testing:
+Send requests with a custom or unusual user-agent string.
