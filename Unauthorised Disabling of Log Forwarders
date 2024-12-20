@@ -1,0 +1,16 @@
+Unauthorised Disabling of Log Forwarders
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Indicator Removal on Host (T1070.002)
+
+Detection Logic:
+Detect disabling or tampering with log forwarding services.
+
+Microsoft Sentinel KQL Query:
+ServiceControlLogs
+| where ServiceName contains "log" and Action == "Stop" and User not in (authorizedAdmins)
+| project TimeGenerated, ServiceName, User, Action
+
+Testing:
+Disable a log forwarder service using an unauthorized account.
