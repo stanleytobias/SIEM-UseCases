@@ -1,0 +1,18 @@
+Unusual Traffic Between Cloud Regions
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Exfiltration Over Network Medium (T1048)
+
+Detection Logic:
+Monitor traffic between cloud regions that deviates from normal patterns.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where RegionSrc != RegionDest
+| summarize TrafficVolume = sum(BytesTransferred) by RegionSrc, RegionDest, bin(TimeGenerated, 1h)
+| where TrafficVolume > 100000000 // Set threshold based on normal baselines
+| project TimeGenerated, RegionSrc, RegionDest, TrafficVolume
+
+Testing:
+Transfer large amounts of data between two cloud regions in a test setup.
