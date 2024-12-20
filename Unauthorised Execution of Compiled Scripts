@@ -1,0 +1,16 @@
+Unauthorised Execution of Compiled Scripts
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: Scripting (T1059)
+
+Detection Logic:
+Detect execution of compiled scripts from unauthorized locations.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where ProcessName in (compiledScripts) and FilePath not in (trustedPaths)
+| project TimeGenerated, ProcessName, FilePath, User
+
+Testing:
+Execute a compiled script from an unauthorized location.
