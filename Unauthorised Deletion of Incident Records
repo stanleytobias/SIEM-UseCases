@@ -1,0 +1,16 @@
+Unauthorised Deletion of Incident Records
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Indicator Removal on Host (T1070.004)
+
+Detection Logic:
+Detect deletion of incident records by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+IncidentManagementLogs
+| where Action == "Delete" and User not in (authorizedAdmins)
+| project TimeGenerated, IncidentID, User, Action
+
+Testing:
+Delete an incident record in a test SIEM environment using an unauthorized account.
