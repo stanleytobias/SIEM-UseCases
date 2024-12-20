@@ -1,0 +1,16 @@
+Tampered Security Logs Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Indicator Removal on Host (T1070)
+
+Detection Logic:
+Detect deletions or modifications of security logs.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID in (1102, 104) // Log cleared or modified
+| project TimeGenerated, AccountName, LogName, EventID
+
+Testing:
+Clear event logs on a test system.
