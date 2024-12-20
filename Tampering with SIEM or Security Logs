@@ -1,0 +1,16 @@
+Tampering with SIEM or Security Logs
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Indicator Removal on Host (T1070)
+
+Detection Logic:
+Detect deletions or modifications in SIEM or security log files.
+
+Microsoft Sentinel KQL Query:
+AuditLogs
+| where Action in ("Delete", "Modify") and LogName contains "SIEM"
+| project TimeGenerated, AccountName, Action, LogName
+
+Testing:
+Delete or modify logs in a test SIEM environment.
