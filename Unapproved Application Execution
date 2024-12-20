@@ -1,0 +1,16 @@
+Unapproved Application Execution
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: Software Deployment Tools (T1072)
+
+Detection Logic:
+Detect execution of applications not on the approved list.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where ProcessName !in (approvedApplications)
+| project TimeGenerated, ProcessName, User, CommandLine
+
+Testing:
+Run an unapproved application in a test environment.
