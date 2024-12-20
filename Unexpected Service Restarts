@@ -1,0 +1,16 @@
+Unexpected Service Restarts
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Modify System Processes (T1031)
+
+Detection Logic:
+Monitor for service restarts initiated by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+ServiceControlLogs
+| where Action == "Restart" and User not in (authorizedAdmins)
+| project TimeGenerated, ServiceName, User, Action
+
+Testing:
+Restart a service using a test unauthorized account.
