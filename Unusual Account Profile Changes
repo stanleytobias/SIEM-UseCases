@@ -1,0 +1,16 @@
+Unusual Account Profile Changes
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Account Manipulation (T1098)
+
+Detection Logic:
+Detect modifications to user profiles that are not authorized or typical.
+
+Microsoft Sentinel KQL Query:
+AccountChangeLogs
+| where Action == "ModifyProfile" and User not in (authorizedAdmins)
+| project TimeGenerated, AccountName, User, Action
+
+Testing:
+Change account profile details using a test unauthorized account.
