@@ -1,0 +1,16 @@
+Unexpected SSH Access
+
+MITRE ATT&CK Mapping:
+Tactic: Lateral Movement (TA0008)
+Technique: Remote Services (T1021.004)
+
+Detection Logic:
+Monitor unexpected SSH logins, particularly from unusual locations.
+
+Microsoft Sentinel KQL Query:
+SSHAccessLogs
+| where SourceIP not in (trustedIPs) and User not in (authorizedUsers)
+| project TimeGenerated, SourceIP, DestinationIP, User
+
+Testing:
+Log in to a system via SSH from an untrusted location.
