@@ -1,0 +1,16 @@
+Unusual Use of Base64 Encoding in Commands
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Obfuscated Files or Information (T1027)
+
+Detection Logic:
+Monitor for commands containing Base64-encoded strings.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where CommandLine contains "base64"
+| project TimeGenerated, ProcessName, CommandLine, User
+
+Testing:
+Execute Base64-encoded commands in a test environment.
