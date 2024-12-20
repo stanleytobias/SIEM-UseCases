@@ -1,0 +1,16 @@
+Unauthorised Key Pair Usage in SSH
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: SSH Authorized Keys (T1098.004)
+
+Detection Logic:
+Detect usage of unauthorized SSH key pairs.
+
+Microsoft Sentinel KQL Query:
+SSHAccessLogs
+| where KeyFingerprint not in (authorizedKeys)
+| project TimeGenerated, User, SourceIP, KeyFingerprint
+
+Testing:
+Attempt to use an unauthorized SSH key pair in a test environment.
