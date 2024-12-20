@@ -1,0 +1,16 @@
+Web Server Attack Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Initial Access (TA0001)
+Technique: Exploit Public-Facing Application (T1190)
+
+Detection Logic:
+Detect anomalies in web server traffic indicative of an attack.
+
+Microsoft Sentinel KQL Query:
+WebServerLogs
+| where HttpStatusCode >= 500 or HttpMethod in ("TRACE", "OPTIONS")
+| project TimeGenerated, SourceIP, DestinationIP, HttpMethod, HttpStatusCode
+
+Testing:
+Simulate an attack on a web server, such as SQL injection or directory traversal.
