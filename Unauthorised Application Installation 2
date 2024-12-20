@@ -1,0 +1,16 @@
+Unauthorised Application Installation 2
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: User Execution (T1204)
+
+Detection Logic:
+Detect the installation of applications not on the approved list.
+
+Microsoft Sentinel KQL Query:
+ApplicationInstallationLogs
+| where ApplicationName not in (approvedApplications)
+| project TimeGenerated, ApplicationName, User
+
+Testing:
+Attempt to install an unapproved application in a test environment.
