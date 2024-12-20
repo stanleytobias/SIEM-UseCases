@@ -1,0 +1,16 @@
+Unusual Logo Activity
+
+MITRE ATT&CK Mapping:
+Tactic: Initial Access (TA0001)
+Technique: Brand Abuse (T1585.002)
+
+Detection Logic:
+Detect usage or modifications of company logos in unexpected contexts.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where FileName contains "logo" and Action in ("Modify", "Copy") and User not in (authorizedUsers)
+| project TimeGenerated, FileName, Action, User
+
+Testing:
+Modify or copy logo files in a controlled environment.
