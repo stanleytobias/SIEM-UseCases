@@ -1,0 +1,16 @@
+Unexpected Traffic to Content Delivery Networks (CDNs)
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Application Layer Protocol (T1071.001)
+
+Detection Logic:
+Detect unusual or excessive traffic to CDNs.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationDomain endswith ".cdn.net" and BytesTransferred > 50000000
+| project TimeGenerated, SourceIP, DestinationDomain, BytesTransferred
+
+Testing:
+Generate high data transfers to a CDN in a controlled environment.
