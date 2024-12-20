@@ -1,0 +1,16 @@
+Traffic Patterns Resembling Covert Channels
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Application Layer Protocol (T1071)
+
+Detection Logic:
+Detect traffic patterns such as small, consistent packet sizes or timed intervals.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where BytesTransferred < 100 and TimeBetweenPackets < 1s
+| project TimeGenerated, SourceIP, DestinationIP, BytesTransferred
+
+Testing:
+Simulate covert channel traffic using tools like ptunnel.
