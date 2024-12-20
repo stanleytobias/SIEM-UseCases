@@ -1,0 +1,16 @@
+Unauthorised Changes to Software Licenses
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Resource Hijacking (T1496)
+
+Detection Logic:
+Detect software license changes initiated by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+SoftwareLicenseLogs
+| where Action == "Modify" and User not in (authorizedAdmins)
+| project TimeGenerated, LicenseKey, User, Action
+
+Testing:
+Change software license settings using a test unauthorized account.
