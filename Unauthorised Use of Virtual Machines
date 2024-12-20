@@ -1,0 +1,16 @@
+Unauthorised Use of Virtual Machines
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Create Cloud Instance (T1578.002)
+
+Detection Logic:
+Detect creation or usage of virtual machines by unauthorized accounts.
+
+Microsoft Sentinel KQL Query:
+AzureActivity
+| where OperationName in ("CreateVirtualMachine", "StartVirtualMachine") and Caller not in (authorizedUsers)
+| project TimeGenerated, ResourceGroup, Caller, OperationName
+
+Testing:
+Create or start a virtual machine using a test unauthorized account.
