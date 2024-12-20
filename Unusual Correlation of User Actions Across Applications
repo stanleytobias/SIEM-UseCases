@@ -1,0 +1,17 @@
+Unusual Correlation of User Actions Across Applications
+
+MITRE ATT&CK Mapping:
+Tactic: Discovery (TA0007)
+Technique: Account Discovery (T1087)
+
+Detection Logic:
+Monitor for unusual user activity across multiple applications in short intervals.
+
+Microsoft Sentinel KQL Query:
+union AppActivityLogs, AuthenticationLogs
+| summarize ActionCount = count() by User, bin(TimeGenerated, 1h)
+| where ActionCount > threshold
+| project TimeGenerated, User, ActionCount
+
+Testing:
+Perform a series of activities in multiple applications using a test account.
