@@ -1,0 +1,16 @@
+Suspicious Removal of Security Agents
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Disable or Modify Tools (T1562.001)
+
+Detection Logic:
+Detect uninstallation or termination of security software.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID == 7036 and Message contains "stopped" and ServiceName in ("antivirus", "EDR", "SIEM")
+| project TimeGenerated, ServiceName, Message, User
+
+Testing:
+Disable or stop a test antivirus or security agent.
