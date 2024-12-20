@@ -1,0 +1,16 @@
+Suspicious SMB Traffic to Non-Standard Ports
+
+MITRE ATT&CK Mapping:
+Tactic: Lateral Movement (TA0008)
+Technique: SMB/Windows Admin Shares (T1077)
+
+Detection Logic:
+Detect SMB traffic on non-standard ports.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol == "SMB" and DestinationPort not in (445, 139)
+| project TimeGenerated, SourceIP, DestinationIP, DestinationPort
+
+Testing:
+Generate SMB traffic on a custom port in a test environment.
