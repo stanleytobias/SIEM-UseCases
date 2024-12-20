@@ -1,0 +1,16 @@
+Unusual Privilege Inheritance
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Valid Accounts (T1078)
+
+Detection Logic:
+Detect unusual privilege inheritance during process creation.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where ParentProcessName != "authorizedProcess" and ProcessName in ("privilegedProcesses")
+| project TimeGenerated, ParentProcessName, ProcessName, User
+
+Testing:
+Run a privileged process with an unauthorized parent in a test environment.
