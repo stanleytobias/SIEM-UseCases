@@ -1,0 +1,16 @@
+Unauthorised Email Forwarding
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Email Collection (T1114)
+
+Detection Logic:
+Detect creation of email forwarding rules to unauthorized domains.
+
+Microsoft Sentinel KQL Query:
+EmailRuleCreationLogs
+| where RuleAction == "Forward" and TargetAddress !endswith "@trusted.com"
+| project TimeGenerated, User, TargetAddress, RuleName
+
+Testing:
+Create an email forwarding rule to an external domain using a test unauthorized account.
