@@ -1,0 +1,17 @@
+Unusual Volume of DNS Queries
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Application Layer Protocol (T1071.004)
+
+Detection Logic:
+Detect high volume of DNS queries from a single host in a short period.
+
+Microsoft Sentinel KQL Query:
+DNSQueryLogs
+| summarize QueryCount = count() by ClientIP, bin(TimeGenerated, 1h)
+| where QueryCount > 500 // Threshold depends on normal baseline
+| project TimeGenerated, ClientIP, QueryCount
+
+Testing:
+Generate large numbers of DNS queries from a test system.
