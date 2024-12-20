@@ -1,0 +1,16 @@
+Unusual Registry Key Modifications
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Modify Registry (T1112)
+
+Detection Logic:
+Detect modifications to critical registry keys by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+RegistryModificationLogs
+| where RegistryKey startswith "HKLM" and User not in (authorizedUsers)
+| project TimeGenerated, RegistryKey, User, Action
+
+Testing:
+Modify a critical registry key using a test unauthorized account.
