@@ -1,0 +1,16 @@
+Suspicious Utilization of Cloud IAM Roles
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Exploitation of Cloud Role (T1078.004)
+
+Detection Logic:
+Monitor usage of IAM roles outside of predefined scopes or timeframes.
+
+Microsoft Sentinel KQL Query:
+AzureActivity
+| where OperationName == "AssumeRole" and Caller not in (authorizedUsers)
+| project TimeGenerated, Caller, RoleName
+
+Testing:
+Assume an IAM role using a test account in a cloud environment.
