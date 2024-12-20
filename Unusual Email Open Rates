@@ -1,0 +1,16 @@
+Unusual Email Open Rates
+
+MITRE ATT&CK Mapping:
+Tactic: Reconnaissance (TA0043)
+Technique: Phishing (T1566)
+
+Detection Logic:
+Monitor for unusually high or low email open rates.
+
+Microsoft Sentinel KQL Query:
+EmailActivityLogs
+| summarize OpenRate = countif(Action == "Opened") / count() by Sender, bin(TimeGenerated, 1h)
+| where OpenRate > 0.8 or OpenRate < 0.1
+
+Testing:
+Send bulk emails to test accounts with abnormal open rates.
