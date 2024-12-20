@@ -1,0 +1,18 @@
+Traffic Spikes Toward Unmonitored Geolocations
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Proxy (T1090.003)
+
+Detection Logic:
+Detect traffic spikes to IPs in unmonitored or unusual geolocations.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where GeoLocation not in (monitoredGeolocations)
+| summarize TrafficVolume = sum(BytesTransferred) by GeoLocation, bin(TimeGenerated, 1h)
+| where TrafficVolume > 100000000 // Adjust threshold
+| project TimeGenerated, GeoLocation, TrafficVolume
+
+Testing:
+Generate test traffic to an IP in an unmonitored geolocation.
