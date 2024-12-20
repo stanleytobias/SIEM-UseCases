@@ -1,0 +1,16 @@
+Unauthorised Change of Critical System Configuration Files
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Modify System Processes (T1031)
+
+Detection Logic:
+Monitor unauthorized modifications to critical configuration files.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where FilePath in (criticalConfigFiles) and Action == "Modify" and User not in (authorizedUsers)
+| project TimeGenerated, FilePath, User, Action
+
+Testing:
+Modify a critical configuration file in a test environment with an unauthorized account.
