@@ -1,0 +1,17 @@
+USB Device Usage Anomalies
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Removable Media (T1025)
+
+Detection Logic:
+Detect unusual USB device connections or high-frequency usage.
+
+Microsoft Sentinel KQL Query:
+USBDeviceLogs
+| summarize DeviceUsage = count() by DeviceID, bin(TimeGenerated, 1h)
+| where DeviceUsage > 10
+| project TimeGenerated, DeviceID, DeviceUsage
+
+Testing:
+Connect multiple USB devices to a system within a short period.
