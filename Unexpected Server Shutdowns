@@ -1,0 +1,16 @@
+Unexpected Server Shutdowns
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: System Shutdown/Reboot (T1529)
+
+Detection Logic:
+Detect server shutdown events initiated unexpectedly or by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+SystemEventLogs
+| where EventID == "Shutdown" and User not in (authorizedAdmins)
+| project TimeGenerated, ServerName, User, Action
+
+Testing:
+Shut down a server using a test unauthorized account.
