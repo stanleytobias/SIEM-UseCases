@@ -1,0 +1,16 @@
+Unusual Audit Policy Modifications
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Indicator Removal on Host (T1070)
+
+Detection Logic:
+Detect modifications to audit policies by unauthorized users or unusual changes.
+
+Microsoft Sentinel KQL Query:
+AuditPolicyChangeLogs
+| where User not in (authorizedAdmins) or PolicyName contains "disable"
+| project TimeGenerated, PolicyName, User, Action
+
+Testing:
+Modify audit policies using a test unauthorized account.
