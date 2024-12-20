@@ -1,0 +1,16 @@
+Suspicious ZIP/RAR File Creation
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Archive Collected Data (T1560)
+
+Detection Logic:
+Detect the creation of archive files in sensitive directories.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where FileExtension in (".zip", ".rar") and FilePath contains "sensitive"
+| project TimeGenerated, FilePath, User
+
+Testing:
+Create a ZIP or RAR file in a test environment with dummy sensitive files.
