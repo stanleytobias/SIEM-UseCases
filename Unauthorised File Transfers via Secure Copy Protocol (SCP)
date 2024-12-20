@@ -1,0 +1,16 @@
+Unauthorised File Transfers via Secure Copy Protocol (SCP)
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Exfiltration Over Other Network Medium (T1048.003)
+
+Detection Logic:
+Detect SCP file transfers from unauthorized accounts or IPs.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol == "SCP" and SourceIP not in (trustedIPs)
+| project TimeGenerated, SourceIP, DestinationIP, BytesTransferred
+
+Testing:
+Perform an SCP file transfer using a test unauthorized account.
