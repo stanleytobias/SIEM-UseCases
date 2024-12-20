@@ -1,0 +1,16 @@
+Unauthorised Software Downloads via Web Browsers
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: User Execution (T1204)
+
+Detection Logic:
+Monitor downloads of unauthorized software via web browsers.
+
+Microsoft Sentinel KQL Query:
+WebProxyLogs
+| where URL contains ".exe" or ".msi" and User not in (authorizedUsers)
+| project TimeGenerated, User, URL, DestinationIP
+
+Testing:
+Download an unauthorized software installer using a test account.
