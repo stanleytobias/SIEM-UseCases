@@ -1,0 +1,17 @@
+Traffic Anomalies in VPCs
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Cloud Storage Object (T1530)
+
+Detection Logic:
+Detect unexpected traffic patterns within Virtual Private Clouds (VPCs).
+
+Microsoft Sentinel KQL Query:
+VPCFlowLogs
+| summarize TrafficVolume = sum(BytesTransferred) by VPC, bin(TimeGenerated, 1h)
+| where TrafficVolume > 1000000000 // Adjust threshold
+| project TimeGenerated, VPC, TrafficVolume
+
+Testing:
+Generate high traffic in a test VPC.
