@@ -1,0 +1,17 @@
+Unusual Spikes in IoT Data Transmission
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Exfiltration Over Alternative Protocol (T1048)
+
+Detection Logic:
+Detect sudden spikes in data transmission from IoT devices.
+
+Microsoft Sentinel KQL Query:
+IoTDeviceLogs
+| summarize TotalBytes = sum(BytesTransferred) by DeviceID, bin(TimeGenerated, 1h)
+| where TotalBytes > 100000000 // Set threshold based on normal baselines
+| project TimeGenerated, DeviceID, TotalBytes
+
+Testing:
+Simulate high data transmission from an IoT device in a controlled environment.
