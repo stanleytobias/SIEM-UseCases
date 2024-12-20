@@ -1,0 +1,16 @@
+Unexpected Changes to Network Segments
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Network Denial of Service (T1498)
+
+Detection Logic:
+Monitor unauthorized changes to network segmentation configurations.
+
+Microsoft Sentinel KQL Query:
+NetworkConfigurationLogs
+| where User not in (authorizedAdmins)
+| project TimeGenerated, SegmentName, User, Action
+
+Testing:
+Modify network segmentation rules using an unauthorized account.
