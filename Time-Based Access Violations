@@ -1,0 +1,16 @@
+Time-Based Access Violations
+
+MITRE ATT&CK Mapping:
+Tactic: Initial Access (TA0001)
+Technique: Valid Accounts (T1078)
+
+Detection Logic:
+Detect logins outside of authorized time windows.
+
+Microsoft Sentinel KQL Query:
+AuthenticationLogs
+| where LogonTime outside (datetime(09:00:00) .. datetime(17:00:00))
+| project TimeGenerated, AccountName, SourceIP
+
+Testing:
+Attempt logins during restricted hours.
