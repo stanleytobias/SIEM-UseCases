@@ -1,0 +1,16 @@
+Unusual File Transfers via FTP or SFTP
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Exfiltration Over Alternative Protocol (T1048)
+
+Detection Logic:
+Monitor large or unusual file transfers via FTP or SFTP.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol in ("FTP", "SFTP") and BytesTransferred > 10000000
+| project TimeGenerated, SourceIP, DestinationIP, BytesTransferred
+
+Testing:
+Transfer large files via FTP/SFTP in a controlled environment.
