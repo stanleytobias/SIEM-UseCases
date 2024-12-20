@@ -1,0 +1,18 @@
+Traffic Spikes to Tor Exit Nodes
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Proxy (T1090.003)
+
+Detection Logic:
+Detect high traffic volume directed to Tor exit nodes.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationIP in (knownTorExitNodes)
+| summarize TrafficVolume = sum(BytesTransferred) by DestinationIP, bin(TimeGenerated, 1h)
+| where TrafficVolume > 100000000 // Adjust threshold
+| project TimeGenerated, DestinationIP, TrafficVolume
+
+Testing:
+Simulate high traffic to Tor exit nodes in a test environment.
