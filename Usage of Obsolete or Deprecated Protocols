@@ -1,0 +1,16 @@
+Usage of Obsolete or Deprecated Protocols
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Exploitation of API Misuse (T1190)
+
+Detection Logic:
+Detect usage of obsolete protocols like FTP or Telnet.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol in ("FTP", "Telnet")
+| project TimeGenerated, SourceIP, DestinationIP, Protocol
+
+Testing:
+Simulate traffic using obsolete protocols.
