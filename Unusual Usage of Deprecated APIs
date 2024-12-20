@@ -1,0 +1,16 @@
+Unusual Usage of Deprecated APIs
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Exploitation of API Misuse (T1190)
+
+Detection Logic:
+Detect calls to APIs that are no longer supported or recommended.
+
+Microsoft Sentinel KQL Query:
+APIActivityLogs
+| where APIName in (deprecatedAPIs)
+| project TimeGenerated, User, APIName, Parameters
+
+Testing:
+Call deprecated APIs in a test environment.
