@@ -1,0 +1,16 @@
+Unauthorised Change in Software Delivery Pipelines
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Continuous Delivery Pipeline Manipulation (T1619)
+
+Detection Logic:
+Detect modifications to CI/CD pipelines initiated by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+CICDPipelineLogs
+| where User not in (authorizedAdmins)
+| project TimeGenerated, PipelineName, User, Action
+
+Testing:
+Modify a CI/CD pipeline using a test unauthorized account.
