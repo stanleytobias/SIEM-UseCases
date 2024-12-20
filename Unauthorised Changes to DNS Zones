@@ -1,0 +1,16 @@
+Unauthorised Changes to DNS Zones
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Domain Name System Manipulation (T1565.001)
+
+Detection Logic:
+Monitor for DNS zone changes initiated by unauthorized accounts.
+
+Microsoft Sentinel KQL Query:
+DNSZoneChangeLogs
+| where User not in (authorizedAdmins)
+| project TimeGenerated, ZoneName, User, Action
+
+Testing:
+Modify DNS zones in a test environment using an unauthorized account.
