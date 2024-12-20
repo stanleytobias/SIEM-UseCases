@@ -1,0 +1,16 @@
+Unauthorised Access to Archived Data
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Local System (T1005)
+
+Detection Logic:
+Detect unauthorized read operations on archived files.
+
+Microsoft Sentinel KQL Query:
+FileAuditLogs
+| where FilePath contains "archive" and User not in (authorizedUsers)
+| project TimeGenerated, FilePath, User, Action
+
+Testing:
+Access archived data using an unauthorized account.
