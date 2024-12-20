@@ -1,0 +1,16 @@
+Unauthorised Use of Encryption Tools
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Data Encrypted for Impact (T1486)
+
+Detection Logic:
+Monitor execution of encryption tools by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where ProcessName in ("gpg.exe", "openssl.exe") and User not in (authorizedUsers)
+| project TimeGenerated, ProcessName, User, CommandLine
+
+Testing:
+Execute encryption tools using a test unauthorized account.
