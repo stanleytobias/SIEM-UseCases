@@ -1,0 +1,18 @@
+Suspicious Traffic Between VLANs
+
+MITRE ATT&CK Mapping:
+Tactic: Lateral Movement (TA0008)
+Technique: Exploitation of Remote Services (T1210)
+
+Detection Logic:
+Detect unusual traffic between VLANs, such as high bandwidth or unauthorized access.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where SourceVLAN != DestinationVLAN
+| summarize TrafficVolume = sum(BytesTransferred) by SourceVLAN, DestinationVLAN, bin(TimeGenerated, 1h)
+| where TrafficVolume > 100000000 // Adjust threshold
+| project TimeGenerated, SourceVLAN, DestinationVLAN, TrafficVolume
+
+Testing:
+Generate inter-VLAN traffic using test systems.
