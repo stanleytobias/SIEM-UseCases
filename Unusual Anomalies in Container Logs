@@ -1,0 +1,16 @@
+Unusual Anomalies in Container Logs
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Container Escape (T1611)
+
+Detection Logic:
+Detect unusual errors, high resource usage, or unexpected commands in container logs.
+
+Microsoft Sentinel KQL Query:
+ContainerLogs
+| where Message contains "error" or CPUUsage > 90
+| project TimeGenerated, ContainerName, Message, CPUUsage
+
+Testing:
+Trigger anomalies in a container by overloading resources or generating errors.
