@@ -1,0 +1,16 @@
+Unauthorised Firmware Rollbacks
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Firmware Corruption (T1495)
+
+Detection Logic:
+Detect firmware rollback actions by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+FirmwareActivityLogs
+| where Action == "Rollback" and User not in (authorizedAdmins)
+| project TimeGenerated, DeviceName, FirmwareVersion, User, Action
+
+Testing:
+Perform a firmware rollback using a test unauthorized account.
