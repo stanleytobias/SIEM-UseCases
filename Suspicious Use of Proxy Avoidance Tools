@@ -1,0 +1,16 @@
+Suspicious Use of Proxy Avoidance Tools
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Traffic Proxy (T1090)
+
+Detection Logic:
+Detect traffic to known proxy avoidance tools or services.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationDomain in ("proxyavoidance.com", "vpnservice.com")
+| project TimeGenerated, SourceIP, DestinationDomain
+
+Testing:
+Use a proxy avoidance tool in a controlled test environment.
