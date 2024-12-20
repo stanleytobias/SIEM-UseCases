@@ -1,0 +1,16 @@
+Unauthorised Use of Development Tools
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: User Execution (T1204)
+
+Detection Logic:
+Detect use of development tools like compilers or IDEs by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where ProcessName in ("gcc.exe", "msbuild.exe", "python.exe") and User not in (authorizedUsers)
+| project TimeGenerated, ProcessName, User, CommandLine
+
+Testing:
+Run a development tool with a test unauthorized account.
