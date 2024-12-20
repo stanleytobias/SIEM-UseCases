@@ -1,0 +1,16 @@
+Unauthorised Software License Activation
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: Application Layer Protocol (T1071)
+
+Detection Logic:
+Detect license activation attempts from unauthorized users or IPs.
+
+Microsoft Sentinel KQL Query:
+SoftwareLicenseLogs
+| where Action == "Activate" and User not in (authorizedUsers)
+| project TimeGenerated, LicenseKey, User, Action
+
+Testing:
+Activate a software license using an unauthorized account in a test environment.
