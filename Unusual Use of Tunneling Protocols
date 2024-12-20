@@ -1,0 +1,16 @@
+Unusual Use of Tunneling Protocols
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Protocol Tunneling (T1572)
+
+Detection Logic:
+Monitor for usage of tunneling protocols like ICMP or DNS.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol in ("ICMP", "DNS") and BytesTransferred > 1000000
+| project TimeGenerated, SourceIP, DestinationIP, Protocol
+
+Testing:
+Simulate tunneling protocols like ICMP in a controlled test setup.
