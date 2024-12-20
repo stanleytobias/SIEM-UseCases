@@ -1,0 +1,16 @@
+Unauthorised Print Jobs
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Local System (T1005)
+
+Detection Logic:
+Detect print jobs initiated by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+PrintJobLogs
+| where User not in (authorizedUsers)
+| project TimeGenerated, DocumentName, User, PrinterName
+
+Testing:
+Submit a print job using a test unauthorized account.
