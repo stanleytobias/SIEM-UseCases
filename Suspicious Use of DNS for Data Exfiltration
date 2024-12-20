@@ -1,0 +1,18 @@
+Suspicious Use of DNS for Data Exfiltration
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Exfiltration Over Other Network Medium (T1048.003)
+
+Detection Logic:
+Detect high volumes of DNS queries with large TXT records.
+
+Microsoft Sentinel KQL Query:
+DNSLogs
+| where QueryType == "TXT" and strlen(QueryResponse) > 500
+| summarize QueryCount = count() by SourceIP, bin(TimeGenerated, 1h)
+| where QueryCount > 10
+| project TimeGenerated, SourceIP, QueryCount
+
+Testing:
+Use a DNS tunneling tool like dnscat2 in a controlled environment.
