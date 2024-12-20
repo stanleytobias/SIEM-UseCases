@@ -1,0 +1,16 @@
+Suspicious Use of Email Auto-Forwarding Rules
+
+MITRE ATT&CK Mapping:
+Tactic: Exfiltration (TA0010)
+Technique: Email Collection (T1114)
+
+Detection Logic:
+Monitor for the creation of auto-forwarding rules to external domains.
+
+Microsoft Sentinel KQL Query:
+EmailRuleCreationLogs
+| where RuleAction == "Forward" and TargetAddress !endswith "@trusted.com"
+| project TimeGenerated, User, TargetAddress
+
+Testing:
+Create an email forwarding rule to an external domain.
