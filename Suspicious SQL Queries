@@ -1,0 +1,16 @@
+Suspicious SQL Queries
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Information Repositories (T1213)
+
+Detection Logic:
+Detect SQL queries attempting to access sensitive or unauthorized data.
+
+Microsoft Sentinel KQL Query:
+DatabaseQueryLogs
+| where Query contains_any ("DROP", "SELECT *", "INSERT INTO sensitive")
+| project TimeGenerated, User, Query, DatabaseName
+
+Testing:
+Execute flagged SQL queries in a controlled environment.
