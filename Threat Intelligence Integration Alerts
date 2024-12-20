@@ -1,0 +1,16 @@
+Threat Intelligence Integration Alerts
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Indicator Matching (T1592)
+
+Detection Logic:
+Generate alerts when activity matches threat intelligence indicators.
+
+Microsoft Sentinel KQL Query:
+ThreatIntelligenceIndicator
+| join kind=inner (NetworkTraffic) on $left.Indicator == $right.DestinationIP
+| project TimeGenerated, Indicator, DestinationIP, SourceIP
+
+Testing:
+Simulate traffic to an IP flagged in the threat intelligence feed.
