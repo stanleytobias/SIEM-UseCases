@@ -1,0 +1,16 @@
+Unauthorised Container Registry Access
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Exploitation for Persistence (T1098.001)
+
+Detection Logic:
+Detect access to container registries by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+ContainerRegistryAccessLogs
+| where Action == "Access" and User not in (authorizedUsers)
+| project TimeGenerated, RegistryName, User, Action
+
+Testing:
+Attempt to access a container registry using an unauthorized account in a test environment.
