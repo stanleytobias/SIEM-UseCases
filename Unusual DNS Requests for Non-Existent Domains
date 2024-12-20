@@ -1,0 +1,17 @@
+Unusual DNS Requests for Non-Existent Domains
+
+MITRE ATT&CK Mapping:
+Tactic: Discovery (TA0007)
+Technique: DNS Query of Non-Existent Domains (T1071.004)
+
+Detection Logic:
+Detect DNS requests to domains that are non-existent or flagged as suspicious.
+
+Microsoft Sentinel KQL Query:
+DNSQueryLogs
+| where ResponseCode == "NXDOMAIN"
+| summarize RequestCount = count() by ClientIP, bin(TimeGenerated, 1h)
+| where RequestCount > 10
+
+Testing:
+Query non-existent domains in a test environment.
