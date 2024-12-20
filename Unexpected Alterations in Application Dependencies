@@ -1,0 +1,17 @@
+Unexpected Alterations in Application Dependencies
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Software Dependencies and Development Tools (T1574.004)
+
+Detection Logic:
+Monitor unauthorized changes to application dependency files.
+
+Microsoft Sentinel KQL Query:
+FileChangeLogs
+| where FilePath endswith "package.json" or FilePath endswith "requirements.txt"
+| where User not in (authorizedAdmins)
+| project TimeGenerated, FilePath, User, Action
+
+Testing:
+Modify a dependency file in a test application using an unauthorized account.
