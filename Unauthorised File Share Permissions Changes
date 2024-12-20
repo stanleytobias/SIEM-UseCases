@@ -1,0 +1,16 @@
+Unauthorised File Share Permissions Changes
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Account Manipulation (T1098)
+
+Detection Logic:
+Monitor for unauthorized modifications to file share permissions.
+
+Microsoft Sentinel KQL Query:
+FileSharePermissionsLogs
+| where User not in (authorizedAdmins)
+| project TimeGenerated, ShareName, User, Action
+
+Testing:
+Modify file share permissions using an unauthorized account.
