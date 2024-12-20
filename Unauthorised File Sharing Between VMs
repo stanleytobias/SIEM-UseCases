@@ -1,0 +1,16 @@
+Unauthorised File Sharing Between VMs
+
+MITRE ATT&CK Mapping:
+Tactic: Lateral Movement (TA0008)
+Technique: Remote File Copy (T1105)
+
+Detection Logic:
+Detect file sharing activities between VMs by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where Protocol == "SMB" and SourceVM != DestinationVM and User not in (authorizedUsers)
+| project TimeGenerated, SourceVM, DestinationVM, FilePath, User
+
+Testing:
+Share files between VMs using a test unauthorized account.
