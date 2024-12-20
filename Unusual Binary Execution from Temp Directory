@@ -1,0 +1,16 @@
+Unusual Binary Execution from Temp Directory
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: System Binary Proxy Execution (T1218)
+
+Detection Logic:
+Monitor for binary execution from temporary directories.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where FilePath startswith "C:\\Temp\\" or FilePath startswith "/tmp/"
+| project TimeGenerated, ProcessName, FilePath, User
+
+Testing:
+Execute a binary from a temporary directory in a test environment.
