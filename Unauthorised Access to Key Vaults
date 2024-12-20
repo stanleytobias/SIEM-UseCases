@@ -1,0 +1,16 @@
+Unauthorised Access to Key Vaults
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Steal or Forge Certificates (T1587.004)
+
+Detection Logic:
+Monitor unauthorized access attempts to key vaults or sensitive secrets.
+
+Microsoft Sentinel KQL Query:
+KeyVaultAccessLogs
+| where User not in (authorizedUsers)
+| project TimeGenerated, KeyName, User, Action
+
+Testing:
+Attempt to access a key vault using a test unauthorized account.
