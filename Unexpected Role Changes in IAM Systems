@@ -1,0 +1,16 @@
+Unexpected Role Changes in IAM Systems
+
+MITRE ATT&CK Mapping:
+Tactic: Privilege Escalation (TA0004)
+Technique: Account Manipulation (T1098)
+
+Detection Logic:
+Monitor for role modifications in IAM by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+IAMActivityLogs
+| where Action == "RoleChange" and User not in (authorizedAdmins)
+| project TimeGenerated, User, RoleName, Action
+
+Testing:
+Change IAM roles using an unauthorized account in a test environment.
