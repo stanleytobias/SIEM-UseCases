@@ -1,0 +1,16 @@
+Tor Network Connection Detection
+
+MITRE ATT&CK Mapping:
+Tactic: Command and Control (TA0011)
+Technique: Proxy (T1090.003)
+
+Detection Logic:
+Detect traffic to known Tor exit nodes.
+
+Microsoft Sentinel KQL Query:
+NetworkTraffic
+| where DestinationIP in (knownTorExitNodes)
+| project TimeGenerated, SourceIP, DestinationIP
+
+Testing:
+Connect to a Tor exit node using a test system.
