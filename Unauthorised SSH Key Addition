@@ -1,0 +1,16 @@
+Unauthorised SSH Key Addition
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: SSH Authorized Keys (T1098.004)
+
+Detection Logic:
+Detect addition of SSH keys not associated with authorized users.
+
+Microsoft Sentinel KQL Query:
+SSHKeyManagementLogs
+| where Action == "AddKey" and User not in (authorizedAdmins)
+| project TimeGenerated, KeyFingerprint, User, Action
+
+Testing:
+Add an SSH key using a test unauthorized account.
