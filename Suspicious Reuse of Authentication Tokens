@@ -1,0 +1,17 @@
+Suspicious Reuse of Authentication Tokens
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Token Impersonation (T1550)
+
+Detection Logic:
+Detect the use of the same authentication token across different IPs.
+
+Microsoft Sentinel KQL Query:
+AuthenticationLogs
+| summarize TokenUsage = count() by TokenID, SourceIP, bin(TimeGenerated, 1h)
+| where TokenUsage > 1 and dcount(SourceIP) > 1
+| project TimeGenerated, TokenID, SourceIP, TokenUsage
+
+Testing:
+Simulate token reuse from different devices in a test environment.
