@@ -1,0 +1,16 @@
+Unauthorised Execution of Scheduled Tasks
+
+MITRE ATT&CK Mapping:
+Tactic: Execution (TA0002)
+Technique: Scheduled Task/Job (T1053.005)
+
+Detection Logic:
+Detect creation or execution of scheduled tasks by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+ScheduledTaskLogs
+| where User not in (authorizedAdmins)
+| project TimeGenerated, TaskName, User, Action
+
+Testing:
+Create or execute a scheduled task using an unauthorized account in a test environment.
