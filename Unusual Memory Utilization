@@ -1,0 +1,16 @@
+Unusual Memory Utilization
+
+MITRE ATT&CK Mapping:
+Tactic: Impact (TA0040)
+Technique: Resource Hijacking (T1496)
+
+Detection Logic:
+Detect spikes in memory usage that deviate from the norm.
+
+Microsoft Sentinel KQL Query:
+PerformanceLogs
+| where CounterName == "Memory Usage" and CounterValue > 90
+| project TimeGenerated, Computer, CounterValue
+
+Testing:
+Run a memory-intensive process on a test server.
