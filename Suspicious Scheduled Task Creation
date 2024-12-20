@@ -1,0 +1,16 @@
+Suspicious Scheduled Task Creation
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Scheduled Task/Job (T1053.005)
+
+Detection Logic:
+Detect the creation of scheduled tasks with suspicious names or actions.
+
+Microsoft Sentinel KQL Query:
+ScheduledTaskLogs
+| where Action == "Create" and TaskName !startswith "System"
+| project TimeGenerated, TaskName, User, Action
+
+Testing:
+Create a scheduled task with a suspicious name in a test environment.
