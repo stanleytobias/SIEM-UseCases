@@ -1,0 +1,16 @@
+Tampering of Application Logs
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Indicator Removal on Host (T1070.001)
+
+Detection Logic:
+Detect unauthorized changes or deletions in application logs.
+
+Microsoft Sentinel KQL Query:
+ApplicationLogs
+| where Action == "Delete" or Action == "Modify"
+| project TimeGenerated, LogName, User, Action
+
+Testing:
+Modify or delete application logs using a test account.
