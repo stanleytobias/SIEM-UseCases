@@ -1,0 +1,17 @@
+Unusual Traffic Through Proxy Servers
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Use Alternate Authentication Material (T1550.003)
+
+Detection Logic:
+Detect abnormal traffic through proxy servers, such as high volume or uncommon destinations.
+
+Microsoft Sentinel KQL Query:
+ProxyLogs
+| summarize TotalBytes = sum(BytesTransferred) by SourceIP, bin(TimeGenerated, 1h)
+| where TotalBytes > 100000000
+| project TimeGenerated, SourceIP, TotalBytes
+
+Testing:
+Generate high traffic through a proxy in a controlled environment.
