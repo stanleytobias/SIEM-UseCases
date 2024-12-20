@@ -1,0 +1,16 @@
+Unauthorised Remote Desktop Connections
+
+MITRE ATT&CK Mapping:
+Tactic: Lateral Movement (TA0008)
+Technique: Remote Services (T1021.001)
+
+Detection Logic:
+Detect remote desktop connections initiated by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+RDPConnectionLogs
+| where User not in (authorizedUsers)
+| project TimeGenerated, SourceIP, DestinationIP, User
+
+Testing:
+Initiate an RDP session using a test unauthorized account.
