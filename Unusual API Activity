@@ -1,0 +1,16 @@
+Unusual API Activity
+
+MITRE ATT&CK Mapping:
+Tactic: Credential Access (TA0006)
+Technique: Application API Abuse (T1529)
+
+Detection Logic:
+Monitor API calls with unusual parameters, high request rates, or unauthorized users.
+
+Microsoft Sentinel KQL Query:
+APIActivityLogs
+| where CallRate > 100 or User not in (authorizedUsers)
+| project TimeGenerated, APIName, CallRate, User
+
+Testing:
+Simulate high API call rates or unauthorized API calls in a test environment.
