@@ -1,0 +1,16 @@
+Unauthorised Modification of Email Security Settings
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Modify Email Security Settings (T1566.002)
+
+Detection Logic:
+Detect changes to email security settings by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+EmailSecurityConfigurationLogs
+| where User not in (authorizedAdmins)
+| project TimeGenerated, SettingChanged, User, Action
+
+Testing:
+Modify email security settings using a test unauthorized account.
