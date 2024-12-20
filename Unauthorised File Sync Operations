@@ -1,0 +1,16 @@
+Unauthorised File Sync Operations
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Network Shared Drive (T1039)
+
+Detection Logic:
+Monitor file synchronization operations by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+FileSyncLogs
+| where User not in (authorizedUsers)
+| project TimeGenerated, SourcePath, DestinationPath, User, Action
+
+Testing:
+Perform a file sync operation using an unauthorized account.
