@@ -1,0 +1,16 @@
+Unusual Activity on Printer Interfaces
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Peripheral Devices (T1123)
+
+Detection Logic:
+Monitor for unusual print jobs or unexpected activity on printer interfaces.
+
+Microsoft Sentinel KQL Query:
+PrintJobLogs
+| where JobSize > 1000000 or User not in (authorizedUsers)
+| project TimeGenerated, PrinterName, DocumentName, JobSize, User
+
+Testing:
+Submit a large or unusual print job using a test unauthorized account.
