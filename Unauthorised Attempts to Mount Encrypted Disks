@@ -1,0 +1,16 @@
+Unauthorised Attempts to Mount Encrypted Disks
+
+MITRE ATT&CK Mapping:
+Tactic: Persistence (TA0003)
+Technique: Data Encrypted for Impact (T1486)
+
+Detection Logic:
+Monitor unauthorized attempts to access or mount encrypted disks.
+
+Microsoft Sentinel KQL Query:
+DiskMountLogs
+| where DiskType == "Encrypted" and User not in (authorizedUsers)
+| project TimeGenerated, DiskName, User, Action
+
+Testing:
+Attempt to mount an encrypted disk using a test unauthorized account.
