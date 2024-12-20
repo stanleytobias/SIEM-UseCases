@@ -1,0 +1,16 @@
+Unauthorised Use of Security Assessment Tools
+
+MITRE ATT&CK Mapping:
+Tactic: Discovery (TA0007)
+Technique: Network Service Scanning (T1046)
+
+Detection Logic:
+Detect execution of tools like Nmap or Nessus by unauthorized users.
+
+Microsoft Sentinel KQL Query:
+ProcessCreationEvents
+| where ProcessName in ("nmap.exe", "nessus.exe") and User not in (authorizedUsers)
+| project TimeGenerated, ProcessName, User, CommandLine
+
+Testing:
+Run a security assessment tool in a test environment.
