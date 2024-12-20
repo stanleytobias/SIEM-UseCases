@@ -1,0 +1,16 @@
+Unauthorised Database Query Monitoring
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Information Repositories (T1213)
+
+Detection Logic:
+Detect query access from unauthorized users or applications.
+
+Microsoft Sentinel KQL Query:
+DatabaseQueryLogs
+| where User not in (authorizedUsers)
+| project TimeGenerated, DatabaseName, Query, User
+
+Testing:
+Execute queries on a test database using an unauthorized account.
