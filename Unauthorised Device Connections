@@ -1,0 +1,16 @@
+Unauthorised Device Connections
+
+MITRE ATT&CK Mapping:
+Tactic: Collection (TA0009)
+Technique: Data from Removable Media (T1025)
+
+Detection Logic:
+Detect connection of devices not in the approved device list.
+
+Microsoft Sentinel KQL Query:
+DeviceConnectionLogs
+| where DeviceID not in (approvedDevices)
+| project TimeGenerated, DeviceID, User, ConnectionType
+
+Testing:
+Connect an unauthorized USB device to a test system.
