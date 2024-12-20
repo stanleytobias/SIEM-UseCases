@@ -1,0 +1,16 @@
+Unusual Log Clearing Activities
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Indicator Removal on Host (T1070.001)
+
+Detection Logic:
+Detect events indicating that logs have been cleared unexpectedly.
+
+Microsoft Sentinel KQL Query:
+SecurityEvent
+| where EventID == 1102 // Log clearing event in Windows
+| project TimeGenerated, Computer, User, EventID
+
+Testing:
+Clear logs in a test system and observe the detection.
