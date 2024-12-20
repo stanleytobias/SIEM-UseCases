@@ -1,0 +1,16 @@
+Suspicious VPN Connection
+
+MITRE ATT&CK Mapping:
+Tactic: Defense Evasion (TA0005)
+Technique: Traffic Proxy (T1090)
+
+Detection Logic:
+Detect VPN connections from unusual IPs or countries.
+
+Microsoft Sentinel KQL Query:
+VPNConnectionLogs
+| where SourceIP not in (trustedIPs) or GeoLocation not in (trustedCountries)
+| project TimeGenerated, SourceIP, GeoLocation, AccountName
+
+Testing:
+Establish a VPN connection from an untrusted IP or country.
